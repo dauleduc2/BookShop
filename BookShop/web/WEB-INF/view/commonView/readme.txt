@@ -1,0 +1,1 @@
+This folder contains header, footer, navbar
