@@ -10,3 +10,4 @@ nbdist/
 **/asset/styles.css
 /Planning
 /tailwind-fast-kit
+**/**.sql
