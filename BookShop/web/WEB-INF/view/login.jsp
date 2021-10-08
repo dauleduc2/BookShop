@@ -7,8 +7,8 @@
     </head>
     <body>
         <form action="LoginController" method="POST">
-            Email: <input type="text" name="email">
-            ${requestScope.emailError} <br> <br>
+            Username: <input type="text" name="username">
+            ${requestScope.usernameError} <br> <br>
             Password: <input type="password" name="password">
             ${requestScope.passwordError}<br> <br>
             <input type="submit" value="submit"> ${requestScope.errorMessage}

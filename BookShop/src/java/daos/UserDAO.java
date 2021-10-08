@@ -42,13 +42,15 @@ public class UserDAO {
             preStm.setString(1, id);
             rs = preStm.executeQuery();
             if (rs.next()) {
+                String username = rs.getString("username");
                 String fullName = rs.getString("fullName");
                 String email = rs.getString("email");
                 String address = rs.getString("address");
                 String phone = rs.getString("phone");
+                String avatar = rs.getString("avatar");
                 String password = rs.getString("password");
                 Integer roleId = rs.getInt("roleId");
-                user = new User(id, roleId, fullName, email, address, phone, password);
+                user = new User(id, roleId, username, fullName, email, address, phone, avatar, password);
             }
         } finally {
             this.closeConnection();
@@ -67,12 +69,40 @@ public class UserDAO {
             rs = preStm.executeQuery();
             if (rs.next()) {
                 String userId = rs.getString("userId");
+                String username = rs.getString("username");
                 String fullName = rs.getString("fullName");
                 String address = rs.getString("address");
                 String phone = rs.getString("phone");
+                String avatar = rs.getString("avatar");
                 String password = rs.getString("password");
                 Integer roleId = rs.getInt("roleId");
-                user = new User(userId, roleId, fullName, email, address, phone, password);
+                user = new User(userId, roleId, username, fullName, email, address, phone, avatar, password);
+            }
+        } finally {
+            this.closeConnection();
+        }
+        return user;
+    }
+
+    // this function will get a user by usrname
+    public User getUserByUsername(String username) throws Exception {
+        User user = null;
+        try {
+            conn = Connector.getConnection();
+            String sql = "SELECT * FROM bookshop_user WHERE username = ?";
+            preStm = conn.prepareStatement(sql);
+            preStm.setString(1, username);
+            rs = preStm.executeQuery();
+            if (rs.next()) {
+                String userId = rs.getString("userId");
+                String fullName = rs.getString("fullName");
+                String email = rs.getString("email");
+                String address = rs.getString("address");
+                String phone = rs.getString("phone");
+                String avatar = rs.getString("avatar");
+                String password = rs.getString("password");
+                Integer roleId = rs.getInt("roleId");
+                user = new User(userId, roleId, username, fullName, email, address, phone, avatar, password);
             }
         } finally {
             this.closeConnection();

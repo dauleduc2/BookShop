@@ -31,17 +31,17 @@ public class LoginController extends HttpServlet {
         UserDAO userDao = new UserDAO();
 
         // validate param
-        String email = GetParam.getEmailParams(request, "email", "Email");
+        String username = GetParam.getStringParam(request, "username", "Username", 5, 50, null);
         String password = GetParam.getStringParam(request, "password", "Password", 5, 50, null);
 
-        if (email == null || password == null) {
+        if (username == null || password == null) {
             return false;
         }
 
         // checking exist user and correct password
-        User existedUser = userDao.getUserByEmail(email);
+        User existedUser = userDao.getUserByUsername(username);
         if (existedUser == null || !existedUser.getPassword().equals(password)) {
-            request.setAttribute("errorMessage", "Email or password is not correct");
+            request.setAttribute("errorMessage", "Username or password is not correct");
             return false;
         }
 
