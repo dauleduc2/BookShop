@@ -12,10 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import models.User;
 import utils.GetParam;
 
-/**
- *
- * @author Bana-na
- */
 @WebServlet(name = "RegisterController", urlPatterns = {"/register"})
 public class RegisterController extends HttpServlet {
 
