@@ -13,7 +13,7 @@ import models.User;
 import utils.GetParam;
 import utils.Helper;
 
-@WebServlet(name = "LoginController", urlPatterns = {"/Login"})
+@WebServlet(name = "LoginController", urlPatterns = {"/login"})
 public class LoginController extends HttpServlet {
 
     /**
