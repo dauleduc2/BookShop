@@ -16,7 +16,6 @@
                         <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
                                 <div class="bg-white py-8 px-4 shadow-xl sm:rounded-xl sm:px-10">
                                         <form class="space-y-6" action="login" method="POST" >
-                                                <p class="text-sm text-red-600 text-center">${requestScope.errorMessage}</p>
                                                 <div>
                                                         <label for="email" class="block text-sm font-medium text-gray-700"> Username </label>
                                                         <div class="mt-1">
@@ -70,6 +69,7 @@
                                                         </div>
                                                         <p class="mt-2 text-sm text-red-600">${requestScope.passwordError}</p>
                                                 </div>
+                                                <p class="text-sm text-red-600 text-left">${requestScope.errorMessage}</p>
 
                                                 <div class="flex items-center justify-end">
                                                         <div class="text-sm">
