@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.first-letter::first-letter {
+        text-transform: uppercase;
+}
+
+@keyframes FadeIn {
+        0% {
+                opacity: 0;
+        }
+        100% {
+                opacity: 1;
+        }
+}
+
+.fade-in {
+        animation: FadeIn 0.3s;
+}
