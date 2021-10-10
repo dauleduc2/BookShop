@@ -4,22 +4,34 @@ public class User {
 
     private String userId;
     private Integer roleId;
+    private String username;
     private String fullName;
     private String email;
     private String address;
     private String phone;
+    private String avatar;
     private String password;
 
     public User() {
     }
 
-    public User(String userId, Integer roleId, String fullName, String email, String address, String phone, String password) {
+    public User(String userId, Integer roleId, String username, String fullName, String email, String address, String phone, String avatar, String password) {
         this.userId = userId;
         this.roleId = roleId;
+        this.username = username;
         this.fullName = fullName;
         this.email = email;
         this.address = address;
         this.phone = phone;
+        this.avatar = avatar;
+        this.password = password;
+    }
+
+    public User(Integer roleId, String username, String fullName, String email, String password) {
+        this.roleId = roleId;
+        this.username = username;
+        this.fullName = fullName;
+        this.email = email;
         this.password = password;
     }
 
@@ -37,6 +49,14 @@ public class User {
 
     public void setRoleId(Integer roleId) {
         this.roleId = roleId;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getFullName() {
@@ -71,6 +91,14 @@ public class User {
         this.phone = phone;
     }
 
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
     public String getPassword() {
         return password;
     }
@@ -81,6 +109,6 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" + "userId=" + userId + ", roleId=" + roleId + ", fullName=" + fullName + ", email=" + email + ", address=" + address + ", phone=" + phone + ", password=" + password + '}';
+        return "User{" + "userId=" + userId + ", roleId=" + roleId + ", username=" + username + ", fullName=" + fullName + ", email=" + email + ", address=" + address + ", phone=" + phone + ", avatar=" + avatar + ", password=" + password + '}';
     }
 }
