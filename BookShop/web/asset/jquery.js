@@ -1,4 +1,5 @@
 $(document).ready(function () {
+  //navbar
   $(".navbarSelection").click(function (e) {
     e.preventDefault();
     $(".navbarSelection").each(function (index) {
@@ -11,9 +12,9 @@ $(document).ready(function () {
     e.preventDefault();
     $(".dropdownMenu").toggleClass("hidden");
   });
-  //   ;
   $("#toggleButton").click(function (e) {
     e.preventDefault();
     $("#mobile-menu").toggleClass("hidden");
   });
+  //form
 });

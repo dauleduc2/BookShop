@@ -12,7 +12,7 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     ></script>
-    <script src="asset/navbar.js"></script>
+   <script src="asset/jquery.js"></script>
   </head>
   <body>
     <div

@@ -17,8 +17,8 @@ public class GetParam {
      */
     public static String getStringParam(HttpServletRequest request, String field, String label, int min, int max,
             String defaultValue) {
-        String value = (String) request.getParameter(field);
 
+        String value = (String) request.getParameter(field);
         //check empty string, if empty then return to default value
         if (value == null || value.trim().isEmpty()) {
             if (defaultValue == null) {

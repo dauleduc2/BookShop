@@ -21,7 +21,7 @@ import utils.GetParam;
  *
  * @author Bana-na
  */
-@WebServlet(name = "RegisterController", urlPatterns = {"/Register"})
+@WebServlet(name = "RegisterController", urlPatterns = {"/register"})
 public class RegisterController extends HttpServlet {
 
     /**
@@ -37,16 +37,16 @@ public class RegisterController extends HttpServlet {
             throws Exception {
         response.setContentType("text/html;charset=UTF-8");
         UserDAO userDao = new UserDAO();
-
+        boolean isTrue = true;
         //Validate param
         String email = GetParam.getEmailParams(request, "email", "Email");
         String username = GetParam.getStringParam(request, "username", "Username", 5, 50, null);
         String fullName = GetParam.getStringParam(request, "fullName", "Full name", 5, 50, null);
         String password = GetParam.getStringParam(request, "password", "Password", 5, 50, null);
         String confirmPassword = GetParam.getStringParam(request, "confirmPassword", "Confirm Password", 5, 50, null);
-
+        System.out.println(password);
         if (email == null || username == null || password == null || confirmPassword == null || fullName == null) {
-            return false;
+            isTrue = false;
         }
 
         //Checking User existed or not
@@ -54,20 +54,23 @@ public class RegisterController extends HttpServlet {
         User existedEmail = userDao.getUserByEmail(email);
 
         if (existedUsername != null) {
-            request.setAttribute("usernameError", "Username was used");
-            return false;
+            request.setAttribute("usernameError", "Username already existed");
+            isTrue = false;
         }
         if (existedEmail != null) {
-            request.setAttribute("emailError", "Email was used");
-            return false;
+            request.setAttribute("emailError", "Email already existed");
+            isTrue = false;
         }
 
         //Checking confirm password is correct
-        if (!password.equals(confirmPassword)) {
-            request.setAttribute("confirmPasswordError", "Confirm password is not correct");
-            return false;
+        if (confirmPassword != null && password != null && !password.equals(confirmPassword)) {
+            request.setAttribute("confirmPasswordError", "Confirm password have to be the same with password");
+            isTrue = false;
         }
 
+        if (!isTrue) {
+            return false;
+        }
         //
         User user = new User(0, username, fullName, email, password);
         userDao.addNewUser(user);

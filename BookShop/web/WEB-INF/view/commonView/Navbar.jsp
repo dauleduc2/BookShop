@@ -18,6 +18,7 @@
       referrerpolicy="no-referrer"
     ></script>
     <script src="asset/navbar.js"></script>
+    
     </head>
     <body>
         <nav class="bg-gray-800">
