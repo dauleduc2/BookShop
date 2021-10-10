@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controllers;
 
 import constant.Router;
@@ -17,10 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import models.User;
 import utils.GetParam;
 
-/**
- *
- * @author Bana-na
- */
 @WebServlet(name = "RegisterController", urlPatterns = {"/Register"})
 public class RegisterController extends HttpServlet {
 
