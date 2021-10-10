@@ -1,20 +1,28 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package controllers;
 
 import constant.Router;
 import daos.UserDAO;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import models.User;
 import utils.GetParam;
-import utils.Helper;
 
-@WebServlet(name = "LoginController", urlPatterns = {"/Login"})
-public class LoginController extends HttpServlet {
+/**
+ *
+ * @author Bana-na
+ */
+@WebServlet(name = "RegisterController", urlPatterns = {"/Register"})
+public class RegisterController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -30,25 +38,39 @@ public class LoginController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         UserDAO userDao = new UserDAO();
 
-        // validate param
+        //Validate param
+        String email = GetParam.getEmailParams(request, "email", "Email");
         String username = GetParam.getStringParam(request, "username", "Username", 5, 50, null);
+        String fullName = GetParam.getStringParam(request, "fullName", "Full name", 5, 50, null);
         String password = GetParam.getStringParam(request, "password", "Password", 5, 50, null);
+        String confirmPassword = GetParam.getStringParam(request, "confirmPassword", "Confirm Password", 5, 50, null);
 
-        if (username == null || password == null) {
+        if (email == null || username == null || password == null || confirmPassword == null || fullName == null) {
             return false;
         }
 
-        // checking exist user and correct password
-        User existedUser = userDao.getUserByUsername(username);
-        if (existedUser == null || !existedUser.getPassword().equals(password)) {
-            request.setAttribute("errorMessage", "Username or password is not correct");
+        //Checking User existed or not
+        User existedUsername = userDao.getUserByUsername(username);
+        User existedEmail = userDao.getUserByEmail(email);
+
+        if (existedUsername != null) {
+            request.setAttribute("usernameError", "Username was used");
+            return false;
+        }
+        if (existedEmail != null) {
+            request.setAttribute("emailError", "Email was used");
             return false;
         }
 
-        // handle on login
-        HttpSession session = request.getSession();
-        session.setAttribute("userId", existedUser.getUserId());
-        session.setAttribute("userRole", existedUser.getRoleId());
+        //Checking confirm password is correct
+        if (!password.equals(confirmPassword)) {
+            request.setAttribute("confirmPasswordError", "Confirm password is not correct");
+            return false;
+        }
+
+        //
+        User user = new User(0, username, fullName, email, password);
+        userDao.addNewUser(user);
         return true;
     }
 
@@ -63,12 +85,8 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        if (Helper.isLogin(request)) {
-            request.setAttribute("errorMessage",
-                    "You have already login before, do you want to login to other account");
-        }
         response.setContentType("text/html;charset=UTF-8");
-        request.getRequestDispatcher(Router.LOGIN_PAGE).forward(request, response);
+        request.getRequestDispatcher(Router.REGISTER_PAGE).forward(request, response);
     }
 
     /**
@@ -86,14 +104,16 @@ public class LoginController extends HttpServlet {
         try {
             if (!processRequest(request, response)) {
                 // forward on 400
-                request.getRequestDispatcher(Router.LOGIN_PAGE).forward(request, response);
+                request.getRequestDispatcher(Router.REGISTER_PAGE).forward(request, response);
                 return;
             }
             // forward on 200
-            request.getRequestDispatcher(Router.HOME_PAGE).forward(request, response);
+            response.sendRedirect(Router.LOGIN_CONTROLLER);
         } catch (Exception e) {
             // forward on 500
+            System.out.println(e.getMessage());
             request.getRequestDispatcher(Router.ERROR).forward(request, response);
         }
     }
+
 }

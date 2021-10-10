@@ -3,6 +3,7 @@ package daos;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.UUID;
 import models.User;
 import utils.Connector;
 
@@ -28,8 +29,27 @@ public class UserDAO {
     }
 
     //this function will add a new user
-    public void addNewUser(User user) {
-
+    public void addNewUser(User user) throws Exception {
+        String uuid = UUID.randomUUID().toString().substring(0, 30);
+        try {
+            conn = Connector.getConnection();
+            String sql = "INSERT INTO bookshop_user (userId, username, fullName, email, address, phone, avatar, password, roleId) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            preStm = conn.prepareStatement(sql);
+            //
+            preStm.setString(1, uuid);
+            preStm.setString(2, user.getUsername());
+            preStm.setString(3, user.getFullName());
+            preStm.setString(4, user.getEmail());
+            preStm.setString(5, null);
+            preStm.setString(6, null);
+            preStm.setString(7, null);
+            preStm.setString(8, user.getPassword());
+            preStm.setString(9, Integer.toString(user.getRoleId()));
+            //
+            preStm.executeUpdate();
+        } finally {
+            this.closeConnection();
+        }
     }
 
     // this function will get a user by id
