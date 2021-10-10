@@ -26,6 +26,7 @@ public class HomePageController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.getRequestDispatcher("/WEB-INF/view/commonView/Navbar.jsp").forward(request, response);
     }
 
     @Override
