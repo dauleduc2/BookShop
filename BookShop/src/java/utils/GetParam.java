@@ -4,11 +4,21 @@ import javax.servlet.http.HttpServletRequest;
 
 public class GetParam {
 
-    //GET STRING
+    /**
+     * Get string from request parameter and validate it, if it invalid, return
+     * default value
+     *
+     * @param request servlet request
+     * @param field request parameter name
+     * @param label Label
+     * @param min minimum length
+     * @param max maximum length
+     * @return Valid string
+     */
     public static String getStringParam(HttpServletRequest request, String field, String label, int min, int max,
             String defaultValue) {
-        String value = (String) request.getParameter(field);
 
+        String value = (String) request.getParameter(field);
         //check empty string, if empty then return to default value
         if (value == null || value.trim().isEmpty()) {
             if (defaultValue == null) {
@@ -31,7 +41,17 @@ public class GetParam {
         return value.trim();
     }
 
-    //GET INT
+    /**
+     * Get Integer from request parameter and validate it, if it invalid, return
+     * default value
+     *
+     * @param request servlet request
+     * @param field request parameter name
+     * @param label Label
+     * @param min minimum value
+     * @param max maximum value
+     * @return Valid Integer
+     */
     public static Integer getIntParams(HttpServletRequest request, String field, String label, int min, int max,
             Integer defaultValue) {
 
@@ -66,7 +86,17 @@ public class GetParam {
         return realValue;
     }
 
-    //GET FLOAT
+    /**
+     * Get Float from request parameter and validate it, if it invalid, return
+     * default value
+     *
+     * @param request servlet request
+     * @param field request parameter name
+     * @param label Label
+     * @param min minimum value
+     * @param max maximum value
+     * @return Valid Float
+     */
     public static Float getFloatParams(HttpServletRequest request, String field, String label, float min, float max,
             Float defaultValue) {
 
@@ -99,5 +129,28 @@ public class GetParam {
         }
 
         return realValue;
+    }
+
+    /**
+     * Get email from request parameter and validate it
+     *
+     * @param request servlet request
+     * @param field request parameter name
+     * @param label Label
+     * @return Valid email
+     */
+    public static String getEmailParams(HttpServletRequest request, String field, String label) {
+        String value = getStringParam(request, field, label, 11, 50, null);
+
+        if (value == null) {
+            return null;
+        }
+
+        String errorMessage = Validator.getEmail(value);
+        if (!errorMessage.isEmpty()) {
+            request.setAttribute(field + "Error", label + errorMessage);
+            return null;
+        }
+        return value;
     }
 }

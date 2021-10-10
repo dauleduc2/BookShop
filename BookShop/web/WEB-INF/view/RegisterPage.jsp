@@ -1,4 +1,4 @@
-<%-- Document : RegisterPage Created on : Oct 8, 2021, 7:56:56 PM Author : Admin
+<%-- Document : Register Created on : Oct 10, 2021, 5:03:07 PM Author : Admin
 --%> <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -6,6 +6,13 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>JSP Page</title>
     <link rel="stylesheet" href="asset/styles.css" type="text/css" />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+      integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="asset/jquery.js"></script>
   </head>
   <body>
     <div
@@ -20,21 +27,20 @@
       "
     >
       <div class="sm:mx-auto sm:w-full sm:max-w-md">
-        <img class="mx-auto w-20 h-20" src="asset/logo.png" alt="Workflow" />
-        <h2 class="mt-6 text-center text-4xl font-extrabold text-gray-900 hello">
-          Sign in
+        <img class="mx-auto w-20 h-20" src="asset/logo.png" alt="logo" />
+        <h2 class="mt-6 text-center text-4xl font-extrabold text-gray-900">
+          Register
         </h2>
       </div>
-
       <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
         <div class="bg-white py-8 px-4 shadow-xl sm:rounded-xl sm:px-10">
-          <form class="space-y-6" action="#" method="POST">
+          <form class="space-y-6" action="register" method="POST">
             <div>
               <label
                 for="email"
                 class="block text-sm font-medium text-gray-700"
               >
-                Email address
+                Email
               </label>
               <div class="mt-1">
                 <input
@@ -59,9 +65,81 @@
                     sm:text-sm
                   "
                 />
+                <p class="mt-2 text-sm text-red-600" id="email-error">
+                  ${requestScope.emailError}
+                </p>
               </div>
             </div>
-
+            <div>
+              <label
+                for="email"
+                class="block text-sm font-medium text-gray-700"
+              >
+                User name
+              </label>
+              <div class="mt-1">
+                <input
+                  id="username"
+                  name="username"
+                  type="text"
+                  autocomplete="email"
+                  required
+                  class="
+                    appearance-none
+                    block
+                    w-full
+                    px-3
+                    py-2
+                    border border-gray-300
+                    rounded-md
+                    shadow-sm
+                    placeholder-gray-400
+                    focus:outline-none
+                    focus:ring-indigo-500
+                    focus:border-indigo-500
+                    sm:text-sm
+                  "
+                />
+                <p class="mt-2 text-sm text-red-600" id="email-error">
+                  ${requestScope.usernameError}
+                </p>
+              </div>
+            </div>
+            <div>
+              <label
+                for="email"
+                class="block text-sm font-medium text-gray-700"
+              >
+                Full name
+              </label>
+              <div class="mt-1">
+                <input
+                  id="fullName"
+                  name="fullName"
+                  type="text"
+                  autocomplete="email"
+                  required
+                  class="
+                    appearance-none
+                    block
+                    w-full
+                    px-3
+                    py-2
+                    border border-gray-300
+                    rounded-md
+                    shadow-sm
+                    placeholder-gray-400
+                    focus:outline-none
+                    focus:ring-indigo-500
+                    focus:border-indigo-500
+                    sm:text-sm
+                  "
+                />
+                <p class="mt-2 text-sm text-red-600" id="email-error">
+                  ${requestScope.fullNameError}
+                </p>
+              </div>
+            </div>
             <div>
               <label
                 for="password"
@@ -73,6 +151,41 @@
                 <input
                   id="password"
                   name="password"
+                  type="password"
+                  autocomplete="email"
+                  required
+                  class="
+                    appearance-none
+                    block
+                    w-full
+                    px-3
+                    py-2
+                    border border-gray-300
+                    rounded-md
+                    shadow-sm
+                    placeholder-gray-400
+                    focus:outline-none
+                    focus:ring-indigo-500
+                    focus:border-indigo-500
+                    sm:text-sm
+                  "
+                />
+                <p class="mt-2 text-sm text-red-600" id="email-error">
+                  ${requestScope.passwordError}
+                </p>
+              </div>
+            </div>
+            <div>
+              <label
+                for="password"
+                class="block text-sm font-medium text-gray-700"
+              >
+                Confirm password
+              </label>
+              <div class="mt-1">
+                <input
+                  id="confirmPassword"
+                  name="confirmPassword"
                   type="password"
                   autocomplete="current-password"
                   required
@@ -92,17 +205,10 @@
                     sm:text-sm
                   "
                 />
-              </div>
-            </div>
 
-            <div class="flex items-center justify-end">
-              <div class="text-sm">
-                <a
-                  href="#"
-                  class="font-medium text-indigo-600 hover:text-indigo-500"
-                >
-                  Forgot your password?
-                </a>
+                <p class="mt-2 text-sm text-red-600" id="email-error">
+                  ${requestScope.confirmPasswordError}
+                </p>
               </div>
             </div>
 
@@ -129,14 +235,14 @@
                   focus:ring-indigo-500
                 "
               >
-                Sign in
+                Register
               </button>
             </div>
             <div class="flex justify-end">
               <div class="self-end mt-4 text-sm">
-                Don't have account yet?
+                Already have an account?
                 <a
-                  href="/user/register"
+                  href="/user/login"
                   class="
                     font-semibold
                     text-indigo-600
@@ -144,7 +250,7 @@
                     hover:text-indigo-500
                   "
                 >
-                  Register
+                  Login
                 </a>
               </div>
             </div>
