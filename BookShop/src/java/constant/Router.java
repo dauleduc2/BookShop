@@ -8,6 +8,7 @@ public class Router {
     public static final String HOME_PAGE = "/WEB-INF/view/home.jsp";
     public static final String REGISTER_PAGE = "/WEB-INF/view/RegisterPage.jsp";
 
-    //
+    // router mapping
     public static final String LOGIN_CONTROLLER = "login";
+    public static final String REGISTER_CONTROLLER = "register";
 }

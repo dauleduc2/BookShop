@@ -16,5 +16,5 @@ $(document).ready(function () {
     e.preventDefault();
     $("#mobile-menu").toggleClass("hidden");
   });
-  //form
+
 });
