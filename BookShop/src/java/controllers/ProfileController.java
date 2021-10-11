@@ -1,55 +1,71 @@
 package controllers;
 
+import constant.Router;
+import daos.UserDAO;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import utils.GetParam;
 
-@WebServlet(name = "ChangeProfileController", urlPatterns = {"/ChangeProfileController"})
-public class ChangeProfileController extends HttpServlet {
+@WebServlet(name = "ProfileController", urlPatterns = {"/me"})
+public class ProfileController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * method
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    protected boolean processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws Exception {
         response.setContentType("text/html;charset=UTF-8");
+        UserDAO userDao = new UserDAO();
 
+        // validate param
+        String fullName = GetParam.getStringParam(request, "fullName", "Full name", 5, 50, null);
+        String email = GetParam.getEmailParams(request, "email", "Email");
+        String address = GetParam.getStringParam(request, "address", "Address", 5, 500, "");
+        String phone = GetParam.getPhoneParams(request, "phone", "Phone number");
+        String avatar = GetParam.getStringParam(request, "avatar", "Avatar", 5, 500, "");
+
+        if (fullName == null || email == null) {
+            return false;
+        }
+        HttpSession session = request.getSession();
+        String userId = (String) session.getAttribute("userId");
+        userDao.updateUserProfile(userId, fullName, email, address, phone, avatar);
+        return true;
     }
 
     /**
      * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        response.setContentType("text/html;charset=UTF-8");
+        request.getRequestDispatcher(Router.ME_PAGE).forward(request, response);
     }
 
     /**
      * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            if (!processRequest(request, response)) {
+                // forward on 400
+                request.getRequestDispatcher(Router.ME_PAGE).forward(request, response);
+                return;
+            }
+            // forward on 200
+            request.getRequestDispatcher(Router.ME_PAGE).forward(request, response);
+        } catch (Exception e) {
+            // forward on 500
+            request.getRequestDispatcher(Router.ERROR).forward(request, response);
+        }
     }
 }
