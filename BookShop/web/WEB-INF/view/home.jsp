@@ -13,5 +13,6 @@
         %>
         <%=userId%>
         <%=userRole%>
+        <a href="me">Your Profile</a>
     </body>
 </html>
