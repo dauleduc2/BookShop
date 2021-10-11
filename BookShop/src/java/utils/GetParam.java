@@ -153,4 +153,27 @@ public class GetParam {
         }
         return value;
     }
+
+    /**
+     * Get phone from request parameter and validate it
+     *
+     * @param request servlet request
+     * @param field request parameter name
+     * @param label Label
+     * @return Valid phone
+     */
+    public static String getPhoneParams(HttpServletRequest request, String field, String label) {
+        String value = getStringParam(request, field, label, 6, 20, "");
+
+        if (value == null) {
+            return null;
+        }
+
+        String errorMessage = Validator.getPhone(value);
+        if (!errorMessage.isEmpty()) {
+            request.setAttribute(field + "Error", label + errorMessage);
+            return null;
+        }
+        return value;
+    }
 }
