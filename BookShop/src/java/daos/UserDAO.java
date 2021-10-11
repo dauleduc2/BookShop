@@ -129,4 +129,22 @@ public class UserDAO {
         }
         return user;
     }
+
+    // this function will update profile of user
+    public void updateUserProfile(String userId, String fullName, String email, String address, String phone, String avatar) throws Exception {
+        try {
+            conn = Connector.getConnection();
+            String sql = "UPDATE bookshop_user SET fullName = ?, email = ?, address = ?, phone = ?, avatar = ? WHERE userId = ?";
+            preStm = conn.prepareStatement(sql);
+            preStm.setString(1, fullName);
+            preStm.setString(2, email);
+            preStm.setString(3, address == "" ? null : address);
+            preStm.setString(4, phone == "" ? null : phone);
+            preStm.setString(5, avatar == "" ? null : avatar);
+            preStm.setString(6, userId);
+            preStm.executeUpdate();
+        } finally {
+            this.closeConnection();
+        }
+    }
 }

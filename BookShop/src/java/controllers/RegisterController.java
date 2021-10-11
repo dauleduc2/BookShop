@@ -3,7 +3,6 @@ package controllers;
 import constant.Router;
 import daos.UserDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,10 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 import models.User;
 import utils.GetParam;
 
-/**
- *
- * @author Bana-na
- */
 @WebServlet(name = "RegisterController", urlPatterns = {"/register"})
 public class RegisterController extends HttpServlet {
 

@@ -13,4 +13,17 @@ public class Validator {
         }
         return "";
     }
+
+    public static String getPhone(String value) {
+        if (value == "") {
+            return "";
+        }
+        Pattern regex = Pattern.compile("^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\\s\\./0-9]*$");
+
+        boolean ismatched = regex.matcher(value).matches();
+        if (!ismatched) {
+            return " is not correct format. Please enter a valid phone number.";
+        }
+        return "";
+    }
 }
