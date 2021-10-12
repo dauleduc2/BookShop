@@ -1,3 +1,4 @@
+<%@page import="constant.Router"%>
 <%@page import="daos.UserDAO"%>
 <%@page import="models.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -24,7 +25,7 @@
 
         <div class="flex flex-col items-center justify-center flex-1 mt-24 ">
                 <form
-                    action="changepassword"
+                    action="<%=Router.CHANGE_PASSWORD_CONTROLLER%>"
                     method="POST"
                     class="
                     w-full
