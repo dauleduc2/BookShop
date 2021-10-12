@@ -15,7 +15,7 @@ import javax.servlet.http.HttpSession;
 import models.User;
 import utils.GetParam;
 
-@WebServlet(name = "PasswordController", urlPatterns = {"/changepassword"})
+@WebServlet(name = "PasswordController", urlPatterns = {"/" + Router.CHANGE_PASSWORD_CONTROLLER})
 public class PasswordController extends HttpServlet {
 
     /**

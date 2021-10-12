@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import utils.GetParam;
 
-@WebServlet(name = "ProfileController", urlPatterns = {"/me"})
+@WebServlet(name = "ProfileController", urlPatterns = {"/" + Router.PROFILE_CONTROLLER})
 public class ProfileController extends HttpServlet {
 
     /**
