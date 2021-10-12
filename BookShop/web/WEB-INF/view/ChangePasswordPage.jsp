@@ -42,7 +42,7 @@
                                                                     "
                                                                     />
                                                         </div>
-                                                        <p class="mt-2 text-sm text-red-600">${requestScope.passwordError}</p>
+                                                        <p class="mt-2 text-sm text-red-600">${requestScope.newPasswordError}</p>
                                                 </div>
                                                 <div>
                                                         <label for="newPassword" class="block text-sm font-medium text-gray-700">New Password </label>
@@ -68,7 +68,7 @@
                                                                     "
                                                                     />
                                                         </div>
-                                                        <p class="mt-2 text-sm text-red-600">${requestScope.passwordError}</p>
+                                                        <p class="mt-2 text-sm text-red-600">${requestScope.newPasswordConfirmError}</p>
                                                 </div>
                                                 <div>
                                                         <label for="newPasswordConfirm" class="block text-sm font-medium text-gray-700">New Password Confirm</label>
