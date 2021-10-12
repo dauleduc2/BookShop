@@ -22,7 +22,7 @@
     %>
 
 
-    <div class="flex flex-col items-center justify-center flex-1">
+    <div class="flex flex-col items-center justify-center flex-1 mt-24 ">
         <form
             action="me" 
             method="POST"
