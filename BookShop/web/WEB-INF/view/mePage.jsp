@@ -22,7 +22,7 @@
     %>
 
 
-    <div class="flex flex-col items-center justify-center flex-1">
+    <div class="flex flex-col items-center justify-center flex-1 mt-24 ">
         <form
             action="me" 
             method="POST"
@@ -124,7 +124,6 @@
                                 id="address"
                                 name="address"
                                 type="text"
-                                required
                                 value="<%= user.getAddress() == null ? "" : user.getAddress()%>"
                                 class="
                                 appearance-none
@@ -156,7 +155,6 @@
                                 id="phone"
                                 name="phone"
                                 type="text"
-                                required
                                 value="<%= user.getPhone() == null ? "" : user.getPhone()%>"
                                 class="
                                 appearance-none
@@ -188,7 +186,6 @@
                                 id="avatar"
                                 name="avatar"
                                 type="text"
-                                required
                                 value="<%= user.getAvatar() == null ? "" : user.getAvatar()%>"
                                 class="
                                 appearance-none
