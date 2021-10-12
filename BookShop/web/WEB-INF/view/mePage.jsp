@@ -1,3 +1,4 @@
+<%@page import="constant.Router"%>
 <%@page import="daos.UserDAO"%>
 <%@page import="models.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -24,7 +25,7 @@
 
     <div class="flex flex-col items-center justify-center flex-1 mt-24 ">
         <form
-            action="me" 
+            action="<%=Router.PROFILE_CONTROLLER%>" 
             method="POST"
             class="
             w-full
@@ -212,7 +213,7 @@
             </div>
             <div class="flex justify-end px-4 py-5 sm:px-6">
                 <a
-                    href="/user/changepassword"
+                    href="<%=Router.CHANGE_PASSWORD_CONTROLLER%>"
                     class="
                     inline-flex
                     items-center

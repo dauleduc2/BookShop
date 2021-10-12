@@ -1,5 +1,6 @@
 <%-- Document : RegisterPage Created on : Oct 8, 2021, 7:56:56 PM Author : Admin
---%> <%@page contentType="text/html" pageEncoding="UTF-8"%>
+--%> <%@page import="constant.Router"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -35,7 +36,7 @@
 
         <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
             <div class="bg-white py-8 px-4 shadow-xl sm:rounded-xl sm:px-10">
-                <form class="space-y-6" action="login" method="POST">
+                <form class="space-y-6" action="<%=Router.LOGIN_CONTROLLER%>" method="POST">
                     <div>
                         <label
                             for="email"
@@ -152,7 +153,7 @@
                         <div class="self-end mt-4 text-sm">
                             Don't have account yet?
                             <a
-                                href="/user/register"
+                                href="<%=Router.REGISTER_CONTROLLER%>"
                                 class="
                                 font-semibold
                                 text-indigo-600

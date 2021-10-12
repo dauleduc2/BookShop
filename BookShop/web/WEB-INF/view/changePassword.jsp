@@ -1,9 +1,3 @@
-<%-- 
-    Document   : changePassword
-    Created on : Oct 12, 2021, 9:45:34 PM
-    Author     : Bana-na
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

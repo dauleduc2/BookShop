@@ -1,3 +1,4 @@
+<%@page import="constant.Router"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -11,6 +12,6 @@
         <% String userId = (String) session.getAttribute("userId");
         Integer userRole
                 = (Integer) session.getAttribute("userRole");%> <%=userId%> <%=userRole%>
-        <a href="me">Your Profile</a>
+                <a href="<%=Router.PROFILE_CONTROLLER%>">Your Profile</a>
     </body>
 </html>
