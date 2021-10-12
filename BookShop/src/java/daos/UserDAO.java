@@ -148,6 +148,7 @@ public class UserDAO {
         }
     }
 
+    // this function will update password of user
     public void changePassword(String userid, String newPassword) throws Exception {
         try {
             conn = Connector.getConnection();

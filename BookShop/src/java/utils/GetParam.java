@@ -7,13 +7,6 @@ public class GetParam {
     /**
      * Get string from request parameter and validate it, if it invalid, return
      * default value
-     *
-     * @param request servlet request
-     * @param field request parameter name
-     * @param label Label
-     * @param min minimum length
-     * @param max maximum length
-     * @return Valid string
      */
     public static String getStringParam(HttpServletRequest request, String field, String label, int min, int max,
             String defaultValue) {
@@ -44,13 +37,6 @@ public class GetParam {
     /**
      * Get Integer from request parameter and validate it, if it invalid, return
      * default value
-     *
-     * @param request servlet request
-     * @param field request parameter name
-     * @param label Label
-     * @param min minimum value
-     * @param max maximum value
-     * @return Valid Integer
      */
     public static Integer getIntParams(HttpServletRequest request, String field, String label, int min, int max,
             Integer defaultValue) {
@@ -89,13 +75,6 @@ public class GetParam {
     /**
      * Get Float from request parameter and validate it, if it invalid, return
      * default value
-     *
-     * @param request servlet request
-     * @param field request parameter name
-     * @param label Label
-     * @param min minimum value
-     * @param max maximum value
-     * @return Valid Float
      */
     public static Float getFloatParams(HttpServletRequest request, String field, String label, float min, float max,
             Float defaultValue) {
@@ -133,11 +112,6 @@ public class GetParam {
 
     /**
      * Get email from request parameter and validate it
-     *
-     * @param request servlet request
-     * @param field request parameter name
-     * @param label Label
-     * @return Valid email
      */
     public static String getEmailParams(HttpServletRequest request, String field, String label) {
         String value = getStringParam(request, field, label, 11, 50, null);
@@ -156,11 +130,6 @@ public class GetParam {
 
     /**
      * Get phone from request parameter and validate it
-     *
-     * @param request servlet request
-     * @param field request parameter name
-     * @param label Label
-     * @return Valid phone
      */
     public static String getPhoneParams(HttpServletRequest request, String field, String label) {
         String value = getStringParam(request, field, label, 6, 20, "");

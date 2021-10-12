@@ -8,7 +8,7 @@ public class Router {
     public static final String HOME_PAGE = "/WEB-INF/view/home.jsp";
     public static final String REGISTER_PAGE = "/WEB-INF/view/RegisterPage.jsp";
     public static final String ME_PAGE = "WEB-INF/view/mePage.jsp";
-    public static final String CHANGEPASSWORD_PAGE = "WEB-INF/view/changePassword.jsp";
+    public static final String CHANGE_PASSWORD_PAGE = "WEB-INF/view/changePassword.jsp";
 
     // router mapping
     public static final String LOGIN_CONTROLLER = "login";

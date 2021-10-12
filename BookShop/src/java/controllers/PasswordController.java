@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controllers;
 
 import constant.Router;
@@ -20,21 +15,12 @@ import javax.servlet.http.HttpSession;
 import models.User;
 import utils.GetParam;
 
-/**
- *
- * @author Bana-na
- */
 @WebServlet(name = "PasswordController", urlPatterns = {"/changepassword"})
 public class PasswordController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
      */
     protected boolean processRequest(HttpServletRequest request, HttpServletResponse response)
             throws Exception {
@@ -49,9 +35,9 @@ public class PasswordController extends HttpServlet {
 
         String oldPassword = GetParam.getStringParam(request, "oldPassword", "Old Password", 5, 50, null);
         String newPassword = GetParam.getStringParam(request, "newPassword", "New Password", 5, 50, null);
-        String confirmNewPw = GetParam.getStringParam(request, "confirmNewPassword", "Confirm New Password", 5, 50, null);
+        String confirmNewPassword = GetParam.getStringParam(request, "confirmNewPassword", "Confirm New Password", 5, 50, null);
 
-        if (oldPassword == null || newPassword == null || confirmNewPw == null) {
+        if (oldPassword == null || newPassword == null || confirmNewPassword == null) {
             return false;
         }
 
@@ -59,7 +45,7 @@ public class PasswordController extends HttpServlet {
             request.setAttribute("oldPasswordError", "Old Password Incorrect");
             return false;
         }
-        if (!newPassword.equals(confirmNewPw)) {
+        if (!newPassword.equals(confirmNewPassword)) {
             request.setAttribute("confirmNewPasswordError", "Confirm Password Incorrect");
             return false;
         }
@@ -70,25 +56,15 @@ public class PasswordController extends HttpServlet {
 
     /**
      * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher(Router.CHANGEPASSWORD_PAGE).forward(request, response);
+        request.getRequestDispatcher(Router.CHANGE_PASSWORD_PAGE).forward(request, response);
     }
 
     /**
      * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -96,7 +72,7 @@ public class PasswordController extends HttpServlet {
         try {
             if (!processRequest(request, response)) {
                 // forward on 400
-                request.getRequestDispatcher(Router.CHANGEPASSWORD_PAGE).forward(request, response);
+                request.getRequestDispatcher(Router.CHANGE_PASSWORD_PAGE).forward(request, response);
                 return;
             }
             // forward on 200
