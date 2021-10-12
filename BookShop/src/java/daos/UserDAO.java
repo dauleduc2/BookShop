@@ -147,4 +147,17 @@ public class UserDAO {
             this.closeConnection();
         }
     }
+
+    public void changePassword(String userid, String newPassword) throws Exception {
+        try {
+            conn = Connector.getConnection();
+            String sql = "UPDATE bookshop_user SET password = ? WHERE userId = ?";
+            preStm = conn.prepareStatement(sql);
+            preStm.setString(1, newPassword);
+            preStm.setString(2, userid);
+            preStm.executeUpdate();
+        } finally {
+            this.closeConnection();
+        }
+    }
 }
