@@ -59,6 +59,7 @@ public class RegisterController extends HttpServlet {
         //
         User user = new User(0, username, fullName, email, password);
         userDao.addNewUser(user);
+        request.setAttribute("successMessage", "Register successful.");
         return true;
     }
 

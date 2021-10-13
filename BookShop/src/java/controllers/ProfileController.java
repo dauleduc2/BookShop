@@ -36,6 +36,7 @@ public class ProfileController extends HttpServlet {
         HttpSession session = request.getSession();
         String userId = (String) session.getAttribute("userId");
         userDao.updateUserProfile(userId, fullName, email, address, phone, avatar);
+        request.setAttribute("successMessage", "Change profile successful.");
         return true;
     }
 
