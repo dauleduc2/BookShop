@@ -8,8 +8,6 @@ public class Connector {
 
     /**
      * Get connection
-     *
-     * @return
      */
     public static Connection getConnection() {
         Connection connection = null;
