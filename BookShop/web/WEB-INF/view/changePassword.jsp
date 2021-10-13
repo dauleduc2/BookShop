@@ -143,7 +143,7 @@
                         </div>
                         <div class="flex justify-end px-4 py-5 sm:px-6">
                                 <a
-                                    href="/me"
+                                    href="<%=Router.PROFILE_CONTROLLER%>"
                                     class="
                                     inline-flex
                                     items-center
@@ -165,7 +165,7 @@
                                     mr-5
                                     "
                                     >
-                                        Change Information
+                                        Edit profile
                                 </a>
                                 <input
                                     type="submit"
