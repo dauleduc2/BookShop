@@ -70,14 +70,13 @@ public class LoginController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try {
-            System.out.println("Hello");
             if (!processRequest(request, response)) {
                 // forward on 400
                 request.getRequestDispatcher(Router.LOGIN_PAGE).forward(request, response);
                 return;
             }
             // forward on 200
-            request.getRequestDispatcher(Router.HOME_PAGE).forward(request, response);
+            response.sendRedirect(Router.HOME_CONTROLLER);
         } catch (Exception e) {
             // forward on 500
             request.getRequestDispatcher(Router.ERROR).forward(request, response);
