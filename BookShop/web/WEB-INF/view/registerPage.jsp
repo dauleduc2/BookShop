@@ -1,4 +1,3 @@
-<%-- Document : Register Created on : Oct 10, 2021, 5:03:07 PM Author : Admin
 --%> <%@page import="constant.Router"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
