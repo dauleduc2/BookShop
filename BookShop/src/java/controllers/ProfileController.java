@@ -40,8 +40,7 @@ public class ProfileController extends HttpServlet {
         userDao.updateUserProfile(userId, fullName, email, address, phone, imageUrl);
         //save avatar url to session
         session = request.getSession();
-        session.setAttribute("userId", imageUrl);
-        session.setAttribute("userRole", imageUrl);
+        session.setAttribute("avatarUrl", imageUrl);
         return true;
     }
 

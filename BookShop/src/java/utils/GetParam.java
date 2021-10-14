@@ -2,6 +2,7 @@ package utils;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.UUID;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.Part;
@@ -151,15 +152,17 @@ public class GetParam {
     }
 
     public static String getFileParam(HttpServletRequest request, String field, String label, long maxSize) throws IOException, ServletException {
+        //upload dir where save the image in server
+        String uploadDir = "asset/images";
         //get absolute path to project
         String appPath = request.getServletContext().getRealPath("");
         appPath = appPath.replace('\\', '/');
         //path to save file
         String fullSavePath = null;
         if (appPath.endsWith("/")) {
-            fullSavePath = appPath + "asset/images";
+            fullSavePath = appPath + uploadDir;
         } else {
-            fullSavePath = appPath + "/" + "asset/images";
+            fullSavePath = appPath + "/" + uploadDir;
         }
 
         //create if the folder is not existed
@@ -181,18 +184,15 @@ public class GetParam {
             return null;
         }
 
-        String fileName = Helper.getFileName(filePart);
+        String fileName = UUID.randomUUID().toString() + Helper.getFileName(filePart);
         //absolute path to image
         String filePath = null;
         if (fileName != null && fileName.length() > 0) {
             filePath = fullSavePath + File.separator + fileName;
-            System.out.println("Write attachment to file: " + filePath);
-
             // save to file
             filePart.write(filePath);
         }
-
-        return filePath;
+        return uploadDir + "/" + fileName;
 
     }
 }
