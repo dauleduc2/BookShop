@@ -215,6 +215,9 @@
                         </dd>
                     </div>
                 </dl>
+                <p class="mt-2 text-sm text-green-600 text-right mr-5 font-semibold" id="successMessage">
+                    ${requestScope.successMessage}
+                </p>
             </div>
             <div class="flex justify-end px-4 py-5 sm:px-6">
                 <a

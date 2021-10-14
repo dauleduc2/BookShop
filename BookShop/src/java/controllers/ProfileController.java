@@ -22,8 +22,6 @@ public class ProfileController extends HttpServlet {
      */
     protected boolean processRequest(HttpServletRequest request, HttpServletResponse response)
             throws Exception {
-
-//       --------------------
         response.setContentType("text/html;charset=UTF-8");
         UserDAO userDao = new UserDAO();
         // validate param
@@ -38,10 +36,12 @@ public class ProfileController extends HttpServlet {
         HttpSession session = request.getSession();
         String userId = (String) session.getAttribute("userId");
         userDao.updateUserProfile(userId, fullName, email, address, phone, imageUrl);
+        //send success message
+        request.setAttribute("successMessage", "Change profile successful.");
         //save avatar url to session
         session = request.getSession();
         session.setAttribute("avatarUrl", imageUrl);
-        request.setAttribute("successMessage", "Change profile successful.");
+
         return true;
     }
 
