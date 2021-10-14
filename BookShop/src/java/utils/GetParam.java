@@ -1,6 +1,11 @@
 package utils;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.UUID;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.Part;
 
 public class GetParam {
 
@@ -144,5 +149,50 @@ public class GetParam {
             return null;
         }
         return value;
+    }
+
+    public static String getFileParam(HttpServletRequest request, String field, String label, long maxSize) throws IOException, ServletException {
+        //upload dir where save the image in server
+        String uploadDir = "asset/images";
+        //get absolute path to project
+        String appPath = request.getServletContext().getRealPath("");
+        appPath = appPath.replace('\\', '/');
+        //path to save file
+        String fullSavePath = null;
+        if (appPath.endsWith("/")) {
+            fullSavePath = appPath + uploadDir;
+        } else {
+            fullSavePath = appPath + "/" + uploadDir;
+        }
+
+        //create if the folder is not existed
+        File fileSaveDir = new File(fullSavePath);
+
+        if (!fileSaveDir.exists()) {
+            fileSaveDir.mkdir();
+        }
+
+        //get upload file;
+        Part filePart = request.getPart(field);
+        if (filePart == null) {
+            request.setAttribute(field + "Error", label + " is required");
+            return null;
+        }
+        //check size
+        if (filePart.getSize() > maxSize) {
+            request.setAttribute(field + "Error", label + " is too large");
+            return null;
+        }
+
+        String fileName = UUID.randomUUID().toString() + Helper.getFileName(filePart);
+        //absolute path to image
+        String filePath = null;
+        if (fileName != null && fileName.length() > 0) {
+            filePath = fullSavePath + File.separator + fileName;
+            // save to file
+            filePart.write(filePath);
+        }
+        return uploadDir + "/" + fileName;
+
     }
 }

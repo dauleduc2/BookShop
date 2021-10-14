@@ -208,8 +208,7 @@
                                 ${requestScope.confirmPasswordError}
                             </p>
                         </div>
-                    </div>
-
+                    </div>    
                     <div>
                         <button
                             type="submit"
