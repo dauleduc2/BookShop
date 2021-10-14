@@ -51,6 +51,7 @@ public class PasswordController extends HttpServlet {
         }
 
         userDao.changePassword(userId, newPassword);
+        request.setAttribute("successMessage", "Change password successful.");
         return true;
     }
 

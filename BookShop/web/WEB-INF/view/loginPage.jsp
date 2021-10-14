@@ -17,7 +17,7 @@
         class="
         relative
         min-h-screen
-        bg-gray-300
+        bg-gray-50
         flex flex-col
         justify-center
         py-12

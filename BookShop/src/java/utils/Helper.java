@@ -2,6 +2,7 @@ package utils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 
 public class Helper {
 
@@ -16,5 +17,16 @@ public class Helper {
         String userId = (String) session.getAttribute("userId");
 
         return userId != null;
+    }
+
+    //get file name of image
+    public static String getFileName(Part part) {
+        for (String content : part.getHeader("content-disposition").split(";")) {
+            if (content.trim().startsWith("filename")) {
+                return content.substring(content.indexOf('=') + 1).trim().replace("\"", "");
+            }
+        }
+
+        return null;
     }
 }
