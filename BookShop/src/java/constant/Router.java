@@ -16,5 +16,6 @@ public class Router {
     public static final String CHANGE_PASSWORD_CONTROLLER = "password";
     public static final String PROFILE_CONTROLLER = "me";
     public static final String SIGNOUT_CONTROLLER = "signout";
+    public static final String HOME_CONTROLLER = "home";
 
 }

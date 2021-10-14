@@ -24,7 +24,7 @@ public class SignoutController extends HttpServlet {
             session.invalidate();
         } finally {
             // forward on success
-            response.sendRedirect(Router.HOME_PAGE + "?message=Signout successfully");
+            response.sendRedirect(Router.HOME_CONTROLLER + "?message=Signout successfully");
         }
     }
 }
