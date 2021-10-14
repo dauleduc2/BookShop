@@ -1,4 +1,5 @@
 <%-- Document : Navbar Created on : Oct 10, 2021, 6:05:32 PM Author : Admin --%>
+<%@page import="constant.Router"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%> <% String avatarUrl =
 (String) session.getAttribute("avatarUrl"); %>
 
@@ -123,7 +124,7 @@
               >Your Profile</a
             >
             <a
-              href="#"
+                href="<%=Router.SIGNOUT_CONTROLLER%>"
               class="block px-4 py-2 text-sm text-gray-700"
               role="menuitem"
               tabindex="-1"
