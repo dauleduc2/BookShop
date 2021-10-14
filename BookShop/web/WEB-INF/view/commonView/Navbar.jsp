@@ -2,7 +2,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <nav class="bg-gray-800">
-  <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
+  <div class="px-2 mx-auto max-w-7xl sm:px-6 lg:px-8">
     <div class="relative flex items-center justify-between h-16">
       <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
         <!-- Mobile menu button-->
@@ -13,8 +13,8 @@
             items-center
             justify-center
             p-2
-            rounded-md
             text-gray-400
+            rounded-md
             hover:text-white hover:bg-gray-700
             focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white
           "
@@ -23,7 +23,7 @@
         >
           <span class="sr-only">Open main menu</span>
           <svg
-            class="block h-6 w-6"
+            class="block w-6 h-6"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
@@ -46,7 +46,7 @@
             Menu open: "block", Menu closed: "hidden"
           -->
           <svg
-            class="hidden h-6 w-6"
+            class="hidden w-6 h-6"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
@@ -64,14 +64,15 @@
       </div>
       <div
         class="
-          flex-1 flex
+          flex
           items-center
           justify-center
+          flex-1
           sm:items-stretch sm:justify-start
         "
       >
-        <div class="flex-shrink-0 flex items-center">
-          <img class="mx-auto h-10" src="asset/logoFull.png" alt="Workflow" />
+        <div class="flex items-center flex-shrink-0">
+          <img class="h-10 mx-auto" src="asset/logoFull.png" alt="Workflow" />
         </div>
         <div class="hidden sm:block sm:ml-6">
           <div class="flex space-x-4">
@@ -79,14 +80,13 @@
             <a
               href="# "
               class="
-                text-gray-300
-                bg-gray-900
-                text-white
                 px-3
                 py-2
-                rounded-md
                 text-sm
                 font-medium
+                text-gray-300
+                bg-gray-900
+                rounded-md
                 navbarSelection
               "
               aria-current="page"
@@ -96,13 +96,13 @@
             <a
               href="#"
               class="
-                text-gray-300
-                hover:bg-gray-700 hover:text-white
                 px-3
                 py-2
-                rounded-md
                 text-sm
                 font-medium
+                text-gray-300
+                rounded-md
+                hover:bg-gray-700 hover:text-white
                 navbarSelection
               "
               >Category</a
@@ -122,14 +122,14 @@
         "
       >
         <!-- Profile dropdown -->
-        <div class="ml-3 relative">
+        <div class="relative ml-3">
           <div>
             <button
               type="button"
               class="
-                bg-gray-800
                 flex
                 text-sm
+                bg-gray-800
                 rounded-full
                 focus:outline-none
                 focus:ring-2
@@ -143,7 +143,7 @@
               aria-haspopup="true"
             >
               <img
-                class="h-8 w-8 rounded-full"
+                class="w-8 h-8 rounded-full"
                 src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                 alt=""
               />
@@ -162,18 +162,18 @@
           -->
           <div
             class="
-              origin-top-right
               absolute
               right-0
-              mt-2
+              hidden
               w-48
+              py-1
+              mt-2
+              origin-top-right
+              bg-white
               rounded-md
               shadow-lg
-              py-1
-              bg-white
               ring-1 ring-black ring-opacity-5
               focus:outline-none
-              hidden
               dropdownMenu
             "
             role="menu"
@@ -205,20 +205,20 @@
   </div>
 
   <!-- Mobile menu, show/hide based on menu state. -->
-  <div class="sm:hidden hidden" id="mobile-menu">
+  <div class="hidden sm:hidden" id="mobile-menu">
     <div class="px-2 pt-2 pb-3 space-y-1">
       <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
       <a
         href="#"
         class="
-          bg-gray-900
-          text-white
           block
           px-3
           py-2
-          rounded-md
           text-base
           font-medium
+          text-white
+          bg-gray-900
+          rounded-md
         "
         aria-current="page"
         >Home</a
@@ -227,14 +227,14 @@
       <a
         href="#"
         class="
-          text-gray-300
-          hover:bg-gray-700 hover:text-white
           block
           px-3
           py-2
-          rounded-md
           text-base
           font-medium
+          text-gray-300
+          rounded-md
+          hover:bg-gray-700 hover:text-white
         "
         >Category</a
       >
