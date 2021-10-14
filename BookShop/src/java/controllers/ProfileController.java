@@ -41,6 +41,7 @@ public class ProfileController extends HttpServlet {
         //save avatar url to session
         session = request.getSession();
         session.setAttribute("avatarUrl", imageUrl);
+        request.setAttribute("successMessage", "Change profile successful.");
         return true;
     }
 
