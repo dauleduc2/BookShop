@@ -30,7 +30,7 @@ public class ProfileController extends HttpServlet {
         String address = GetParam.getStringParam(request, "address", "Address", 5, 500, "");
         String phone = GetParam.getPhoneParams(request, "phone", "Phone number");
         String imageUrl = GetParam.getFileParam(request, "avatar", "Avatar", 1080 * 1080);
-        if (fullName == null || email == null) {
+        if (fullName == null || email == null || imageUrl == null) {
             return false;
         }
         HttpSession session = request.getSession();
