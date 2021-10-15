@@ -1,4 +1,4 @@
-<%-- Document : Navbar Created on : Oct 10, 2021, 6:05:32 PM Author : Admin --%> <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%> <% String avatarUrl = (String) session.getAttribute("avatarUrl");%>
 <%@page
     import="constant.Router"%>
@@ -50,7 +50,6 @@
                                     </div>
                                     <div class="hidden sm:block sm:ml-6">
                                             <div class="flex space-x-4">
-                                                    <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
                                                     <a
                                                         href="# "
                                                         class="px-3 py-2 text-sm font-medium text-gray-300 bg-gray-900 rounded-md navbarSelection"
@@ -79,21 +78,10 @@
                                                                 aria-expanded="false"
                                                                 aria-haspopup="true"
                                                                 >
-                                                                 <img class="w-8 h-8 rounded-full" src="<%= avatarUrl == null
-										? "asset/images/avatar.png" : avatarUrl%>" alt="" />
+                                                                    <img class="w-8 h-8 rounded-full object-cover" src="<%= avatarUrl == null
+									 ? "asset/images/avatar.png" : avatarUrl%>" alt="" />
                                                             </button>
                                                     </div>
-
-                                                    <!--
-                                Dropdown menu, show/hide based on menu state.
-
-                                Entering: "transition ease-out duration-100"
-                                  From: "transform opacity-0 scale-95"
-                                  To: "transform opacity-100 scale-100"
-                                Leaving: "transition ease-in duration-75"
-                                  From: "transform opacity-100 scale-100"
-                                  To: "transform opacity-0 scale-95"
-                                                    -->
                                                     <div
                                                         class="absolute right-0 z-50 hidden w-48 py-1 mt-2 origin-top-right bg-white rounded-md shadow-lg  ring-1 ring-black ring-opacity-5 focus:outline-none dropdownMenu"
                                                         role="menu"
@@ -111,7 +99,7 @@
                                                                 >Your Profile</a
                                                             >
                                                             <a
-                                                                href="#"
+                                                                href="<%=Router.SIGNOUT_CONTROLLER%>"
                                                                 class="block px-4 py-2 text-sm text-gray-700 transition duration-300  hover:bg-gray-700 hover:text-white"
                                                                 role="menuitem"
                                                                 tabindex="-1"
@@ -145,7 +133,6 @@
             <!-- Mobile menu, show/hide based on menu state. -->
             <div class="hidden sm:hidden" id="mobile-menu">
                     <div class="px-2 pt-2 pb-3 space-y-1">
-                            <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
                             <a href="#" class="block px-3 py-2 text-base font-medium text-white bg-gray-900 rounded-md" aria-current="page">Home</a>
 
                             <a href="#" class="block px-3 py-2 text-base font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white"
