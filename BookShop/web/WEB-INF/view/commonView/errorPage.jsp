@@ -36,7 +36,7 @@
                   ${requestScope.errorTitle}
               </h1>
               <p class="mt-1 text-base text-gray-500">
-                  ${requestScope.errorDescription}
+                ${requestScope.errorDescription}
               </p>
             </div>
             <div
@@ -45,10 +45,11 @@
                 flex
                 space-x-3
                 sm:border-l sm:border-transparent sm:pl-6
+                justify-start
               "
             >
               <a
-                  href="<%=Router.HOME_CONTROLLER%>"
+                href="#"
                 class="
                   items-center
                   px-4
@@ -69,6 +70,7 @@
                 "
               >
                 Go back home
+              </a>
             </div>
           </div>
         </main>
