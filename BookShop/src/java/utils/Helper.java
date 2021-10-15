@@ -29,4 +29,11 @@ public class Helper {
 
         return null;
     }
+
+    //set attribute for error page
+    public static void setAttribute(HttpServletRequest request, Integer errorStatus, String errorTitle, String errorDescription) {
+        request.setAttribute("errorStatus", errorStatus);
+        request.setAttribute("errorTitle", errorTitle);
+        request.setAttribute("errorDescription", errorDescription);
+    }
 }

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import models.User;
 import utils.GetParam;
+import utils.Helper;
 
 @WebServlet(name = "RegisterController", urlPatterns = {"/" + Router.REGISTER_CONTROLLER})
 public class RegisterController extends HttpServlet {
@@ -57,7 +58,7 @@ public class RegisterController extends HttpServlet {
             return false;
         }
         //
-        User user = new User(0, username, fullName, email, password);
+        User user = new User(2, username, fullName, email, password);
         userDao.addNewUser(user);
         request.setAttribute("successMessage", "Register successful.");
         return true;
@@ -90,7 +91,7 @@ public class RegisterController extends HttpServlet {
             response.sendRedirect(Router.LOGIN_CONTROLLER);
         } catch (Exception e) {
             // forward on 500
-            System.out.println(e.getMessage());
+            Helper.setAttribute(request, 500, "Something failed", "Please try again later");
             request.getRequestDispatcher(Router.ERROR).forward(request, response);
         }
     }
