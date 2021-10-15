@@ -1,8 +1,10 @@
+<%@page import="constant.Router"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="asset/styles.css" type="text/css" />
     <title>JSP Page</title>
   </head>
   <body>
@@ -34,7 +36,7 @@
                   ${requestScope.errorTitle}
               </h1>
               <p class="mt-1 text-base text-gray-500">
-                  ${requestScope.errorDescription}}
+                  ${requestScope.errorDescription}
               </p>
             </div>
             <div
@@ -46,7 +48,7 @@
               "
             >
               <a
-                href="#"
+                  href="<%=Router.HOME_CONTROLLER%>"
                 class="
                   items-center
                   px-4
@@ -66,7 +68,7 @@
                   text-center
                 "
               >
-                Go bac
+                Go back home
             </div>
           </div>
         </main>
