@@ -1,5 +1,4 @@
-<%-- Document : errorPage Created on : Oct 14, 2021, 5:00:45 PM Author : Admin
---%> <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
   <head>
