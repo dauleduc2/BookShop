@@ -1,5 +1,4 @@
-<%-- Document : RegisterPage Created on : Oct 8, 2021, 7:56:56 PM Author : Admin
---%> <%@page import="constant.Router"%>
+<%@page import="constant.Router"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
