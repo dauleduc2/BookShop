@@ -3,9 +3,6 @@ package controllers;
 import constant.Router;
 import daos.UserDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import models.User;
 import utils.GetParam;
+import utils.Helper;
 
 @WebServlet(name = "PasswordController", urlPatterns = {"/" + Router.CHANGE_PASSWORD_CONTROLLER})
 public class PasswordController extends HttpServlet {
@@ -51,6 +49,7 @@ public class PasswordController extends HttpServlet {
         }
 
         userDao.changePassword(userId, newPassword);
+        request.setAttribute("successMessage", "Change password successful.");
         return true;
     }
 
@@ -79,6 +78,7 @@ public class PasswordController extends HttpServlet {
             request.getRequestDispatcher(Router.ME_PAGE).forward(request, response);
         } catch (Exception e) {
             // forward on 500
+            Helper.setAttribute(request, 500, "Something failed", "Please try again later");
             request.getRequestDispatcher(Router.ERROR).forward(request, response);
         }
     }
