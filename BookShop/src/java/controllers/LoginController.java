@@ -79,6 +79,7 @@ public class LoginController extends HttpServlet {
             response.sendRedirect(Router.HOME_CONTROLLER);
         } catch (Exception e) {
             // forward on 500
+            Helper.setAttribute(request, 500, "Something failed", "Please try again later");
             request.getRequestDispatcher(Router.ERROR).forward(request, response);
         }
     }
