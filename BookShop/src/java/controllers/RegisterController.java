@@ -30,7 +30,6 @@ public class RegisterController extends HttpServlet {
         String fullName = GetParam.getStringParam(request, "fullName", "Full name", 5, 50, null);
         String password = GetParam.getStringParam(request, "password", "Password", 5, 50, null);
         String confirmPassword = GetParam.getStringParam(request, "confirmPassword", "Confirm Password", 5, 50, null);
-        System.out.println(password);
         if (email == null || username == null || password == null || confirmPassword == null || fullName == null) {
             isTrue = false;
         }

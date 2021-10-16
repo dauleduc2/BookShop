@@ -27,9 +27,7 @@ public class PasswordController extends HttpServlet {
         HttpSession session = request.getSession();
 
         String userId = (String) session.getAttribute("userId");
-        User user = new User();
-
-        user = userDao.getUserById(userId);
+        User user = userDao.getUserById(userId);
 
         String oldPassword = GetParam.getStringParam(request, "oldPassword", "Old Password", 5, 50, null);
         String newPassword = GetParam.getStringParam(request, "newPassword", "New Password", 5, 50, null);
@@ -47,7 +45,6 @@ public class PasswordController extends HttpServlet {
             request.setAttribute("confirmNewPasswordError", "Confirm Password Incorrect");
             return false;
         }
-
         userDao.changePassword(userId, newPassword);
         request.setAttribute("successMessage", "Change password successful.");
         return true;
@@ -75,7 +72,7 @@ public class PasswordController extends HttpServlet {
                 return;
             }
             // forward on 200
-            request.getRequestDispatcher(Router.ME_PAGE).forward(request, response);
+            response.sendRedirect(Router.PROFILE_CONTROLLER);
         } catch (Exception e) {
             // forward on 500
             Helper.setAttribute(request, 500, "Something failed", "Please try again later");

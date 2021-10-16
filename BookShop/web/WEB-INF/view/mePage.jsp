@@ -16,9 +16,7 @@
 </head>
 <body>
     <%
-        String userId = (String) session.getAttribute("userId");
-        UserDAO userDao = new UserDAO();
-        User user = userDao.getUserById(userId);
+        User user =(User) request.getAttribute("user");
     %>
 
 

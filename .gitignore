@@ -11,3 +11,5 @@ nbdist/
 /Planning
 /tailwind-fast-kit
 **/**.sql
+**context.xml
+/BookShop/dist/
