@@ -1,12 +1,16 @@
 package controllers;
 
 import constant.Router;
+import daos.ProductDAO;
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import models.Product;
+import utils.Helper;
 
 @WebServlet(name = "HomeController", urlPatterns = {"/" + Router.HOME_CONTROLLER})
 public class HomeController extends HttpServlet {
@@ -15,9 +19,15 @@ public class HomeController extends HttpServlet {
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    protected boolean processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws Exception {
         response.setContentType("text/html;charset=UTF-8");
+        ProductDAO productDao = new ProductDAO();
+        // get products
+        ArrayList<Product> products = productDao.getProducts();
+        // set attribute
+        request.setAttribute("products", products);
+        return true;
     }
 
     /**
@@ -27,7 +37,18 @@ public class HomeController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        request.getRequestDispatcher(Router.HOME_PAGE).forward(request, response);
+        try {
+            if (!processRequest(request, response)) {
+                // forward on 400
+                request.getRequestDispatcher(Router.HOME_PAGE).forward(request, response);
+            }
+            // forward on 200
+            request.getRequestDispatcher(Router.HOME_PAGE).forward(request, response);
+        } catch (Exception e) {
+            // forward on 500
+            Helper.setAttribute(request, 500, "Something failed", "Please try again later");
+            request.getRequestDispatcher(Router.ERROR).forward(request, response);
+        }
     }
 
     /**
@@ -36,6 +57,5 @@ public class HomeController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
     }
 }

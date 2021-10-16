@@ -1,3 +1,4 @@
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@page import="constant.Router"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -13,5 +14,9 @@
         Integer userRole
                 = (Integer) session.getAttribute("userRole");%> <%=userId%> <%=userRole%>
                 <a href="<%=Router.PROFILE_CONTROLLER%>">Your Profile</a>
+                <c:forEach var="product" items="${requestScope.products}">
+                    <h1>${product.getName()}</h1>
+                    
+                </c:forEach>
     </body>
 </html>
