@@ -3,6 +3,8 @@ package controllers;
 import constant.Router;
 import daos.UserDAO;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -10,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import models.User;
 import utils.GetParam;
 import utils.Helper;
 
@@ -42,7 +45,6 @@ public class ProfileController extends HttpServlet {
         //save avatar url to session
         session = request.getSession();
         session.setAttribute("avatarUrl", imageUrl);
-
         return true;
     }
 
@@ -52,6 +54,13 @@ public class ProfileController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        try {
+            Helper.sendUserResponse(request);
+        } catch (Exception e) {
+            // forward on 500
+            Helper.setAttribute(request, 500, "Something failed", "Please try again later");
+            request.getRequestDispatcher(Router.ERROR).forward(request, response);
+        }
         response.setContentType("text/html;charset=UTF-8");
         request.getRequestDispatcher(Router.ME_PAGE).forward(request, response);
     }
@@ -65,11 +74,11 @@ public class ProfileController extends HttpServlet {
         try {
             if (!processRequest(request, response)) {
                 // forward on 400
-                request.getRequestDispatcher(Router.ME_PAGE).forward(request, response);
+                this.doGet(request, response);
                 return;
             }
             // forward on 200
-            request.getRequestDispatcher(Router.ME_PAGE).forward(request, response);
+            this.doGet(request, response);
         } catch (Exception e) {
             // forward on 500
             Helper.setAttribute(request, 500, "Something failed", "Please try again later");
