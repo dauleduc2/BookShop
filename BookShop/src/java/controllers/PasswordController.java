@@ -45,7 +45,6 @@ public class PasswordController extends HttpServlet {
             request.setAttribute("confirmNewPasswordError", "Confirm Password Incorrect");
             return false;
         }
-
         userDao.changePassword(userId, newPassword);
         request.setAttribute("successMessage", "Change password successful.");
         return true;
@@ -73,7 +72,7 @@ public class PasswordController extends HttpServlet {
                 return;
             }
             // forward on 200
-            request.getRequestDispatcher(Router.ME_PAGE).forward(request, response);
+            response.sendRedirect(Router.PROFILE_CONTROLLER);
         } catch (Exception e) {
             // forward on 500
             Helper.setAttribute(request, 500, "Something failed", "Please try again later");
