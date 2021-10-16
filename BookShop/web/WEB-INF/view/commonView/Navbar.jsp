@@ -1,5 +1,9 @@
+<%@page import="models.User"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%> <% String avatarUrl = (String) session.getAttribute("avatarUrl");%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%> 
+<% 
+    String avatarUrl = (String) session.getAttribute("avatarUrl");
+%>
 <%@page
     import="constant.Router"%>
     <nav class="bg-gray-800">
@@ -31,7 +35,7 @@
                                                         Heroicon name: outline/x
 
                                                         Menu open: "block", Menu closed: "hidden"
-                                            -->
+                                            --> 
                                             <svg
                                                 class="hidden w-6 h-6"
                                                 xmlns="http://www.w3.org/2000/svg"
