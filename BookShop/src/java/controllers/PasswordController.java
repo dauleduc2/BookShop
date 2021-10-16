@@ -27,9 +27,7 @@ public class PasswordController extends HttpServlet {
         HttpSession session = request.getSession();
 
         String userId = (String) session.getAttribute("userId");
-        User user = new User();
-
-        user = userDao.getUserById(userId);
+        User user = userDao.getUserById(userId);
 
         String oldPassword = GetParam.getStringParam(request, "oldPassword", "Old Password", 5, 50, null);
         String newPassword = GetParam.getStringParam(request, "newPassword", "New Password", 5, 50, null);
