@@ -29,12 +29,7 @@ public class AddProductController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
      *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
      */
     protected boolean processRequest(HttpServletRequest request, HttpServletResponse response)
             throws Exception {
@@ -67,41 +62,32 @@ public class AddProductController extends HttpServlet {
     /**
      * Handles the HTTP <code>GET</code> method.
      *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        System.out.println("Check doGet");
         request.getRequestDispatcher(Router.ADD_PRODUCT_PAGE).forward(request, response);
     }
 
     /**
      * Handles the HTTP <code>POST</code> method.
      *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try {
-            System.out.println(!processRequest(request, response));
-//            if (!processRequest(request, response)) {
-//                // forward on 400
-//                request.getRequestDispatcher(Router.ADD_PRODUCT_PAGE).forward(request, response);
-//                return;
-//            }
+            if (!processRequest(request, response)) {
+                // forward on 400
+                request.getRequestDispatcher(Router.ADD_PRODUCT_PAGE).forward(request, response);
+                return;
+            }
             // forward on 200
             response.sendRedirect(Router.HOME_CONTROLLER);
         } catch (Exception e) {
             // forward on 500
+            System.out.println(e.getMessage());
             Helper.setAttribute(request, 500, "Something failed", "Please try again later");
             request.getRequestDispatcher(Router.ERROR).forward(request, response);
         }

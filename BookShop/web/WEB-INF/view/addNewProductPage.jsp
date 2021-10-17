@@ -10,7 +10,7 @@
         </jsp:include>
     </head>
     <body>
-        <form action="<%=Router.ADDPRODUCT_CONTROLLER%>" method="POST" class="p-2 lg:p-7 space-y-8 divide-y divide-gray-200">
+        <form action="<%=Router.ADDPRODUCT_CONTROLLER%>" method="POST"  enctype="multipart/form-data" class="p-2 lg:p-7 space-y-8 divide-y divide-gray-200">
             <div class="space-y-8 divide-y divide-gray-200 sm:space-y-5">
                 <div>
                     <div class="mb-3">
@@ -56,6 +56,9 @@
                                 "
                                 />
                         </div>
+                        <p class="mt-2 text-sm text-red-600" id="email-error">
+                                ${requestScope.nameError}
+                            </p>
                     </div>
                     <div class="mt-6 sm:mt-5 space-y-6 sm:space-y-5">
                         <div
