@@ -39,13 +39,12 @@ public class AddProductController extends HttpServlet {
 
         String name = GetParam.getStringParam(request, "name", "Book's Name", 5, 50, null);
 
-        String imageUrl = GetParam.getFileParam(request, "image", "Image", 1080 * 1080);
-
-        Integer quantity = GetParam.getIntParams(request, "quantity", "Quantity", 0, Integer.MAX_VALUE, 0);
+        String imageUrl = GetParam.getFileParam(request, "productAvatar", "Product avatar", 1080 * 1080);
+        Integer quantity = GetParam.getIntParams(request, "quantity", "Quantity", 0, Integer.MAX_VALUE, null);
         Float price = GetParam.getFloatParams(request, "price", "Price", 0, Float.MAX_VALUE, null);
         String description = GetParam.getStringParam(request, "description", "Description", 5, Integer.MAX_VALUE, null);
-        Date publishedDate = GetParam.getDateParams(request, "date", "Date");
-        Integer categoryId = GetParam.getIntParams(request, "categoryId", "Category Id", 0, 20, null);
+        Date publishedDate = GetParam.getDateParams(request, "publishedDate", "Published date");
+        Integer categoryId = GetParam.getIntParams(request, "type", "type", 0, 20, null);
         if (name == null || imageUrl == null || quantity == null || price == null || description == null || publishedDate == null || categoryId == null) {
             isTrue = false;
         }

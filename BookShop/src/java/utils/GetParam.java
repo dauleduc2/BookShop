@@ -154,6 +154,13 @@ public class GetParam {
     }
 
     public static String getFileParam(HttpServletRequest request, String field, String label, long maxSize) throws IOException, ServletException {
+        //get upload file;
+        Part filePart = request.getPart(field);
+        if (Helper.getFileName(filePart) == "") {
+            request.setAttribute(field + "Error", label + " is required");
+            return null;
+        }
+
         //upload dir where save the image in server
         String uploadDir = "asset/images";
         //get absolute path to project
@@ -168,22 +175,12 @@ public class GetParam {
         }
 
         //create if the folder is not existed
-        System.out.println("Check1");
         File fileSaveDir = new File(fullSavePath);
 
         if (!fileSaveDir.exists()) {
             fileSaveDir.mkdir();
         }
 
-        //get upload file;
-        System.out.println("Check2");
-        System.out.println(field);
-        Part filePart = request.getPart(field);
-        System.out.println("Check3");
-        if (filePart == null) {
-            request.setAttribute(field + "Error", label + " is required");
-            return null;
-        }
         //check size
         if (filePart.getSize() > maxSize) {
             request.setAttribute(field + "Error", label + " is too large");
@@ -191,8 +188,8 @@ public class GetParam {
         }
 
         String fileName = UUID.randomUUID().toString() + Helper.getFileName(filePart);
+
         //absolute path to image
-        System.out.println("Check4");
         String filePath = null;
         if (fileName != null && fileName.length() > 0) {
             filePath = fullSavePath + File.separator + fileName;
@@ -200,6 +197,7 @@ public class GetParam {
             filePart.write(filePath);
         }
         return uploadDir + "/" + fileName;
+
     }
 
     public static Date getDateParams(HttpServletRequest request, String field, String label) {
