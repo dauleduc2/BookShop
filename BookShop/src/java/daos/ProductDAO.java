@@ -34,12 +34,12 @@ public class ProductDAO {
     }
 
     // this function will get products
-    public ArrayList<Product> getProducts() throws Exception {
+    public ArrayList<Product> getNewProducts() throws Exception {
         ArrayList<Product> products = new ArrayList<Product>();
         try {
             Product product;
             conn = Connector.getConnection();
-            String sql = "SELECT * FROM bookshop_product";
+            String sql = "SELECT TOP 24 * FROM bookshop_product ORDER BY publishedDate DESC";
             preStm = conn.prepareStatement(sql);
             rs = preStm.executeQuery();
             while (rs.next()) {

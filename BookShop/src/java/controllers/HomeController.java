@@ -24,7 +24,7 @@ public class HomeController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         ProductDAO productDao = new ProductDAO();
         // get products
-        ArrayList<Product> products = productDao.getProducts();
+        ArrayList<Product> products = productDao.getNewProducts();
         // set attribute
         request.setAttribute("products", products);
         return true;
