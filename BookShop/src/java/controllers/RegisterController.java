@@ -13,19 +13,18 @@ import utils.GetParam;
 import utils.Helper;
 import models.Role;
 
-@WebServlet(name = "RegisterController", urlPatterns = {"/" + Router.REGISTER_CONTROLLER})
+@WebServlet(name = "RegisterController", urlPatterns = { "/" + Router.REGISTER_CONTROLLER })
 public class RegisterController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
      */
-    protected boolean processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws Exception {
+    protected boolean processRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
         response.setContentType("text/html;charset=UTF-8");
         UserDAO userDao = new UserDAO();
         boolean isTrue = true;
-        //Validate param
+        // Validate param
         String email = GetParam.getEmailParams(request, "email", "Email");
         String username = GetParam.getStringParam(request, "username", "Username", 5, 50, null);
         String fullName = GetParam.getStringParam(request, "fullName", "Full name", 5, 50, null);
