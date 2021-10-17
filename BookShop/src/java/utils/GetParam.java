@@ -2,6 +2,8 @@ package utils;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.UUID;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -166,6 +168,7 @@ public class GetParam {
         }
 
         //create if the folder is not existed
+        System.out.println("Check1");
         File fileSaveDir = new File(fullSavePath);
 
         if (!fileSaveDir.exists()) {
@@ -173,7 +176,10 @@ public class GetParam {
         }
 
         //get upload file;
+        System.out.println("Check2");
+        System.out.println(field);
         Part filePart = request.getPart(field);
+        System.out.println("Check3");
         if (filePart == null) {
             request.setAttribute(field + "Error", label + " is required");
             return null;
@@ -186,6 +192,7 @@ public class GetParam {
 
         String fileName = UUID.randomUUID().toString() + Helper.getFileName(filePart);
         //absolute path to image
+        System.out.println("Check4");
         String filePath = null;
         if (fileName != null && fileName.length() > 0) {
             filePath = fullSavePath + File.separator + fileName;
@@ -193,6 +200,22 @@ public class GetParam {
             filePart.write(filePath);
         }
         return uploadDir + "/" + fileName;
+    }
 
+    public static Date getDateParams(HttpServletRequest request, String field, String label) {
+        String value = getStringParam(request, field, label, 8, 10, null);
+
+        if (value == null) {
+            return null;
+        }
+
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        format.setLenient(false);
+        try {
+            Date date = format.parse(value);
+            return date;
+        } catch (Exception e) {
+            return null;
+        }
     }
 }

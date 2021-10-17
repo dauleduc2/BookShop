@@ -9,14 +9,15 @@ public class Product {
     private String name;
     private String imageUrl;
     private Integer quantity;
-    private Double price;
+    private Float price;
     private String description;
     private Date publishedDate;
+    private Date createdDate;
 
     public Product() {
     }
 
-    public Product(Integer productId, Integer categoryId, String name, String imageUrl, Integer quantity, Double price, String description, Date publishedDate) {
+    public Product(Integer productId, Integer categoryId, String name, String imageUrl, Integer quantity, Float price, String description, Date publishedDate) {
         this.productId = productId;
         this.categoryId = categoryId;
         this.name = name;
@@ -67,11 +68,11 @@ public class Product {
         this.quantity = quantity;
     }
 
-    public Double getPrice() {
+    public Float getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(Float price) {
         this.price = price;
     }
 
@@ -91,8 +92,16 @@ public class Product {
         this.publishedDate = publishedDate;
     }
 
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
+    }
+
     @Override
     public String toString() {
-        return "Product{" + "productId=" + productId + ", categoryId=" + categoryId + ", name=" + name + ", imageUrl=" + imageUrl + ", quantity=" + quantity + ", price=" + price + ", description=" + description + ", publishedDate=" + publishedDate + '}';
+        return "Product{" + "productId=" + productId + ", categoryId=" + categoryId + ", name=" + name + ", imageUrl=" + imageUrl + ", quantity=" + quantity + ", price=" + price + ", description=" + description + ", publishedDate=" + publishedDate + ", createdDate=" + createdDate + '}';
     }
 }
