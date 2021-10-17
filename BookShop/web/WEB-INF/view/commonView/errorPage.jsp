@@ -6,7 +6,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <title>JSP Page</title>
         <link rel="stylesheet" href="asset/styles.css" type="text/css" />
-        <jsp:include page="./commonView/Navbar.jsp">
+        <jsp:include page="./Navbar.jsp">
             <jsp:param name="title" value="Sannin SC |  Add Room" />
         </jsp:include>
     </head>
