@@ -1,9 +1,5 @@
-<%@page import="models.User"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%
-        String avatarUrl = (String) session.getAttribute("avatarUrl");
-%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%> <% String avatarUrl = (String) session.getAttribute("avatarUrl");%>
 <%@page
     import="constant.Router"%>
     <nav class="bg-gray-800">
@@ -31,9 +27,7 @@
                                             </svg>
                                             <!--
                                                         Icon when menu is open.
-
                                                         Heroicon name: outline/x
-
                                                         Menu open: "block", Menu closed: "hidden"
                                             -->
                                             <svg
@@ -50,12 +44,12 @@
                             </div>
                             <div class="flex items-center justify-center flex-1 sm:items-stretch sm:justify-start">
                                     <div class="flex items-center flex-shrink-0">
-                                            <img class="h-10 mx-auto" src="asset/logoFull.png" alt="bookshop" />
+                                            <img class="h-10 mx-auto" src="asset/logoFull.png" alt="Workflow" />
                                     </div>
                                     <div class="hidden sm:block sm:ml-6">
                                             <div class="flex space-x-4">
                                                     <a
-                                                        href="<%=Router.HOME_CONTROLLER%>"
+                                                        href="# "
                                                         class="px-3 py-2 text-sm font-medium text-gray-300 bg-gray-900 rounded-md navbarSelection"
                                                         aria-current="page"
                                                         >Home</a
@@ -82,8 +76,8 @@
                                                                 aria-expanded="false"
                                                                 aria-haspopup="true"
                                                                 >
-                                                                 <img class="w-8 h-8 rounded-full object-cover" src="<%= avatarUrl == null
-									    ? "asset/images/avatar.png" : avatarUrl%>" alt="" />
+                                                                    <img class="w-8 h-8 rounded-full object-cover" src="<%= avatarUrl == null
+									 ? "asset/images/avatar.png" : avatarUrl%>" alt="" />
                                                             </button>
                                                     </div>
                                                     <div
