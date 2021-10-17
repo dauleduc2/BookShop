@@ -40,7 +40,8 @@ public class ProfileController extends HttpServlet {
         HttpSession session = request.getSession();
         String userId = (String) session.getAttribute("userId");
         User user = userDao.getUserById(userId);
-        userDao.updateUserProfile(userId, fullName, email, address, phone, imageUrl);
+        imageUrl = imageUrl == null ? (user.getAvatar() == null ? "asset/avatar.png" : user.getAvatar()) : imageUrl;
+        userDao.updateUserProfile(userId, user.getRoleId(), fullName, email, address, phone, imageUrl);
         //send success message
         request.setAttribute("successMessage", "Change profile successful.");
         //save avatar url to session
