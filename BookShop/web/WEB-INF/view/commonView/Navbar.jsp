@@ -49,15 +49,15 @@
                                     <div class="hidden sm:block sm:ml-6">
                                             <div class="flex space-x-4">
                                                     <a
-                                                        href="# "
-                                                        class="px-3 py-2 text-sm font-medium text-gray-300 bg-gray-900 rounded-md navbarSelection"
+                                                        href="<%=Router.HOME_CONTROLLER%>"
+                                                        class="px-3 py-2 text-sm font-medium text-gray-300 rounded-md  hover:bg-gray-700 hover:text-white"
                                                         aria-current="page"
                                                         >Home</a
                                                     >
 
                                                     <a
                                                         href="#"
-                                                        class="px-3 py-2 text-sm font-medium text-gray-300 rounded-md  hover:bg-gray-700 hover:text-white navbarSelection"
+                                                        class="px-3 py-2 text-sm font-medium text-gray-300 rounded-md  hover:bg-gray-700 hover:text-white"
                                                         >Category</a
                                                     >
                                             </div>
@@ -81,7 +81,7 @@
                                                             </button>
                                                     </div>
                                                     <div
-                                                        class="absolute right-0 z-50 hidden w-48 py-1 mt-2 origin-top-right bg-white rounded-md shadow-lg  ring-1 ring-black ring-opacity-5 focus:outline-none dropdownMenu"
+                                                        class="absolute right-0 z-50 hidden w-48 mt-2 origin-top-right bg-white rounded-md shadow-lg  ring-1 ring-black ring-opacity-5 focus:outline-none dropdownMenu overflow-hidden"
                                                         role="menu"
                                                         aria-orientation="vertical"
                                                         aria-labelledby="user-menu-button"
@@ -110,13 +110,13 @@
                                         <c:otherwise>
                                             <div class="hidden sm:block">
                                                     <a
-                                                        class="inline-flex items-center px-3 py-2 mr-4 text-sm font-medium leading-4 text-gray-700 bg-white border border-gray-300 rounded shadow-sm cursor-pointer  hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                                                        class="px-3 py-2 text-sm font-medium text-gray-300 rounded-md  hover:bg-gray-700 hover:text-white"
                                                         href="<%=Router.LOGIN_CONTROLLER%>"
                                                         >
                                                             Sign In
                                                     </a>
                                                     <a
-                                                        class="inline-flex items-center px-3 py-2 text-sm font-medium leading-4 text-white rounded shadow-sm cursor-pointer  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                                                        class="px-3 py-2 text-sm font-medium text-gray-300 rounded-md  hover:bg-gray-700 hover:text-white"
                                                         href="<%=Router.REGISTER_CONTROLLER%>"
                                                         >
                                                             Sign Up
@@ -131,11 +131,8 @@
             <!-- Mobile menu, show/hide based on menu state. -->
             <div class="hidden sm:hidden" id="mobile-menu">
                     <div class="px-2 pt-2 pb-3 space-y-1">
-                            <a href="#" class="block px-3 py-2 text-base font-medium text-white bg-gray-900 rounded-md" aria-current="page">Home</a>
-
-                            <a href="#" class="block px-3 py-2 text-base font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white"
-                               >Category</a
-                            >
+                        <a href="<%=Router.HOME_CONTROLLER%>" class="block px-3 py-2 text-base font-medium text-white bg-gray-900 rounded-md" aria-current="page">Home</a>
+                        <a href="#" class="block px-3 py-2 text-base font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white">Category</a>
                     </div>
             </div>
     </nav>
