@@ -201,7 +201,7 @@
                                 focus:border-indigo-500
                                 sm:text-sm
                                 "
-                                /> -->
+                             /> -->
                             <input
                                 type="file"
                                 id="avatar"

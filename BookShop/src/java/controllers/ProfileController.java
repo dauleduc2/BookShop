@@ -34,17 +34,21 @@ public class ProfileController extends HttpServlet {
         String address = GetParam.getStringParam(request, "address", "Address", 5, 500, "");
         String phone = GetParam.getPhoneParams(request, "phone", "Phone number");
         String imageUrl = GetParam.getFileParam(request, "avatar", "Avatar", 1080 * 1080);
-        if (fullName == null || email == null || imageUrl == null) {
+        if (fullName == null || email == null) {
             return false;
         }
         HttpSession session = request.getSession();
         String userId = (String) session.getAttribute("userId");
+        User user = userDao.getUserById(userId);
         userDao.updateUserProfile(userId, fullName, email, address, phone, imageUrl);
         //send success message
         request.setAttribute("successMessage", "Change profile successful.");
         //save avatar url to session
         session = request.getSession();
-        session.setAttribute("avatarUrl", imageUrl);
+        if (request.getAttribute("avatarError") != null && request.getAttribute("avatarError").toString().contains("required")) {
+            request.setAttribute("avatarError", "");
+        }
+        session.setAttribute("avatarUrl", imageUrl == null ? (user.getAvatar() == null ? "asset/avatar.png" : user.getAvatar()) : imageUrl);
         return true;
     }
 
@@ -80,6 +84,7 @@ public class ProfileController extends HttpServlet {
             // forward on 200
             this.doGet(request, response);
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             // forward on 500
             Helper.setAttribute(request, 500, "Something failed", "Please try again later");
             request.getRequestDispatcher(Router.ERROR).forward(request, response);
