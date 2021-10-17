@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import models.User;
 import utils.GetParam;
 import utils.Helper;
+import models.Role;
 
 @WebServlet(name = "RegisterController", urlPatterns = {"/" + Router.REGISTER_CONTROLLER})
 public class RegisterController extends HttpServlet {
@@ -57,7 +58,7 @@ public class RegisterController extends HttpServlet {
             return false;
         }
         //
-        User user = new User(0, username, fullName, email, password);
+        User user = new User(Role.CUSTOMER.ordinal(), username, fullName, email, password);
         userDao.addNewUser(user);
         request.setAttribute("successMessage", "Register successful.");
         return true;
