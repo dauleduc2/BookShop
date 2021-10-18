@@ -54,7 +54,6 @@ public class AddProductController extends HttpServlet {
 
         Product product = new Product(null, categoryId, name, imageUrl, quantity, price, description, publishedDate);
         productDao.addNewProduct(product);
-        System.out.println(product);
         return true;
     }
 

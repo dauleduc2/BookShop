@@ -43,7 +43,7 @@
                 autocomplete="name"
                 class="block w-full max-w-lg border-gray-300 rounded-md shadow-sm  focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm"
               />
-              <p class="mt-2 text-sm text-red-600" id="email-error">
+              <p class="mt-1 text-sm text-red-600" id="email-error">
                 ${requestScope.nameError}
               </p>
             </div>
@@ -68,7 +68,7 @@
                     class="flex-1 block w-full min-w-0 border-gray-300 rounded-md  focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                   />
                 </div>
-                <p class="mt-2 text-sm text-red-600" id="email-error">
+                <p class="mt-1 text-sm text-red-600" id="email-error">
                   ${requestScope.priceError}
                 </p>
               </div>
@@ -92,7 +92,7 @@
                     class="flex-1 block w-full min-w-0 border-gray-300 rounded-md  focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                   />
                 </div>
-                <p class="mt-2 text-sm text-red-600" id="email-error">
+                <p class="mt-1 text-sm text-red-600" id="email-error">
                   ${requestScope.quantityError}
                 </p>
               </div>
@@ -116,7 +116,7 @@
                     class="flex-1 block w-full min-w-0 border-gray-300 rounded-md  focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                   />
                 </div>
-                <p class="mt-2 text-sm text-red-600" id="email-error">
+                <p class="mt-1 text-sm text-red-600" id="email-error">
                   ${requestScope.publishedDateError}
                 </p>
               </div>
@@ -137,9 +137,9 @@
                   autocomplete="type"
                   class="block w-full max-w-lg border-gray-300 rounded-md shadow-sm  focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm"
                 >
-                  <option>Romance</option>
-                  <option>Horror</option>
-                  <option>Action</option>
+                  <option value="0">Romance</option>
+                  <option value="1">Horror</option>
+                  <option value="2">Action</option>
                 </select>
               </div>
             </div>
@@ -154,7 +154,7 @@
               </label>
               <div class="mt-1 sm:mt-0 sm:col-span-2">
                 <input type="file" id="productAvatar" name="productAvatar" />
-                <p class="mt-2 text-sm text-red-600" id="email-error">
+                <p class="mt-1 text-sm text-red-600" id="email-error">
                   ${requestScope.productAvatarError}
                 </p>
               </div>
@@ -176,7 +176,7 @@
                   placeholder="Write a few sentences about product."
                   class="block w-full max-w-lg border border-gray-300 rounded-md shadow-sm  focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                 ></textarea>
-                <p class="mt-2 text-sm text-red-600" id="email-error">
+                <p class="mt-1 text-sm text-red-600" id="email-error">
                   ${requestScope.descriptionError}
                 </p>
               </div>

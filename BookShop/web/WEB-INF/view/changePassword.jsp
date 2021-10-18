@@ -14,7 +14,7 @@
                 </jsp:include>
         </head>
 </head>
-<body class="bg-gradient-to-b from-gray-200 to-gray-300">
+<body class="h-screen bg-gradient-to-b from-gray-200 to-gray-300">
         <%
                 String userId = (String) session.getAttribute("userId");
                 UserDAO userDao = new UserDAO();
@@ -23,11 +23,11 @@
         %>
 
 
-        <div class="flex flex-col items-center justify-center flex-1 mt-24 ">
+        <div class="flex flex-col items-center justify-center flex-1 ">
                 <form
                     action="<%=Router.CHANGE_PASSWORD_CONTROLLER%>"
                     method="POST"
-                    class="w-full max-w-3xl overflow-hidden bg-white  sm:shadow sm:rounded-lg sm:w-180"
+                    class="w-full max-w-3xl overflow-hidden bg-white sm:shadow sm:rounded-lg sm:w-180"
                     >
                         <div class="px-4 py-5 sm:px-6">
                                 <h3 class="text-lg font-medium leading-6 text-gray-900">
@@ -47,9 +47,9 @@
                                                             name="oldPassword"
                                                             type="password"
                                                             required
-                                                            class="block w-full px-3 py-2 placeholder-gray-400 border border-gray-300 rounded-md shadow-sm appearance-none  focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                                            class="block w-full px-3 py-2 placeholder-gray-400 border border-gray-300 rounded-md shadow-sm appearance-none focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                                             />
-                                                        <p class="mt-2 text-sm text-red-600" id="email-error">
+                                                        <p class="mt-1 text-sm text-red-600" id="email-error">
                                                                 ${requestScope.oldPasswordError}
                                                         </p>
                                                 </dd>
@@ -64,9 +64,9 @@
                                                             name="newPassword"
                                                             type="password"
                                                             required
-                                                            class="block w-full px-3 py-2 placeholder-gray-400 border border-gray-300 rounded-md shadow-sm appearance-none  focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                                            class="block w-full px-3 py-2 placeholder-gray-400 border border-gray-300 rounded-md shadow-sm appearance-none focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                                             />
-                                                        <p class="mt-2 text-sm text-red-600" id="email-error">
+                                                        <p class="mt-1 text-sm text-red-600" id="email-error">
                                                                 ${requestScope.newPasswordError}
                                                         </p>
                                                 </dd>
@@ -81,9 +81,9 @@
                                                             name="confirmNewPassword"
                                                             type="password"
                                                             required
-                                                            class="block w-full px-3 py-2 placeholder-gray-400 border border-gray-300 rounded-md shadow-sm appearance-none  focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                                            class="block w-full px-3 py-2 placeholder-gray-400 border border-gray-300 rounded-md shadow-sm appearance-none focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                                             />
-                                                        <p class="mt-2 text-sm text-red-600" id="email-error">
+                                                        <p class="mt-1 text-sm text-red-600" id="email-error">
                                                                 ${requestScope.confirmNewPasswordError}
                                                         </p>
                                                 </dd>
@@ -96,13 +96,13 @@
                         <div class="flex justify-end px-4 py-5 sm:px-6">
                                 <a
                                     href="<%=Router.PROFILE_CONTROLLER%>"
-                                    class="inline-flex items-center px-3 py-2 mr-5 text-sm font-medium leading-4 text-white bg-red-500 border border-transparent rounded-md shadow-sm  hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                                    class="inline-flex items-center px-3 py-2 mr-5 text-sm font-medium leading-4 text-white bg-red-500 border border-transparent rounded-md shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                                     >
                                         Edit profile
                                 </a>
                                 <input
                                     type="submit"
-                                    class="inline-flex items-center px-3 py-2 text-sm font-medium leading-4 text-white bg-indigo-600 border border-transparent rounded-md shadow-sm  hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                                    class="inline-flex items-center px-3 py-2 text-sm font-medium leading-4 text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                                     value="Save"
                                     >
                         </div>
