@@ -30,7 +30,25 @@ public class ProductDAO {
     }
 
     //this function will add a new product
-    public void addNewProduct() throws Exception {
+    public void addNewProduct(Product product) throws Exception {
+        try {
+            conn = Connector.getConnection();
+            String sql = "INSERT INTO bookshop_product (name, image, quantity, price, description, publishedDate, categoryId) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            preStm = conn.prepareStatement(sql);
+            //
+            preStm.setString(1, product.getName());
+            preStm.setString(2, product.getImageUrl());
+            preStm.setInt(3, product.getQuantity());
+            preStm.setFloat(4, product.getPrice());
+            preStm.setString(5, product.getDescription());
+            preStm.setString(6, product.getPublishedDate().toString());
+            preStm.setInt(7, product.getCategoryId());
+
+            //
+            preStm.executeUpdate();
+        } finally {
+            this.closeConnection();
+        }
     }
 
     // this function will get products
@@ -48,7 +66,7 @@ public class ProductDAO {
                 String name = rs.getString("name");
                 String imageUrl = rs.getString("image");
                 Integer quantity = rs.getInt("quantity");
-                Double price = rs.getDouble("price");
+                Float price = rs.getFloat("price");
                 String description = rs.getString("description");
                 Date publishedDate = rs.getDate("publishedDate");
                 product = new Product(productId, categoryId, name, imageUrl, quantity, price, description, publishedDate);
