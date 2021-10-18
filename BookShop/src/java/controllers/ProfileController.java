@@ -99,6 +99,7 @@ public class ProfileController extends HttpServlet {
             // forward on 200
             this.doGet(request, response);
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             // forward on 500
             Helper.setAttribute(request, 500, "Something failed", "Please try again later");
             request.getRequestDispatcher(Router.ERROR).forward(request, response);

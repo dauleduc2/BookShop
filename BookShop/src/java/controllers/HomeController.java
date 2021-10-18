@@ -45,6 +45,7 @@ public class HomeController extends HttpServlet {
             // forward on 200
             request.getRequestDispatcher(Router.HOME_PAGE).forward(request, response);
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             // forward on 500
             Helper.setAttribute(request, 500, "Something failed", "Please try again later");
             request.getRequestDispatcher(Router.ERROR).forward(request, response);
