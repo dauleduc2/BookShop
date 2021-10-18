@@ -83,7 +83,7 @@
                                                                 aria-haspopup="true"
                                                                 >
                                                                  <img class="w-8 h-8 rounded-full object-cover" src="<%= avatarUrl == null
-									    ? "asset/images/avatar.png" : avatarUrl%>" alt="" />
+									 ? "asset/images/avatar.png" : avatarUrl%>" alt="" />
                                                             </button>
                                                     </div>
                                                     <div
