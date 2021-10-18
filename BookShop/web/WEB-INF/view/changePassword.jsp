@@ -14,7 +14,7 @@
                 </jsp:include>
         </head>
 </head>
-<body class="bg-gradient-to-b from-gray-200 to-gray-300">
+<body class="bg-gradient-to-b from-gray-200 to-gray-300 h-screen">
         <%
                 String userId = (String) session.getAttribute("userId");
                 UserDAO userDao = new UserDAO();
@@ -23,7 +23,7 @@
         %>
 
 
-        <div class="flex flex-col items-center justify-center flex-1 mt-24 ">
+        <div class="flex flex-col items-center justify-center flex-1 mt-24">
                 <form
                     action="<%=Router.CHANGE_PASSWORD_CONTROLLER%>"
                     method="POST"
