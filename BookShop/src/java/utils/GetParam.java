@@ -2,6 +2,8 @@ package utils;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.UUID;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -152,6 +154,12 @@ public class GetParam {
     }
 
     public static String getFileParam(HttpServletRequest request, String field, String label, long maxSize) throws IOException, ServletException {
+        //get upload file;
+        Part filePart = request.getPart(field);
+        if (Helper.getFileName(filePart).equals("")) {
+            request.setAttribute(field + "Error", label + " is required");
+            return null;
+        }
         //upload dir where save the image in server
         String uploadDir = "asset/images";
         //get absolute path to project
@@ -172,12 +180,6 @@ public class GetParam {
             fileSaveDir.mkdir();
         }
 
-        //get upload file;
-        Part filePart = request.getPart(field);
-        if (filePart == null) {
-            request.setAttribute(field + "Error", label + " is required");
-            return null;
-        }
         //check size
         if (filePart.getSize() > maxSize) {
             request.setAttribute(field + "Error", label + " is too large");
@@ -185,6 +187,7 @@ public class GetParam {
         }
 
         String fileName = UUID.randomUUID().toString() + Helper.getFileName(filePart);
+
         //absolute path to image
         String filePath = null;
         if (fileName != null && fileName.length() > 0) {
@@ -194,5 +197,22 @@ public class GetParam {
         }
         return uploadDir + "/" + fileName;
 
+    }
+
+    public static Date getDateParams(HttpServletRequest request, String field, String label) {
+        String value = getStringParam(request, field, label, 8, 10, null);
+
+        if (value == null) {
+            return null;
+        }
+
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        format.setLenient(false);
+        try {
+            Date date = format.parse(value);
+            return date;
+        } catch (Exception e) {
+            return null;
+        }
     }
 }
