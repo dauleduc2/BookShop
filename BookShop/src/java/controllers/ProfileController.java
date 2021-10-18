@@ -46,6 +46,11 @@ public class ProfileController extends HttpServlet {
             imageUrl = user.getAvatar();
         }
 
+        // remove required error message
+        if (request.getAttribute("avatarError") != null && request.getAttribute("avatarError").toString().contains("required")) {
+            request.setAttribute("avatarError", "");
+        }
+
         // check params
         if (fullName == null || email == null) {
             return false;
@@ -56,11 +61,6 @@ public class ProfileController extends HttpServlet {
 
         //send success message
         request.setAttribute("successMessage", "Change profile successful.");
-
-        // remove required error message
-        if (request.getAttribute("avatarError") != null && request.getAttribute("avatarError").toString().contains("required")) {
-            request.setAttribute("avatarError", "");
-        }
 
         //save avatar url to session
         session.setAttribute("avatarUrl", imageUrl == null ? "asset/avatar.png" : imageUrl);
@@ -99,7 +99,6 @@ public class ProfileController extends HttpServlet {
             // forward on 200
             this.doGet(request, response);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
             // forward on 500
             Helper.setAttribute(request, 500, "Something failed", "Please try again later");
             request.getRequestDispatcher(Router.ERROR).forward(request, response);

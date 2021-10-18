@@ -44,7 +44,6 @@ public class LoginController extends HttpServlet {
         HttpSession session = request.getSession();
         session.setAttribute("userId", existedUser.getUserId());
         session.setAttribute("userRole", existedUser.getRoleId());
-        System.out.println(existedUser.getAvatar());
         session.setAttribute("avatarUrl", existedUser.getAvatar() == null ? "asset/avatar.png" : existedUser.getAvatar());
         return true;
     }

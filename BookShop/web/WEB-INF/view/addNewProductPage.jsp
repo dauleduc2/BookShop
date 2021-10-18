@@ -14,7 +14,7 @@
       action="<%=Router.ADDPRODUCT_CONTROLLER%>"
       method="POST"
       enctype="multipart/form-data"
-      class="max-w-2xl p-2 m-auto my-5 space-y-8 bg-white border-2 border-black divide-y divide-gray-200 rounded-md  lg:p-7"
+      class="max-w-2xl p-2 m-auto my-5 space-y-8 bg-white border-2 border-black divide-y divide-gray-200 rounded-md lg:p-7"
     >
       <div class="space-y-8 divide-y divide-gray-200 sm:space-y-5">
         <div>
@@ -41,7 +41,7 @@
                 name="name"
                 id="name"
                 autocomplete="name"
-                class="block w-full max-w-lg border-gray-300 rounded-md shadow-sm  focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm"
+                class="block w-full max-w-lg border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm"
               />
               <p class="mt-1 text-sm text-red-600" id="email-error">
                 ${requestScope.nameError}
@@ -65,7 +65,7 @@
                     name="price"
                     id="price"
                     autocomplete="price"
-                    class="flex-1 block w-full min-w-0 border-gray-300 rounded-md  focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                    class="flex-1 block w-full min-w-0 border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                   />
                 </div>
                 <p class="mt-1 text-sm text-red-600" id="email-error">
@@ -89,7 +89,7 @@
                     name="quantity"
                     id="quantity"
                     autocomplete="quantity"
-                    class="flex-1 block w-full min-w-0 border-gray-300 rounded-md  focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                    class="flex-1 block w-full min-w-0 border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                   />
                 </div>
                 <p class="mt-1 text-sm text-red-600" id="email-error">
@@ -113,7 +113,7 @@
                     name="publishedDate "
                     id="publishedDate "
                     autocomplete="publishedDate "
-                    class="flex-1 block w-full min-w-0 border-gray-300 rounded-md  focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                    class="flex-1 block w-full min-w-0 border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                   />
                 </div>
                 <p class="mt-1 text-sm text-red-600" id="email-error">
@@ -135,7 +135,7 @@
                   id="type"
                   name="type"
                   autocomplete="type"
-                  class="block w-full max-w-lg border-gray-300 rounded-md shadow-sm  focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm"
+                  class="block w-full max-w-lg border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm"
                 >
                   <option value="0">Romance</option>
                   <option value="1">Horror</option>
@@ -174,7 +174,7 @@
                   name="description"
                   rows="3"
                   placeholder="Write a few sentences about product."
-                  class="block w-full max-w-lg border border-gray-300 rounded-md shadow-sm  focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  class="block w-full max-w-lg border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                 ></textarea>
                 <p class="mt-1 text-sm text-red-600" id="email-error">
                   ${requestScope.descriptionError}
@@ -188,18 +188,16 @@
         <div class="flex justify-end">
           <button
             type="button"
-            class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm  hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           >
             Cancel
           </button>
           <button
             type="submit"
-            class="inline-flex justify-center px-4 py-2 ml-3 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm  hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            class="inline-flex justify-center px-4 py-2 ml-3 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           >
             Save
           </button>
         </div>
-      </div>
-    </form>
-  </body>
+    </body>
 </html>

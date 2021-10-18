@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controllers;
 
 import constant.Router;
@@ -19,17 +14,12 @@ import models.Product;
 import utils.GetParam;
 import utils.Helper;
 
-/**
- *
- * @author Bana-na
- */
 @WebServlet(name = "AddProductController", urlPatterns = {"/" + Router.ADDPRODUCT_CONTROLLER})
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 1024, maxFileSize = 1024 * 1024 * 1024, maxRequestSize = 1024 * 1024 * 1024)
 public class AddProductController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     *
      */
     protected boolean processRequest(HttpServletRequest request, HttpServletResponse response)
             throws Exception {
@@ -59,7 +49,6 @@ public class AddProductController extends HttpServlet {
 
     /**
      * Handles the HTTP <code>GET</code> method.
-     *
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -69,7 +58,6 @@ public class AddProductController extends HttpServlet {
 
     /**
      * Handles the HTTP <code>POST</code> method.
-     *
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -85,7 +73,6 @@ public class AddProductController extends HttpServlet {
             response.sendRedirect(Router.HOME_CONTROLLER);
         } catch (Exception e) {
             // forward on 500
-            System.out.println(e.getMessage());
             Helper.setAttribute(request, 500, "Something failed", "Please try again later");
             request.getRequestDispatcher(Router.ERROR).forward(request, response);
         }
