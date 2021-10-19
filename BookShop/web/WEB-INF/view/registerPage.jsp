@@ -4,6 +4,7 @@
 <html>
         <head>
                 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+                <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <title>JSP Page</title>
                 <link rel="stylesheet" href="asset/styles.css" type="text/css" />
                 <jsp:include page="./commonView/Navbar.jsp">
@@ -15,7 +16,7 @@
         <div
             class="
             min-h-screen
-            bg-gray-300
+            bg-gradient-to-b from-gray-50 to-gray-100
             flex flex-col
             justify-center
             py-12
