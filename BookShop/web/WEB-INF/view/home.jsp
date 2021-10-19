@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
         <link rel="stylesheet" href="asset/styles.css" type="text/css" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <head>
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
                 <jsp:include page="./commonView/Navbar.jsp">
