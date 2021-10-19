@@ -21,7 +21,7 @@
     %>
 
 
-    <div class="flex flex-col items-center justify-center flex-1 h-screen mt-24 bg-gradient-to-b from-gray-50 to-gray-100">
+    <div class="flex flex-col items-center justify-center flex-1 h-screen bg-gradient-to-b from-gray-50 to-gray-100">
         <form
             action="<%=Router.PROFILE_CONTROLLER%>"
             method="POST"
