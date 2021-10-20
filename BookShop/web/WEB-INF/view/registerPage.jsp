@@ -16,7 +16,8 @@
         <div
             class="
             min-h-screen
-            bg-gradient-to-b from-gray-50 to-gray-100
+            bg-white
+            lg:bg-gradient-to-b lg:from-gray-50 lg:to-gray-100
             flex flex-col
             justify-center
             py-12
@@ -31,7 +32,7 @@
                         </h2>
                 </div>
                 <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-                        <div class="bg-white py-8 px-4 shadow-xl sm:rounded-xl sm:px-10">
+                        <div class="bg-white py-8 px-4 lg:shadow-xl sm:rounded-xl sm:px-10">
                                 <form class="space-y-6" action="<%=Router.REGISTER_CONTROLLER%>" method="POST">
                                         <div>
                                                 <label
