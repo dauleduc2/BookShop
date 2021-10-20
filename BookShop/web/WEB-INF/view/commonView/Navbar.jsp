@@ -52,6 +52,8 @@
                                                     class="px-3 py-2 text-sm font-medium text-gray-300 rounded-md  hover:bg-gray-700 hover:text-white"
                                                     >Category</a
                                                 >
+
+
                                         </div>
                                 </div>
                         </div>
@@ -68,7 +70,7 @@
                                                             aria-expanded="false"
                                                             aria-haspopup="true"
                                                             >
-                                                                <img class="object-cover w-8 h-8 rounded-full" src="<%=avatarUrl == null
+                                                             <img class="object-cover w-8 h-8 rounded-full" src="<%=avatarUrl == null
 								     ? "asset/images/avatar.png" : avatarUrl%>" alt="" />
                                                         </button>
                                                 </div>
@@ -132,6 +134,14 @@
                         <a href="#" class="block px-3 py-2 text-base font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white"
                            >Category</a
                         >
+                        <c:if test="${avatarUrl == null}">
+                            <a href="<%=Router.LOGIN_CONTROLLER%>" class="block px-3 py-2 text-base font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white"
+                               >Sign in</a
+                            >
+                            <a href="<%=Router.REGISTER_CONTROLLER%>" class="block px-3 py-2 text-base font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white"
+                               >Sign up</a
+                            >
+                        </c:if>
                 </div>
         </div>
 </nav>
