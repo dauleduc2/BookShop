@@ -15,7 +15,7 @@
         </jsp:include>
     </head>
 </head>
-<body class="h-screen bg-gradient-to-b from-gray-200 to-gray-300">
+<body class="h-screen flex flex-col bg-gradient-to-b from-gray-200 to-gray-300">
     <%
         String userId = (String) session.getAttribute("userId");
         UserDAO userDao = new UserDAO();
@@ -28,7 +28,7 @@
         <form
             action="<%=Router.CHANGE_PASSWORD_CONTROLLER%>"
             method="POST"
-            class="w-full max-w-3xl overflow-hidden bg-white sm:shadow sm:rounded-lg sm:w-180"
+            class="w-full h-full lg:h-auto max-w-3xl overflow-hidden bg-white sm:shadow sm:rounded-lg sm:w-180"
             >
             <div class="px-4 py-5 sm:px-6">
                 <h3 class="text-lg font-medium leading-6 text-gray-900">
@@ -37,7 +37,7 @@
                 <p class="max-w-2xl mt-1 text-sm text-gray-500">Update your new password for <%= user.getUsername()%></p>
             </div>
             <div class="px-4 py-5 border-t border-gray-200 sm:p-0">
-                <dl class="sm:divide-y sm:divide-gray-200">
+                <dl class="sm:divide-y flex flex-col sm:divide-gray-200">
                     <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                         <dt class="flex items-center text-sm font-medium text-gray-500">
                             <p>Old password</p>
@@ -89,13 +89,15 @@
                             </p>
                         </dd>
                     </div>
-                    <p class="mt-1 text-sm text-red-600" id="email-error">
+                    
+                    
+                </dl>
+                <p class="text-sm text-red-600 text-right   sm:px-6" id="email-error">
                         ${requestScope.errorMessage}
                     </p>
-                    <p class="mt-2 text-sm text-green-600 text-right mr-5 font-semibold" id="successMessage">
+                    <p class="text-sm text-green-600 text-right   sm:px-6" id="successMessage">
                         ${requestScope.successMessage}
                     </p>
-                </dl>
             </div>
             <div class="flex justify-end px-4 py-5 sm:px-6">
                 <a
