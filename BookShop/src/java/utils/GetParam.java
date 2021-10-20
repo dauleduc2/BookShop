@@ -212,6 +212,7 @@ public class GetParam {
             Date date = format.parse(value);
             return date;
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             return null;
         }
     }

@@ -72,6 +72,7 @@ public class AddProductController extends HttpServlet {
             // forward on 200
             response.sendRedirect(Router.HOME_CONTROLLER);
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             // forward on 500
             Helper.setAttribute(request, 500, "Something failed", "Please try again later");
             request.getRequestDispatcher(Router.ERROR).forward(request, response);
