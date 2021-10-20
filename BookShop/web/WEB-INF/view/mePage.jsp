@@ -6,6 +6,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>JSP Page</title>
         <link rel="stylesheet" href="asset/styles.css" type="text/css" />
 
@@ -16,23 +17,15 @@
 </head>
 <body>
     <%
-        String userId = (String) session.getAttribute("userId");
-        UserDAO userDao = new UserDAO();
-        User user = userDao.getUserById(userId);
+        User user =(User) request.getAttribute("user");
     %>
 
 
-    <div class="flex flex-col items-center justify-center flex-1 mt-24 ">
+    <div class="flex flex-col items-center justify-center flex-1 h-screen bg-gradient-to-b from-gray-50 to-gray-100">
         <form
             action="<%=Router.PROFILE_CONTROLLER%>"
             method="POST"
-            class="
-            w-full
-            max-w-3xl
-            overflow-hidden
-            bg-white
-            sm:shadow sm:rounded-lg sm:w-180
-            "
+            class="w-full max-w-3xl overflow-hidden bg-white  sm:shadow sm:rounded-lg sm:w-180"
             enctype="multipart/form-data"
             >
             <div class="px-4 py-5 sm:px-6">
@@ -63,21 +56,7 @@
                                 autocomplete="email"
                                 required
                                 value="<%= user.getEmail() == null ? "" : user.getEmail()%>"
-                                class="
-                                appearance-none
-                                block
-                                w-full
-                                px-3
-                                py-2
-                                border border-gray-300
-                                rounded-md
-                                shadow-sm
-                                placeholder-gray-400
-                                focus:outline-none
-                                focus:ring-indigo-500
-                                focus:border-indigo-500
-                                sm:text-sm
-                                "
+                                class="block w-full px-3 py-2 placeholder-gray-400 border border-gray-300 rounded-md shadow-sm appearance-none  focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                 />
                             <p class="mt-2 text-sm text-red-600" id="email-error">
                                 ${requestScope.emailError}
@@ -95,21 +74,7 @@
                                 type="text"
                                 required
                                 value="<%= user.getFullName() == null ? "" : user.getFullName()%>"
-                                class="
-                                appearance-none
-                                block
-                                w-full
-                                px-3
-                                py-2
-                                border border-gray-300
-                                rounded-md
-                                shadow-sm
-                                placeholder-gray-400
-                                focus:outline-none
-                                focus:ring-indigo-500
-                                focus:border-indigo-500
-                                sm:text-sm
-                                "
+                                class="block w-full px-3 py-2 placeholder-gray-400 border border-gray-300 rounded-md shadow-sm appearance-none  focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                 />
                             <p class="mt-2 text-sm text-red-600" id="email-error">
                                 ${requestScope.fullNameError}
@@ -126,21 +91,7 @@
                                 name="address"
                                 type="text"
                                 value="<%= user.getAddress() == null ? "" : user.getAddress()%>"
-                                class="
-                                appearance-none
-                                block
-                                w-full
-                                px-3
-                                py-2
-                                border border-gray-300
-                                rounded-md
-                                shadow-sm
-                                placeholder-gray-400
-                                focus:outline-none
-                                focus:ring-indigo-500
-                                focus:border-indigo-500
-                                sm:text-sm
-                                "
+                                class="block w-full px-3 py-2 placeholder-gray-400 border border-gray-300 rounded-md shadow-sm appearance-none  focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                 />
                             <p class="mt-2 text-sm text-red-600" id="email-error">
                                 ${requestScope.addressError}
@@ -157,21 +108,7 @@
                                 name="phone"
                                 type="text"
                                 value="<%= user.getPhone() == null ? "" : user.getPhone()%>"
-                                class="
-                                appearance-none
-                                block
-                                w-full
-                                px-3
-                                py-2
-                                border border-gray-300
-                                rounded-md
-                                shadow-sm
-                                placeholder-gray-400
-                                focus:outline-none
-                                focus:ring-indigo-500
-                                focus:border-indigo-500
-                                sm:text-sm
-                                "
+                                class="block w-full px-3 py-2 placeholder-gray-400 border border-gray-300 rounded-md shadow-sm appearance-none  focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                 />
                             <p class="mt-2 text-sm text-red-600" id="email-error">
                                 ${requestScope.phoneError}
@@ -188,22 +125,8 @@
                                 name="avatar"
                                 type="text"
                                 value="<%= user.getAvatar() == null ? "" : user.getAvatar()%>"
-                                class="
-                                appearance-none
-                                block
-                                w-full
-                                px-3
-                                py-2
-                                border border-gray-300
-                                rounded-md
-                                shadow-sm
-                                placeholder-gray-400
-                                focus:outline-none
-                                focus:ring-indigo-500
-                                focus:border-indigo-500
-                                sm:text-sm
-                                "
-                                /> -->
+                                class="block w-full px-3 py-2 placeholder-gray-400 border border-gray-300 rounded-md shadow-sm appearance-none  focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                             /> -->
                             <input
                                 type="file"
                                 id="avatar"
@@ -215,57 +138,20 @@
                         </dd>
                     </div>
                 </dl>
-                <p class="mt-2 text-sm text-green-600 text-right mr-5 font-semibold" id="successMessage">
+                <p class="mt-2 mr-5 text-sm font-semibold text-right text-green-600" id="successMessage">
                     ${requestScope.successMessage}
                 </p>
             </div>
             <div class="flex justify-end px-4 py-5 sm:px-6">
                 <a
                     href="<%=Router.CHANGE_PASSWORD_CONTROLLER%>"
-                    class="
-                    inline-flex
-                    items-center
-                    px-3
-                    py-2
-                    text-sm
-                    font-medium
-                    leading-4
-                    text-white
-                    bg-red-500
-                    border border-transparent
-                    rounded-md
-                    shadow-sm
-                    hover:bg-red-700
-                    focus:outline-none
-                    focus:ring-2
-                    focus:ring-offset-2
-                    focus:ring-indigo-500
-                    mr-5
-                    "
+                    class="inline-flex items-center px-3 py-2 mr-5 text-sm font-medium leading-4 text-white bg-red-500 border border-transparent rounded-md shadow-sm  hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                     >
                     Change password
                 </a>
                 <input
                     type="submit"
-                    class="
-                    inline-flex
-                    items-center
-                    px-3
-                    py-2
-                    text-sm
-                    font-medium
-                    leading-4
-                    text-white
-                    bg-indigo-600
-                    border border-transparent
-                    rounded-md
-                    shadow-sm
-                    hover:bg-indigo-700
-                    focus:outline-none
-                    focus:ring-2
-                    focus:ring-offset-2
-                    focus:ring-indigo-500
-                    "
+                    class="inline-flex items-center px-3 py-2 text-sm font-medium leading-4 text-white bg-indigo-600 border border-transparent rounded-md shadow-sm  hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                     value="Save"
                     >
             </div>

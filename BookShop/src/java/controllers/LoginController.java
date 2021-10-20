@@ -44,7 +44,7 @@ public class LoginController extends HttpServlet {
         HttpSession session = request.getSession();
         session.setAttribute("userId", existedUser.getUserId());
         session.setAttribute("userRole", existedUser.getRoleId());
-        session.setAttribute("avatarUrl", existedUser.getAvatar());
+        session.setAttribute("avatarUrl", existedUser.getAvatar() == null ? "asset/avatar.png" : existedUser.getAvatar());
         return true;
     }
 
@@ -78,6 +78,7 @@ public class LoginController extends HttpServlet {
             // forward on 200
             response.sendRedirect(Router.HOME_CONTROLLER);
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             // forward on 500
             Helper.setAttribute(request, 500, "Something failed", "Please try again later");
             request.getRequestDispatcher(Router.ERROR).forward(request, response);

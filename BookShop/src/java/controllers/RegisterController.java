@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import models.User;
 import utils.GetParam;
 import utils.Helper;
+import models.Role;
 
 @WebServlet(name = "RegisterController", urlPatterns = {"/" + Router.REGISTER_CONTROLLER})
 public class RegisterController extends HttpServlet {
@@ -30,7 +31,6 @@ public class RegisterController extends HttpServlet {
         String fullName = GetParam.getStringParam(request, "fullName", "Full name", 5, 50, null);
         String password = GetParam.getStringParam(request, "password", "Password", 5, 50, null);
         String confirmPassword = GetParam.getStringParam(request, "confirmPassword", "Confirm Password", 5, 50, null);
-        System.out.println(password);
         if (email == null || username == null || password == null || confirmPassword == null || fullName == null) {
             isTrue = false;
         }
@@ -58,7 +58,7 @@ public class RegisterController extends HttpServlet {
             return false;
         }
         //
-        User user = new User(0, username, fullName, email, password);
+        User user = new User(Role.CUSTOMER.ordinal(), username, fullName, email, password);
         userDao.addNewUser(user);
         request.setAttribute("successMessage", "Register successful.");
         return true;
@@ -89,7 +89,7 @@ public class RegisterController extends HttpServlet {
             }
             // forward on 200
             response.sendRedirect(Router.LOGIN_CONTROLLER);
-        } catch (Exception e) {
+        } catch (Exception e) {System.out.println(e.getMessage());
             // forward on 500
             Helper.setAttribute(request, 500, "Something failed", "Please try again later");
             request.getRequestDispatcher(Router.ERROR).forward(request, response);
