@@ -14,7 +14,7 @@
 </head>
 <body>
         <div
-            class="relative flex flex-col justify-center min-h-screen py-12  bg-gradient-to-b from-gray-50 to-gray-100 sm:px-6 lg:px-8"
+            class="relative flex flex-col justify-center min-h-screen lg:py-12 bg-white  lg:bg-gradient-to-b lg:from-gray-50 lg:to-gray-100 sm:px-6 lg:px-8"
             >
                 <div class="sm:mx-auto sm:w-full sm:max-w-md">
                         <img class="w-20 h-20 mx-auto" src="asset/logo.png" alt="Workflow" />
@@ -26,7 +26,7 @@
                 </div>
 
                 <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-                        <div class="px-4 py-8 bg-white shadow-xl sm:rounded-xl sm:px-10">
+                        <div class="px-4 py-8 bg-white lg:shadow-xl sm:rounded-xl sm:px-10">
                                 <form class="space-y-6" action="<%=Router.LOGIN_CONTROLLER%>" method="POST">
                                         <div>
                                                 <label
