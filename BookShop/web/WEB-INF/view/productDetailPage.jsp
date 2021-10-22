@@ -3,6 +3,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
   <head>
     <link rel="stylesheet" href="./styles.css" type="text/css" />
+    <link rel="stylesheet" href="asset/styles.css" type="text/css" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <jsp:include page="./commonView/Navbar.jsp">
