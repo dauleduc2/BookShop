@@ -33,7 +33,7 @@
           <div class="mt-2 max-w-xl text-sm text-gray-500">
             <p>Write down a new category you want to add to the store.</p>
           </div>
-          <form class="mt-5 sm:flex sm:items-center">
+          <form action="<%=Router.ADDCATEGORY_CONTROLLER%>" method="POST" class="mt-5 sm:flex sm:items-center">
             <div class="w-full flex flex-col sm:max-w-xs">
               <label for="category" class="sr-only">Category</label>
               <input
