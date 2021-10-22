@@ -45,6 +45,7 @@
                                                             </div>
                                                             <p class="text-sm font-medium text-gray-900">$${product.getPrice()}</p>
                                                     </div>
+                                                            <a href="<%=Router.PRODUCT_DETAIL_CONTROLLER%>?productId=${product.getProductId()}">Click here</a>
                                             </div>
 
                                         </c:forEach>
