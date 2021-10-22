@@ -26,6 +26,7 @@ public class ProfileController extends HttpServlet {
      */
     protected boolean processRequest(HttpServletRequest request, HttpServletResponse response)
             throws Exception {
+        request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=UTF-8");
         UserDAO userDao = new UserDAO();
 
@@ -73,6 +74,7 @@ public class ProfileController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
         try {
             Helper.sendUserResponse(request);
         } catch (Exception e) {
@@ -80,7 +82,6 @@ public class ProfileController extends HttpServlet {
             Helper.setAttribute(request, 500, "Something failed", "Please try again later");
             request.getRequestDispatcher(Router.ERROR).forward(request, response);
         }
-        response.setContentType("text/html;charset=UTF-8");
         request.getRequestDispatcher(Router.ME_PAGE).forward(request, response);
     }
 
