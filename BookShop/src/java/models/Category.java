@@ -4,13 +4,15 @@ public class Category {
 
     private Integer categoryId;
     private String name;
+    private String createdDate;
 
     public Category() {
     }
 
-    public Category(Integer categoryId, String name) {
+    public Category(Integer categoryId, String name, String createdDate) {
         this.categoryId = categoryId;
         this.name = name;
+        this.createdDate = createdDate;
     }
 
     public Integer getCategoryId() {
@@ -27,6 +29,14 @@ public class Category {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(String createdDate) {
+        this.createdDate = createdDate;
     }
 
     @Override
