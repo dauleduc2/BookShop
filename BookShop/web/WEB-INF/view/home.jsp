@@ -41,7 +41,7 @@
                                                                                     ${product.getName()}
                                                                             </a>
                                                                     </h3>
-                                                                   
+
                                                             </div>
                                                             <p class="text-sm font-medium text-gray-900">$${product.getPrice()}</p>
                                                     </div>
