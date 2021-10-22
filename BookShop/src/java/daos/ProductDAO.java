@@ -77,4 +77,28 @@ public class ProductDAO {
         }
         return products;
     }
+
+    public Product getProductById(Integer productId) throws Exception {
+        Product product = null;
+        try {
+            conn = Connector.getConnection();
+            String sql = "SELECT * FROM bookshop_product WHERE productId = ?";
+            preStm = conn.prepareStatement(sql);
+            preStm.setInt(1, productId);
+            rs = preStm.executeQuery();
+            if (rs.next()) {
+                Integer categoryId = rs.getInt("categoryId");
+                String name = rs.getString("name");
+                String imageUrl = rs.getString("image");
+                Integer quantity = rs.getInt("quantity");
+                Float price = rs.getFloat("price");
+                String description = rs.getString("description");
+                Date publishedDate = rs.getDate("publishedDate");
+                product = new Product(productId, categoryId, name, imageUrl, quantity, price, description, publishedDate);
+            }
+        } finally {
+            this.closeConnection();
+        }
+        return product;
+    }
 }
