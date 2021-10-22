@@ -11,13 +11,13 @@ public class Product {
     private Integer quantity;
     private Float price;
     private String description;
-    private Date publishedDate;
-    private Date createdDate;
+    private String publishedDate;
+    private String createdDate;
 
     public Product() {
     }
 
-    public Product(Integer productId, Integer categoryId, String name, String imageUrl, Integer quantity, Float price, String description, Date publishedDate) {
+    public Product(Integer productId, Integer categoryId, String name, String imageUrl, Integer quantity, Float price, String description, String publishedDate, String createdDate) {
         this.productId = productId;
         this.categoryId = categoryId;
         this.name = name;
@@ -26,6 +26,7 @@ public class Product {
         this.price = price;
         this.description = description;
         this.publishedDate = publishedDate;
+        this.createdDate = createdDate;
     }
 
     public Integer getProductId() {
@@ -84,19 +85,19 @@ public class Product {
         this.description = description;
     }
 
-    public Date getPublishedDate() {
+    public String getPublishedDate() {
         return publishedDate;
     }
 
-    public void setPublishedDate(Date publishedDate) {
+    public void setPublishedDate(String publishedDate) {
         this.publishedDate = publishedDate;
     }
 
-    public Date getCreatedDate() {
+    public String getCreatedDate() {
         return createdDate;
     }
 
-    public void setCreatedDate(Date createdDate) {
+    public void setCreatedDate(String createdDate) {
         this.createdDate = createdDate;
     }
 
