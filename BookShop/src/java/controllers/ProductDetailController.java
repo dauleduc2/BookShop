@@ -22,15 +22,21 @@ public class ProductDetailController extends HttpServlet {
             throws Exception {
         response.setContentType("text/html;charset=UTF-8");
         ProductDAO productDao = new ProductDAO();
+
+        // get productId
         Integer productId = Integer.parseInt(request.getParameter("productId"));
 
+        // find product by given id
         Product product = productDao.getProductById(productId);
+
+        // check existed product
         if (product == null) {
             Helper.setAttribute(request, 404, "Not found", "The requested URL was not found on this server");
             return false;
         }
+
+        // set attribute product
         request.setAttribute("product", product);
-        System.out.println("ABC");
         return true;
     }
 
