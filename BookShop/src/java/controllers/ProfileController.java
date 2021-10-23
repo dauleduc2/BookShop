@@ -23,25 +23,45 @@ public class ProfileController extends HttpServlet {
      */
     protected boolean processRequest(HttpServletRequest request, HttpServletResponse response)
             throws Exception {
+        request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=UTF-8");
         UserDAO userDao = new UserDAO();
-        // validate param
+
+        //get current user
+        HttpSession session = request.getSession();
+        String userId = (String) session.getAttribute("userId");
+        User user = userDao.getUserById(userId);
+
+        // validate params
         String fullName = GetParam.getStringParam(request, "fullName", "Full name", 5, 50, null);
         String email = GetParam.getEmailParams(request, "email", "Email");
         String address = GetParam.getStringParam(request, "address", "Address", 5, 500, "");
         String phone = GetParam.getPhoneParams(request, "phone", "Phone number");
         String imageUrl = GetParam.getFileParam(request, "avatar", "Avatar", 1080 * 1080);
-        if (fullName == null || email == null || imageUrl == null) {
+
+        // check imageUrl and assign to current user's avatar if null
+        if (imageUrl == null) {
+            imageUrl = user.getAvatar();
+        }
+
+        // remove required error message
+        if (request.getAttribute("avatarError") != null && request.getAttribute("avatarError").toString().contains("required")) {
+            request.setAttribute("avatarError", "");
+        }
+
+        // check params
+        if (fullName == null || email == null) {
             return false;
         }
-        HttpSession session = request.getSession();
-        String userId = (String) session.getAttribute("userId");
+
+        // update user to datbase
         userDao.updateUserProfile(userId, fullName, email, address, phone, imageUrl);
+
         //send success message
         request.setAttribute("successMessage", "Change profile successful.");
+
         //save avatar url to session
-        session = request.getSession();
-        session.setAttribute("avatarUrl", imageUrl);
+        session.setAttribute("avatarUrl", imageUrl == null ? "asset/avatar.png" : imageUrl);
         return true;
     }
 
@@ -51,6 +71,7 @@ public class ProfileController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
         try {
             Helper.sendUserResponse(request);
         } catch (Exception e) {
@@ -58,7 +79,6 @@ public class ProfileController extends HttpServlet {
             Helper.setAttribute(request, 500, "Something failed", "Please try again later");
             request.getRequestDispatcher(Router.ERROR).forward(request, response);
         }
-        response.setContentType("text/html;charset=UTF-8");
         request.getRequestDispatcher(Router.ME_PAGE).forward(request, response);
     }
 
@@ -77,6 +97,7 @@ public class ProfileController extends HttpServlet {
             // forward on 200
             this.doGet(request, response);
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             // forward on 500
             Helper.setAttribute(request, 500, "Something failed", "Please try again later");
             request.getRequestDispatcher(Router.ERROR).forward(request, response);

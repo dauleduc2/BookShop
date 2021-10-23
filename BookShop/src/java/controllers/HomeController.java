@@ -24,7 +24,7 @@ public class HomeController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         ProductDAO productDao = new ProductDAO();
         // get products
-        ArrayList<Product> products = productDao.getProducts();
+        ArrayList<Product> products = productDao.getNewProducts();
         // set attribute
         request.setAttribute("products", products);
         return true;
@@ -45,6 +45,7 @@ public class HomeController extends HttpServlet {
             // forward on 200
             request.getRequestDispatcher(Router.HOME_PAGE).forward(request, response);
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             // forward on 500
             Helper.setAttribute(request, 500, "Something failed", "Please try again later");
             request.getRequestDispatcher(Router.ERROR).forward(request, response);

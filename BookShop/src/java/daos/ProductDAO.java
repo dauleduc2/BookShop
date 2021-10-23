@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.UUID;
 import models.Product;
 import utils.Connector;
 
@@ -42,7 +41,7 @@ public class ProductDAO {
             preStm.setInt(3, product.getQuantity());
             preStm.setFloat(4, product.getPrice());
             preStm.setString(5, product.getDescription());
-            preStm.setString(6, product.getPublishedDate().toString());
+            preStm.setString(6, product.getPublishedDate());
             preStm.setInt(7, product.getCategoryId());
 
             //
@@ -53,12 +52,12 @@ public class ProductDAO {
     }
 
     // this function will get products
-    public ArrayList<Product> getProducts() throws Exception {
+    public ArrayList<Product> getNewProducts() throws Exception {
         ArrayList<Product> products = new ArrayList<Product>();
         try {
             Product product;
             conn = Connector.getConnection();
-            String sql = "SELECT * FROM bookshop_product";
+            String sql = "SELECT TOP 24 * FROM bookshop_product ORDER BY publishedDate DESC";
             preStm = conn.prepareStatement(sql);
             rs = preStm.executeQuery();
             while (rs.next()) {
@@ -69,13 +68,39 @@ public class ProductDAO {
                 Integer quantity = rs.getInt("quantity");
                 Float price = rs.getFloat("price");
                 String description = rs.getString("description");
-                Date publishedDate = rs.getDate("publishedDate");
-                product = new Product(productId, categoryId, name, imageUrl, quantity, price, description, publishedDate);
+                String publishedDate = rs.getString("publishedDate");
+                String createdDate = rs.getString("createdDate");
+                product = new Product(productId, categoryId, name, imageUrl, quantity, price, description, publishedDate, createdDate);
                 products.add(product);
             }
         } finally {
             this.closeConnection();
         }
         return products;
+    }
+
+    public Product getProductById(Integer productId) throws Exception {
+        Product product = null;
+        try {
+            conn = Connector.getConnection();
+            String sql = "SELECT * FROM bookshop_product WHERE productId = ?";
+            preStm = conn.prepareStatement(sql);
+            preStm.setInt(1, productId);
+            rs = preStm.executeQuery();
+            if (rs.next()) {
+                Integer categoryId = rs.getInt("categoryId");
+                String name = rs.getString("name");
+                String imageUrl = rs.getString("image");
+                Integer quantity = rs.getInt("quantity");
+                Float price = rs.getFloat("price");
+                String description = rs.getString("description");
+                String publishedDate = rs.getString("publishedDate");
+                String createdDate = rs.getString("createdDate");
+                product = new Product(productId, categoryId, name, imageUrl, quantity, price, description, publishedDate, createdDate);
+            }
+        } finally {
+            this.closeConnection();
+        }
+        return product;
     }
 }
