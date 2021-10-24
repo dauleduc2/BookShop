@@ -20,8 +20,8 @@ public class Router {
     public static final String PROFILE_CONTROLLER = "me";
     public static final String SIGNOUT_CONTROLLER = "signout";
     public static final String HOME_CONTROLLER = "home";
-    public static final String ADDPRODUCT_CONTROLLER = "addbook";
+    public static final String ADD_PRODUCT_CONTROLLER = "addbook";
     public static final String PRODUCT_DETAIL_CONTROLLER = "product";
-    public static final String ADDCATEGORY_CONTROLLER = "addcategory";
+    public static final String ADD_CATEGORY_CONTROLLER = "addcategory";
 
 }
