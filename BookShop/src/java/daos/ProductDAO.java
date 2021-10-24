@@ -33,7 +33,7 @@ public class ProductDAO {
     public void addNewProduct(Product product) throws Exception {
         try {
             conn = Connector.getConnection();
-            String sql = "INSERT INTO bookshop_product (name, image, quantity, price, description, publishedDate, categoryId) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO bookshop_product (name, image, quantity, price, description, publishedDate, categoryId) VALUES (?, ?, ?, ?, ?, ?, ?)";
             preStm = conn.prepareStatement(sql);
             //
             preStm.setString(1, product.getName());
@@ -41,7 +41,7 @@ public class ProductDAO {
             preStm.setInt(3, product.getQuantity());
             preStm.setFloat(4, product.getPrice());
             preStm.setString(5, product.getDescription());
-            preStm.setString(6, product.getPublishedDate().toString());
+            preStm.setString(6, product.getPublishedDate());
             preStm.setInt(7, product.getCategoryId());
 
             //
@@ -68,8 +68,9 @@ public class ProductDAO {
                 Integer quantity = rs.getInt("quantity");
                 Float price = rs.getFloat("price");
                 String description = rs.getString("description");
-                Date publishedDate = rs.getDate("publishedDate");
-                product = new Product(productId, categoryId, name, imageUrl, quantity, price, description, publishedDate);
+                String publishedDate = rs.getString("publishedDate");
+                String createdDate = rs.getString("createdDate");
+                product = new Product(productId, categoryId, name, imageUrl, quantity, price, description, publishedDate, createdDate);
                 products.add(product);
             }
         } finally {
@@ -93,8 +94,9 @@ public class ProductDAO {
                 Integer quantity = rs.getInt("quantity");
                 Float price = rs.getFloat("price");
                 String description = rs.getString("description");
-                Date publishedDate = rs.getDate("publishedDate");
-                product = new Product(productId, categoryId, name, imageUrl, quantity, price, description, publishedDate);
+                String publishedDate = rs.getString("publishedDate");
+                String createdDate = rs.getString("createdDate");
+                product = new Product(productId, categoryId, name, imageUrl, quantity, price, description, publishedDate, createdDate);
             }
         } finally {
             this.closeConnection();
