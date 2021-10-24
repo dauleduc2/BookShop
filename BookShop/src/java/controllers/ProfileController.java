@@ -40,6 +40,13 @@ public class ProfileController extends HttpServlet {
         String phone = GetParam.getPhoneParams(request, "phone", "Phone number");
         String imageUrl = GetParam.getFileParam(request, "avatar", "Avatar", 1080 * 1080);
 
+        // check existed email
+        User isExistedEmail = userDao.getUserByEmail(email);
+        if (!user.getEmail().equals(email) && isExistedEmail != null) {
+            request.setAttribute("emailError", "The given email is already existed");
+            email = null;
+        }
+
         // check imageUrl and assign to current user's avatar if null
         if (imageUrl == null) {
             imageUrl = user.getAvatar();
