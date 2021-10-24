@@ -35,12 +35,15 @@ public class AddCategoryController extends HttpServlet {
         CategoryDAO categoryDao = new CategoryDAO();
         boolean isTrue = true;
 
+        //validate params
         String name = GetParam.getStringParam(request, "category", "Category's Name", 1, 50, null);
 
+        //check param
         if (name == null) {
             isTrue = false;
         }
 
+        //check caterogy is existed
         if (categoryDao.getCategoryByName(name) != null) {
             request.setAttribute("categoryError", "This Category's Name was existed.");
             isTrue = false;

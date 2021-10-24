@@ -3,6 +3,7 @@ package daos;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import models.Category;
 import utils.Connector;
 
@@ -40,5 +41,25 @@ public class CategoryDAO {
         } finally {
             this.closeConnection();
         }
+    }
+
+    public Category getCategoryByName(String caterogyName) throws Exception {
+        Category category = null;
+        try {
+            conn = Connector.getConnection();
+            String sql = "SELECT * FROM bookshop_category WHERE name = ?";
+            preStm = conn.prepareStatement(sql);
+            preStm.setString(1, caterogyName);
+            rs = preStm.executeQuery();
+            if (rs.next()) {
+                Integer categoryId = rs.getInt("categoryId");
+                String name = rs.getString("name");
+                String createdDate = rs.getString("createdDate");
+                category = new Category(categoryId, name, createdDate);
+            }
+        } finally {
+            this.closeConnection();
+        }
+        return category;
     }
 }
