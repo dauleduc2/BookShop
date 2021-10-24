@@ -3,8 +3,6 @@ package controllers;
 import constant.Router;
 import daos.UserDAO;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -41,6 +39,13 @@ public class ProfileController extends HttpServlet {
         String address = GetParam.getStringParam(request, "address", "Address", 5, 500, "");
         String phone = GetParam.getPhoneParams(request, "phone", "Phone number");
         String imageUrl = GetParam.getFileParam(request, "avatar", "Avatar", 1080 * 1080);
+
+        // check existed email
+        User isExistedEmail = userDao.getUserByEmail(email);
+        if (!user.getEmail().equals(email) && isExistedEmail != null) {
+            request.setAttribute("emailError", "The given email is already existed");
+            email = null;
+        }
 
         // check imageUrl and assign to current user's avatar if null
         if (imageUrl == null) {
