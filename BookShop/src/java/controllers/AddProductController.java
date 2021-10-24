@@ -40,22 +40,31 @@ public class AddProductController extends HttpServlet {
 
         String name = GetParam.getStringParam(request, "name", "Book's Name", 5, 50, null);
 
+        //validate param
         String imageUrl = GetParam.getFileParam(request, "productAvatar", "Product avatar", 1080 * 1080);
         Integer quantity = GetParam.getIntParams(request, "quantity", "Quantity", 0, Integer.MAX_VALUE, null);
         Float price = GetParam.getFloatParams(request, "price", "Price", 0, Float.MAX_VALUE, null);
         String description = GetParam.getStringParam(request, "description", "Description", 5, Integer.MAX_VALUE, null);
         String publishedDate = GetParam.getStringParam(request, "publishedDate", "Published date", 7, 12, null);
         Integer categoryId = 0;
-        if (name == null || imageUrl == null || quantity == null || price == null || description == null || publishedDate == null || categoryId == null) {
+
+        //check params
+        if (name == null || imageUrl == null || quantity == null || price == null || description == null || publishedDate == null) {
             isTrue = false;
         }
+
+        //check error occur
         if (!isTrue) {
             return false;
         }
 
+        //add new product to database
         Product product = new Product(null, categoryId, name, imageUrl, quantity, price, description, publishedDate, null);
         productDao.addNewProduct(product);
-        System.out.println(product);
+
+        //send success message
+        request.setAttribute("successMessage", "Change profile successful.");
+
         return true;
     }
 
@@ -84,7 +93,7 @@ public class AddProductController extends HttpServlet {
                 return;
             }
             // forward on 200
-            response.sendRedirect(Router.HOME_CONTROLLER);
+            this.doGet(request, response);
         } catch (Exception e) {
             // forward on 500
             System.out.println(e.getMessage());
