@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controllers;
 
 import constant.Router;
@@ -20,11 +15,7 @@ import models.Product;
 import utils.GetParam;
 import utils.Helper;
 
-/**
- *
- * @author Bana-na
- */
-@WebServlet(name = "AddProductController", urlPatterns = {"/" + Router.ADDPRODUCT_CONTROLLER})
+@WebServlet(name = "AddProductController", urlPatterns = {"/" + Router.ADD_PRODUCT_CONTROLLER})
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 1024, maxFileSize = 1024 * 1024 * 1024, maxRequestSize = 1024 * 1024 * 1024)
 public class AddProductController extends HttpServlet {
 
