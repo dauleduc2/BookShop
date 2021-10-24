@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import models.Category;
 import utils.Connector;
 
@@ -62,5 +63,27 @@ public class CategoryDAO {
             this.closeConnection();
         }
         return category;
+    }
+
+    // this function will get all categories
+    public ArrayList<Category> getAllCategory() throws Exception {
+        ArrayList<Category> categories = new ArrayList<Category>();
+        try {
+            Category category = null;
+            conn = Connector.getConnection();
+            String sql = "SELECT * FROM bookshop_category";
+            preStm = conn.prepareStatement(sql);
+            rs = preStm.executeQuery();
+            while (rs.next()) {
+                Integer categoryId = rs.getInt("categoryId");
+                String name = rs.getString("name");
+                String createdDate = rs.getString("createdDate");
+                category = new Category(categoryId, name, createdDate);
+                categories.add(category);
+            }
+        } finally {
+            this.closeConnection();
+        }
+        return categories;
     }
 }
