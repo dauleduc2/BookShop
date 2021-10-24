@@ -33,7 +33,7 @@ public class ProductDAO {
     public void addNewProduct(Product product) throws Exception {
         try {
             conn = Connector.getConnection();
-            String sql = "INSERT INTO bookshop_product (name, image, quantity, price, description, publishedDate, categoryId) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO bookshop_product (name, image, quantity, price, description, publishedDate, categoryId) VALUES (?, ?, ?, ?, ?, ?, ?)";
             preStm = conn.prepareStatement(sql);
             //
             preStm.setString(1, product.getName());

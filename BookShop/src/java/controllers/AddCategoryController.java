@@ -35,17 +35,32 @@ public class AddCategoryController extends HttpServlet {
         CategoryDAO categoryDao = new CategoryDAO();
         boolean isTrue = true;
 
+        //validate params
         String name = GetParam.getStringParam(request, "category", "Category's Name", 1, 50, null);
+
+        //check param
         if (name == null) {
             isTrue = false;
         }
 
+        //check caterogy is existed
+        if (categoryDao.getCategoryByName(name) != null) {
+            request.setAttribute("categoryError", "This Category's Name was existed.");
+            isTrue = false;
+        }
+
+        //check error occur
         if (!isTrue) {
             return false;
         }
 
+        //add new category
         Category category = new Category(null, name, null);
         categoryDao.addNewCategory(category);
+
+        //send success message
+        request.setAttribute("successMessage", "Change profile successful.");
+
         return true;
     }
 
@@ -82,7 +97,7 @@ public class AddCategoryController extends HttpServlet {
                 return;
             }
             // forward on 200
-            response.sendRedirect(Router.HOME_CONTROLLER);
+            this.doGet(request, response);
         } catch (Exception e) {
             // forward on 500
             System.out.println(e.getMessage());
