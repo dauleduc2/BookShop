@@ -43,6 +43,7 @@ public class CategoryDAO {
         }
     }
 
+    //this function will get Category by name
     public Category getCategoryByName(String caterogyName) throws Exception {
         Category category = null;
         try {
