@@ -28,7 +28,6 @@ public class AddProductController extends HttpServlet {
         boolean isTrue = true;
 
         String name = GetParam.getStringParam(request, "name", "Book's Name", 5, 50, null);
-
         String imageUrl = GetParam.getFileParam(request, "productAvatar", "Product avatar", 1080 * 1080);
         Integer quantity = GetParam.getIntParams(request, "quantity", "Quantity", 0, Integer.MAX_VALUE, null);
         Float price = GetParam.getFloatParams(request, "price", "Price", 0, Float.MAX_VALUE, null);
@@ -38,6 +37,7 @@ public class AddProductController extends HttpServlet {
         if (name == null || imageUrl == null || quantity == null || price == null || description == null || publishedDate == null || categoryId == null) {
             isTrue = false;
         }
+
         if (!isTrue) {
             return false;
         }
