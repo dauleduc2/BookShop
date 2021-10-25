@@ -52,7 +52,7 @@ public class ProductDAO {
     }
 
     // this function will get products
-    public ArrayList<Product> getNewProducts() throws Exception {
+    public ArrayList<Product> getProductToShow() throws Exception {
         ArrayList<Product> products = new ArrayList<Product>();
         try {
             Product product;
