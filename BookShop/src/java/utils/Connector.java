@@ -20,7 +20,6 @@ public class Connector {
             DataSource env = (DataSource) end.lookup("BookShop");
             Connection conn = env.getConnection();
             return conn;
-
         } catch (SQLException | NamingException e) {
             e.printStackTrace();
             return null;

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controllers;
 
 import constant.Router;
@@ -17,40 +12,29 @@ import models.Category;
 import utils.GetParam;
 import utils.Helper;
 
-@WebServlet(name = "AddCategoryController", urlPatterns = {"/" + Router.ADDCATEGORY_CONTROLLER})
+@WebServlet(name = "AddCategoryController", urlPatterns = {"/" + Router.ADD_CATEGORY_CONTROLLER})
 public class AddCategoryController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
      */
     protected boolean processRequest(HttpServletRequest request, HttpServletResponse response)
             throws Exception {
         response.setContentType("text/html;charset=UTF-8");
         CategoryDAO categoryDao = new CategoryDAO();
-        boolean isTrue = true;
 
         //validate params
         String name = GetParam.getStringParam(request, "category", "Category's Name", 1, 50, null);
 
         //check param
         if (name == null) {
-            isTrue = false;
+            return false;
         }
 
         //check caterogy is existed
         if (categoryDao.getCategoryByName(name) != null) {
             request.setAttribute("categoryError", "This Category's Name was existed.");
-            isTrue = false;
-        }
-
-        //check error occur
-        if (!isTrue) {
             return false;
         }
 
@@ -59,19 +43,13 @@ public class AddCategoryController extends HttpServlet {
         categoryDao.addNewCategory(category);
 
         //send success message
-        request.setAttribute("successMessage", "Change profile successful.");
+        request.setAttribute("successMessage", "Add category successful.");
 
         return true;
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -81,11 +59,6 @@ public class AddCategoryController extends HttpServlet {
 
     /**
      * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

@@ -11,6 +11,7 @@ public class Router {
     public static final String CHANGE_PASSWORD_PAGE = "WEB-INF/view/changePassword.jsp";
     public static final String ADD_PRODUCT_PAGE = "WEB-INF/view/addNewProductPage.jsp";
     public static final String PRODUCT_DETAIL_PAGE = "WEB-INF/view/productDetailPage.jsp";
+    public static final String UPDATE_PRODUCT_PAGE = "WEB-INF/view/updateProductPage.jsp";
     public static final String ADD_CATEGORY_PAGE = "WEB-INF/view/addCategoryPage.jsp";
 
     // router mapping
@@ -20,8 +21,9 @@ public class Router {
     public static final String PROFILE_CONTROLLER = "me";
     public static final String SIGNOUT_CONTROLLER = "signout";
     public static final String HOME_CONTROLLER = "home";
-    public static final String ADDPRODUCT_CONTROLLER = "addbook";
+    public static final String ADD_PRODUCT_CONTROLLER = "addbook";
     public static final String PRODUCT_DETAIL_CONTROLLER = "product";
-    public static final String ADDCATEGORY_CONTROLLER = "addcategory";
+    public static final String UPDATE_PRODUCT_CONTROLLER = "updateproduct";
+    public static final String ADD_CATEGORY_CONTROLLER = "addcategory";
 
 }
