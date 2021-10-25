@@ -61,18 +61,10 @@ public class ProfileController extends HttpServlet {
         if (fullName == null || email == null) {
             return false;
         }
-<<<<<<< HEAD
-        HttpSession session = request.getSession();
-        String userId = (String) session.getAttribute("userId");
-        User user = userDao.getUserById(userId);
-        imageUrl = imageUrl == null ? (user.getAvatar() == null ? "asset/avatar.png" : user.getAvatar()) : imageUrl;
-        userDao.updateUserProfile(userId, user.getRoleId(), fullName, email, address, phone, imageUrl);
-=======
 
         // update user to datbase
         userDao.updateUserProfile(userId, fullName, email, address, phone, imageUrl);
 
->>>>>>> c8f2a51567ffab24b0e6eb83e9b7cc571cdc2e3b
         //send success message
         request.setAttribute("successMessage", "Change profile successful.");
 
