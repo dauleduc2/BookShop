@@ -3,8 +3,6 @@ package controllers;
 import constant.Router;
 import daos.ProductDAO;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
