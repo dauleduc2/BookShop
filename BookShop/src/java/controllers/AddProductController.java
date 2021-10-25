@@ -46,7 +46,7 @@ public class AddProductController extends HttpServlet {
         Float price = GetParam.getFloatParams(request, "price", "Price", 0, Float.MAX_VALUE, null);
         String description = GetParam.getStringParam(request, "description", "Description", 5, Integer.MAX_VALUE, null);
         String publishedDate = GetParam.getStringParam(request, "publishedDate", "Published date", 7, 12, null);
-        Integer categoryId = 0;
+        Integer categoryId = 1;
 
         //check params
         if (name == null || imageUrl == null || quantity == null || price == null || description == null || publishedDate == null) {
