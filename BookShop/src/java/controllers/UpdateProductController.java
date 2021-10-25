@@ -12,7 +12,7 @@ import models.Product;
 import utils.GetParam;
 import utils.Helper;
 
-@WebServlet(name = "UpdateProductController", urlPatterns = { "/UpdateProductController" })
+@WebServlet(name = "UpdateProductController", urlPatterns = {"/" + Router.UPDATE_PRODUCT_CONTROLLER})
 public class UpdateProductController extends HttpServlet {
 
     /**
@@ -40,7 +40,7 @@ public class UpdateProductController extends HttpServlet {
         Float price = GetParam.getFloatParams(request, "price", "Price", 0, Float.MAX_VALUE, null);
         String description = GetParam.getStringParam(request, "description", "Discription", 3, 255, null);
         String publishedDate = GetParam.getStringParam(request, "publishedDate", "Published date", 7, 12, null);
-        Integer categoryId = GetParam.getIntParams(request, "categoryId", "Category", 0, Integer.MAX_VALUE, null);
+        Integer categoryId = GetParam.getIntParams(request, "type", "Type", 0, Integer.MAX_VALUE, null);
 
         // check null value for params
         if (name == null) {
@@ -68,7 +68,6 @@ public class UpdateProductController extends HttpServlet {
         // update to database
         productDao.updateProduct(product.getProductId(), name, image, quantity, price, description, publishedDate,
                 categoryId);
-
         // send success message
         request.setAttribute("successMessage", "Update product successful.");
         return true;
@@ -80,8 +79,7 @@ public class UpdateProductController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        request.getRequestDispatcher("").forward(request, response);
+        request.getRequestDispatcher(Router.UPDATE_PRODUCT_PAGE).forward(request, response);
     }
 
     /**
