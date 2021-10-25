@@ -1,3 +1,6 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="models.Category"%>
+<%@page import="daos.CategoryDAO"%>
 <%@page import="constant.Router"%>
 <!DOCTYPE html>
 <html>
@@ -11,6 +14,11 @@
                 </jsp:include>
         </head>
         <body class="bg-gradient-to-b min-h-screen from-gray-200 to-gray-300">
+                <%
+                        CategoryDAO ct = new CategoryDAO();
+                        ArrayList<Category> list = ct.getAllCategory();
+
+                %>
                 <form action="<%=Router.ADD_PRODUCT_CONTROLLER%>" method="POST" enctype="multipart/form-data" class="max-w-2xl p-2 m-auto my-5 space-y-8 bg-white border-2 border-black divide-y divide-gray-200 rounded-md lg:p-7">
                         <div class="space-y-8 divide-y divide-gray-200 sm:space-y-5">
                                 <div>
@@ -79,9 +87,10 @@
                                                         </label>
                                                         <div class="mt-1 sm:mt-0 sm:col-span-2">
                                                                 <select id="type" name="type" autocomplete="type" class="block w-full max-w-lg border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm">
-                                                                        <c:forEach var="category" items="${requestScope.categories}">
-                                                                                <option value="${category.getCategoryId()}">${category.getName()}</option>
-                                                                        </c:forEach>
+                                                                        <% for (int i = 0; i < list.size(); i++) {%>
+                                                                        <option value=<%=list.get(i).getCategoryId()%> ><%=list.get(i).getName()%></option>
+                                                                        <% }%>
+
                                                                 </select>
                                                         </div>
                                                 </div>
