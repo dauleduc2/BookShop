@@ -19,7 +19,6 @@ public class AddProductController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     *
      */
     protected boolean processRequest(HttpServletRequest request, HttpServletResponse response)
             throws Exception {
@@ -59,7 +58,6 @@ public class AddProductController extends HttpServlet {
 
     /**
      * Handles the HTTP <code>GET</code> method.
-     *
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -69,7 +67,6 @@ public class AddProductController extends HttpServlet {
 
     /**
      * Handles the HTTP <code>POST</code> method.
-     *
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
