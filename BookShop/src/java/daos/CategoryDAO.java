@@ -3,8 +3,11 @@ package daos;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+<<<<<<< HEAD
+=======
 import java.sql.SQLException;
 import java.util.ArrayList;
+>>>>>>> test
 import models.Category;
 import org.apache.jasper.tagplugins.jstl.core.ForEach;
 import utils.Connector;
