@@ -4,6 +4,7 @@
 <html>
         <head>
                 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+                <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <title>JSP Page</title>
                 <link rel="stylesheet" href="asset/styles.css" type="text/css" />
                 <jsp:include page="./commonView/Navbar.jsp">
@@ -15,7 +16,8 @@
         <div
             class="
             min-h-screen
-            bg-gray-300
+            bg-white
+            lg:bg-gradient-to-b lg:from-gray-50 lg:to-gray-100
             flex flex-col
             justify-center
             py-12
@@ -30,7 +32,7 @@
                         </h2>
                 </div>
                 <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-                        <div class="bg-white py-8 px-4 shadow-xl sm:rounded-xl sm:px-10">
+                        <div class="bg-white py-8 px-4 lg:shadow-xl sm:rounded-xl sm:px-10">
                                 <form class="space-y-6" action="<%=Router.REGISTER_CONTROLLER%>" method="POST">
                                         <div>
                                                 <label

@@ -26,26 +26,42 @@ public class PasswordController extends HttpServlet {
         UserDAO userDao = new UserDAO();
         HttpSession session = request.getSession();
 
+        // get current user
         String userId = (String) session.getAttribute("userId");
         User user = userDao.getUserById(userId);
 
+        // validate params
         String oldPassword = GetParam.getStringParam(request, "oldPassword", "Old Password", 5, 50, null);
         String newPassword = GetParam.getStringParam(request, "newPassword", "New Password", 5, 50, null);
         String confirmNewPassword = GetParam.getStringParam(request, "confirmNewPassword", "Confirm New Password", 5, 50, null);
 
+        // check params
         if (oldPassword == null || newPassword == null || confirmNewPassword == null) {
             return false;
         }
 
+        // check correct password
         if (!oldPassword.equals(user.getPassword())) {
             request.setAttribute("oldPasswordError", "Old Password Incorrect");
             return false;
         }
+
+        // check confirm password
         if (!newPassword.equals(confirmNewPassword)) {
             request.setAttribute("confirmNewPasswordError", "Confirm Password Incorrect");
             return false;
         }
+
+        // check duplicate password
+        if (user.getPassword().equals(newPassword)) {
+            request.setAttribute("errorMessage", "New password is not different with the current password");
+            return false;
+        }
+
+        // change password in database
         userDao.changePassword(userId, newPassword);
+
+        // set success message
         request.setAttribute("successMessage", "Change password successful.");
         return true;
     }
@@ -72,8 +88,9 @@ public class PasswordController extends HttpServlet {
                 return;
             }
             // forward on 200
-            response.sendRedirect(Router.PROFILE_CONTROLLER);
+            this.doGet(request, response);
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             // forward on 500
             Helper.setAttribute(request, 500, "Something failed", "Please try again later");
             request.getRequestDispatcher(Router.ERROR).forward(request, response);

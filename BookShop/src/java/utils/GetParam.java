@@ -156,11 +156,10 @@ public class GetParam {
     public static String getFileParam(HttpServletRequest request, String field, String label, long maxSize) throws IOException, ServletException {
         //get upload file;
         Part filePart = request.getPart(field);
-        if (Helper.getFileName(filePart) == "") {
+        if (Helper.getFileName(filePart).equals("")) {
             request.setAttribute(field + "Error", label + " is required");
             return null;
         }
-
         //upload dir where save the image in server
         String uploadDir = "asset/images";
         //get absolute path to project
@@ -213,6 +212,7 @@ public class GetParam {
             Date date = format.parse(value);
             return date;
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             return null;
         }
     }
