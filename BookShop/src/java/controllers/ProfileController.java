@@ -14,7 +14,7 @@ import models.User;
 import utils.GetParam;
 import utils.Helper;
 
-@WebServlet(name = "ProfileController", urlPatterns = { "/" + Router.PROFILE_CONTROLLER })
+@WebServlet(name = "ProfileController", urlPatterns = {"/" + Router.PROFILE_CONTROLLER})
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 1024, maxFileSize = 1024 * 1024 * 1024, maxRequestSize = 1024 * 1024
         * 1024)
 public class ProfileController extends HttpServlet {
@@ -49,6 +49,13 @@ public class ProfileController extends HttpServlet {
         if (request.getAttribute("avatarError") != null
                 && request.getAttribute("avatarError").toString().contains("required")) {
             request.setAttribute("avatarError", "");
+        }
+
+        // check existed email
+        User isExistedEmail = userDao.getUserByEmail(email);
+        if (!user.getEmail().equals(email) && isExistedEmail != null) {
+            request.setAttribute("emailError", "The given email is already existed");
+            email = null;
         }
 
         // check params
