@@ -59,7 +59,11 @@ public class ProfileController extends HttpServlet {
         // update user to datbase
         userDao.updateUserProfile(userId, fullName, email, address, phone, imageUrl);
 
+<<<<<<< HEAD
         // send success message
+=======
+        //send success message
+>>>>>>> 56609e7c5665bf2f34bf954ec62a071fac00d73a
         request.setAttribute("successMessage", "Change profile successful.");
 
         // save avatar url to session

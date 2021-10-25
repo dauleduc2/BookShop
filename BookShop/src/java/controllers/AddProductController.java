@@ -52,7 +52,7 @@ public class AddProductController extends HttpServlet {
         productDao.addNewProduct(product);
 
         //send success message
-        request.setAttribute("successMessage", "Change profile successful.");
+        request.setAttribute("successMessage", "Add product successful.");
 
         return true;
     }
