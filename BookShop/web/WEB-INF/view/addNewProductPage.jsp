@@ -11,7 +11,7 @@
                 </jsp:include>
         </head>
         <body class="bg-gradient-to-b min-h-screen from-gray-200 to-gray-300">
-                <form action="<%=Router.ADDPRODUCT_CONTROLLER%>" method="POST" enctype="multipart/form-data" class="max-w-2xl p-2 m-auto my-5 space-y-8 bg-white border-2 border-black divide-y divide-gray-200 rounded-md lg:p-7">
+                <form action="<%=Router.ADD_PRODUCT_CONTROLLER%>" method="POST" enctype="multipart/form-data" class="max-w-2xl p-2 m-auto my-5 space-y-8 bg-white border-2 border-black divide-y divide-gray-200 rounded-md lg:p-7">
                         <div class="space-y-8 divide-y divide-gray-200 sm:space-y-5">
                                 <div>
                                         <div class="mb-3">
