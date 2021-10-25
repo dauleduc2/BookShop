@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.util.Date;
 import models.Product;
 import utils.Connector;
 
@@ -79,6 +78,7 @@ public class ProductDAO {
         return products;
     }
 
+    // this function will get product by given id
     public Product getProductById(Integer productId) throws Exception {
         Product product = null;
         try {
@@ -102,5 +102,52 @@ public class ProductDAO {
             this.closeConnection();
         }
         return product;
+    }
+
+    public void updateProduct(Integer productId, String name, String image, Integer quantity, Float price, String description, String publishedDate, Integer categoryId) throws Exception {
+        try {
+            conn = Connector.getConnection();
+            String sql = "UPDATE bookshop_product(name, image, quantity, price, description, publishedDate, categoryId) "
+                    + "SET name = ?, image = ?, quantity = ?, price = ?, description = ?, publishedDate = ?, categoryId = ? WHERE productId = ?";
+            preStm = conn.prepareStatement(sql);
+            preStm.setString(1, name);
+            preStm.setString(2, image);
+            preStm.setInt(3, quantity);
+            preStm.setFloat(4, price);
+            preStm.setString(5, description);
+            preStm.setString(6, publishedDate);
+            preStm.setInt(7, categoryId);
+            preStm.setInt(8, productId);
+            preStm.executeUpdate();
+        } finally {
+            this.closeConnection();
+        }
+    }
+
+    public ArrayList<Product> getProductsByName(String name) throws Exception {
+        ArrayList<Product> products = new ArrayList<Product>();
+        try {
+            Product product;
+            conn = Connector.getConnection();
+            String sql = "SELECT * FROM bookshop_product WHERE name = ?";
+            preStm = conn.prepareStatement(sql);
+            preStm.setString(1, name);
+            rs = preStm.executeQuery();
+            while (rs.next()) {
+                Integer productId = rs.getInt("productId");
+                Integer categoryId = rs.getInt("categoryId");
+                String imageUrl = rs.getString("image");
+                Integer quantity = rs.getInt("quantity");
+                Float price = rs.getFloat("price");
+                String description = rs.getString("description");
+                String publishedDate = rs.getString("publishedDate");
+                String createdDate = rs.getString("createdDate");
+                product = new Product(productId, categoryId, name, imageUrl, quantity, price, description, publishedDate, createdDate);
+                products.add(product);
+            }
+        } finally {
+            this.closeConnection();
+        }
+        return products;
     }
 }

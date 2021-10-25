@@ -45,6 +45,7 @@ public class CategoryDAO {
 		}
 	}
 
+<<<<<<< HEAD
 	//this function will get Category by name
 	public Category getCategoryByName(String caterogyName) throws Exception {
 		Category category = null;
@@ -87,4 +88,48 @@ public class CategoryDAO {
 
 		return categories;
 	}
+=======
+    //this function will get Category by name
+    public Category getCategoryByName(String caterogyName) throws Exception {
+        Category category = null;
+        try {
+            conn = Connector.getConnection();
+            String sql = "SELECT * FROM bookshop_category WHERE name = ?";
+            preStm = conn.prepareStatement(sql);
+            preStm.setString(1, caterogyName);
+            rs = preStm.executeQuery();
+            if (rs.next()) {
+                Integer categoryId = rs.getInt("categoryId");
+                String name = rs.getString("name");
+                String createdDate = rs.getString("createdDate");
+                category = new Category(categoryId, name, createdDate);
+            }
+        } finally {
+            this.closeConnection();
+        }
+        return category;
+    }
+
+    // this function will get all categories
+    public ArrayList<Category> getAllCategory() throws Exception {
+        ArrayList<Category> categories = new ArrayList<Category>();
+        try {
+            Category category = null;
+            conn = Connector.getConnection();
+            String sql = "SELECT * FROM bookshop_category";
+            preStm = conn.prepareStatement(sql);
+            rs = preStm.executeQuery();
+            while (rs.next()) {
+                Integer categoryId = rs.getInt("categoryId");
+                String name = rs.getString("name");
+                String createdDate = rs.getString("createdDate");
+                category = new Category(categoryId, name, createdDate);
+                categories.add(category);
+            }
+        } finally {
+            this.closeConnection();
+        }
+        return categories;
+    }
+>>>>>>> loc
 }
