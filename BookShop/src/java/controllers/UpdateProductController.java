@@ -1,72 +1,25 @@
-<<<<<<< HEAD
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package controllers;
-
-import java.io.IOException;
-import java.io.PrintWriter;
-=======
 package controllers;
 
 import constant.Router;
 import daos.ProductDAO;
 import java.io.IOException;
->>>>>>> loc
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-<<<<<<< HEAD
-import constant.Router;
-
-/**
- *
- * @author Admin
- */
-@WebServlet(name = "UpdateProductController", urlPatterns = {"/" + Router.UPDATE_PRODUCT_CONTROLLER})
-public class UpdateProductController extends HttpServlet {
-
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-
-    }
-
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-
-        request.getRequestDispatcher(Router.UPDATE_PRODUCT_PAGE).forward(request, response);
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-
-    }
-
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
-=======
 import models.Product;
 import utils.GetParam;
 import utils.Helper;
 
-@WebServlet(name = "UpdateProductController", urlPatterns = {"/UpdateProductController"})
+@WebServlet(name = "UpdateProductController", urlPatterns = { "/UpdateProductController" })
 public class UpdateProductController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
      */
-    protected boolean processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws Exception {
+    protected boolean processRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=UTF-8");
         ProductDAO productDao = new ProductDAO();
@@ -113,9 +66,10 @@ public class UpdateProductController extends HttpServlet {
         }
 
         // update to database
-        productDao.updateProduct(product.getProductId(), name, image, quantity, price, description, publishedDate, categoryId);
+        productDao.updateProduct(product.getProductId(), name, image, quantity, price, description, publishedDate,
+                categoryId);
 
-        //send success message
+        // send success message
         request.setAttribute("successMessage", "Update product successful.");
         return true;
     }
@@ -152,5 +106,4 @@ public class UpdateProductController extends HttpServlet {
         }
     }
 
->>>>>>> loc
 }
