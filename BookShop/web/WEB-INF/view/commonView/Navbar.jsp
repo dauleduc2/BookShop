@@ -2,22 +2,13 @@
 contentType="text/html" pageEncoding="UTF-8"%> <% String avatarUrl = (String)
 session.getAttribute("avatarUrl");%> <%@page import="constant.Router"%>
 <nav class="bg-gray-800">
-  <div class="px-2 mx-auto w-full sm:px-6 lg:px-8">
+  <div class="w-full px-2 mx-auto sm:px-6 lg:px-8">
     <div class="relative flex items-center justify-between h-16">
       <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
         <!-- Mobile menu button-->
         <button
           type="button"
-          class="
-            inline-flex
-            items-center
-            justify-center
-            p-2
-            text-gray-400
-            rounded-md
-            hover:text-white hover:bg-gray-700
-            focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white
-          "
+          class="inline-flex items-center justify-center p-2 text-gray-400 rounded-md  hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
           aria-controls="mobile-menu"
           aria-expanded="false"
         >
@@ -56,13 +47,7 @@ session.getAttribute("avatarUrl");%> <%@page import="constant.Router"%>
         </button>
       </div>
       <div
-        class="
-          flex
-          items-center
-          justify-center
-          flex-1
-          sm:items-stretch sm:justify-start
-        "
+        class="flex items-center justify-center flex-1  sm:items-stretch sm:justify-start"
       >
         <div class="flex items-center flex-shrink-0">
           <img class="h-10 mx-auto" src="asset/logoFull.png" alt="Workflow" />
@@ -71,44 +56,21 @@ session.getAttribute("avatarUrl");%> <%@page import="constant.Router"%>
           <div class="flex space-x-4">
             <a
               href="<%=Router.HOME_CONTROLLER%>"
-              class="
-                px-3
-                py-2
-                text-sm
-                font-medium
-                text-gray-300
-                rounded-md
-                hover:bg-gray-700 hover:text-white
-              "
+              class="px-3 py-2 text-sm font-medium text-gray-300 rounded-md  hover:bg-gray-700 hover:text-white"
               aria-current="page"
               >Home</a
             >
 
             <a
               href="#"
-              class="
-                px-3
-                py-2
-                text-sm
-                font-medium
-                text-gray-300
-                rounded-md
-                hover:bg-gray-700 hover:text-white
-              "
+              class="px-3 py-2 text-sm font-medium text-gray-300 rounded-md  hover:bg-gray-700 hover:text-white"
               >Category</a
             >
           </div>
         </div>
       </div>
       <div
-        class="
-          absolute
-          inset-y-0
-          right-0
-          flex
-          pr-2
-          sm:static sm:inset-auto sm:ml-6 sm:pr-0
-        "
+        class="absolute inset-y-0 right-0 flex pr-2  sm:static sm:inset-auto sm:ml-6 sm:pr-0"
       >
         <!-- Profile dropdown -->
         <c:choose>
@@ -116,38 +78,27 @@ session.getAttribute("avatarUrl");%> <%@page import="constant.Router"%>
             <div class="relative flex self-center">
               <a
                 href="<%=Router.CART_CONTROLLER %>"
-                class="text-gray-100 mr-6 hidden lg:block z-50"
+                class="z-50 hidden mr-6 text-gray-100 lg:block"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  class="h-8 w-8"
+                  class="w-8 h-8"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
                 >
                   <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="{2}"
-                    d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
                   />
                 </svg>
               </a>
               <div class="">
                 <button
                   type="button"
-                  class="
-                    flex
-                    text-sm
-                    bg-gray-800
-                    rounded-full
-                    focus:outline-none
-                    focus:ring-2
-                    focus:ring-offset-2
-                    focus:ring-offset-gray-800
-                    focus:ring-white
-                    userButton
-                  "
+                  class="flex text-sm bg-gray-800 rounded-full  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white userButton"
                   id="user-menu-button"
                   aria-expanded="false"
                   aria-haspopup="true"
@@ -159,23 +110,7 @@ session.getAttribute("avatarUrl");%> <%@page import="constant.Router"%>
               </div>
 
               <div
-                class="
-                  absolute
-                  top-5
-                  right-10
-                  z-50
-                  hidden
-                  w-48
-                  mt-2
-                  overflow-hidden
-                  origin-top-right
-                  bg-white
-                  rounded-md
-                  shadow-lg
-                  ring-1 ring-black ring-opacity-5
-                  focus:outline-none
-                  dropdownMenu
-                "
+                class="absolute z-50 hidden w-48 mt-2 overflow-hidden origin-top-right bg-white rounded-md shadow-lg  top-5 right-10 ring-1 ring-black ring-opacity-5 focus:outline-none dropdownMenu"
                 role="menu"
                 aria-orientation="vertical"
                 aria-labelledby="user-menu-button"
@@ -184,15 +119,7 @@ session.getAttribute("avatarUrl");%> <%@page import="constant.Router"%>
                 <!-- Active: "bg-gray-100", Not Active: "" -->
                 <a
                   href="<%=Router.PROFILE_CONTROLLER%>"
-                  class="
-                    block
-                    px-4
-                    py-2
-                    text-sm text-gray-700
-                    transition
-                    duration-300
-                    hover:bg-gray-700 hover:text-white
-                  "
+                  class="block px-4 py-2 text-sm text-gray-700 transition duration-300  hover:bg-gray-700 hover:text-white"
                   role="menuitem"
                   tabindex="-1"
                   id="user-menu-item-0"
@@ -201,15 +128,7 @@ session.getAttribute("avatarUrl");%> <%@page import="constant.Router"%>
 
                 <a
                   href="<%=Router.SIGNOUT_CONTROLLER%>"
-                  class="
-                    block
-                    px-4
-                    py-2
-                    text-sm text-gray-700
-                    transition
-                    duration-300
-                    hover:bg-gray-700 hover:text-white
-                  "
+                  class="block px-4 py-2 text-sm text-gray-700 transition duration-300  hover:bg-gray-700 hover:text-white"
                   role="menuitem"
                   tabindex="-1"
                   id="user-menu-item-2"
@@ -221,29 +140,13 @@ session.getAttribute("avatarUrl");%> <%@page import="constant.Router"%>
           <c:otherwise>
             <div class="hidden sm:block">
               <a
-                class="
-                  px-3
-                  py-2
-                  text-sm
-                  font-medium
-                  text-gray-300
-                  rounded-md
-                  hover:bg-gray-700 hover:text-white
-                "
+                class="px-3 py-2 text-sm font-medium text-gray-300 rounded-md  hover:bg-gray-700 hover:text-white"
                 href="<%=Router.LOGIN_CONTROLLER%>"
               >
                 Sign In
               </a>
               <a
-                class="
-                  px-3
-                  py-2
-                  text-sm
-                  font-medium
-                  text-gray-300
-                  rounded-md
-                  hover:bg-gray-700 hover:text-white
-                "
+                class="px-3 py-2 text-sm font-medium text-gray-300 rounded-md  hover:bg-gray-700 hover:text-white"
                 href="<%=Router.REGISTER_CONTROLLER%>"
               >
                 Sign Up
@@ -260,77 +163,32 @@ session.getAttribute("avatarUrl");%> <%@page import="constant.Router"%>
     <div class="px-2 pt-2 pb-3 space-y-1">
       <a
         href="<%=Router.HOME_CONTROLLER%>"
-        class="
-          block
-          px-3
-          py-2
-          text-base
-          font-medium
-          text-white
-          bg-gray-900
-          rounded-md
-        "
+        class="block px-3 py-2 text-base font-medium text-white bg-gray-900 rounded-md "
         aria-current="page"
         >Home</a
       >
       <a
         href="#"
-        class="
-          block
-          px-3
-          py-2
-          text-base
-          font-medium
-          text-gray-300
-          rounded-md
-          hover:bg-gray-700 hover:text-white
-        "
+        class="block px-3 py-2 text-base font-medium text-gray-300 rounded-md  hover:bg-gray-700 hover:text-white"
         >Category</a
       >
       <c:choose>
         <c:when test="${avatarUrl == null}">
           <a
             href="<%=Router.LOGIN_CONTROLLER%>"
-            class="
-              block
-              px-3
-              py-2
-              text-base
-              font-medium
-              text-gray-300
-              rounded-md
-              hover:bg-gray-700 hover:text-white
-            "
+            class="block px-3 py-2 text-base font-medium text-gray-300 rounded-md  hover:bg-gray-700 hover:text-white"
             >Sign in</a
           >
           <a
             href="<%=Router.REGISTER_CONTROLLER%>"
-            class="
-              block
-              px-3
-              py-2
-              text-base
-              font-medium
-              text-gray-300
-              rounded-md
-              hover:bg-gray-700 hover:text-white
-            "
+            class="block px-3 py-2 text-base font-medium text-gray-300 rounded-md  hover:bg-gray-700 hover:text-white"
             >Sign up</a
           >
         </c:when>
         <c:otherwise>
           <a
             href="<%=Router.CART_CONTROLLER %>"
-            class="
-              block
-              px-3
-              py-2
-              text-base
-              font-medium
-              text-gray-300
-              rounded-md
-              hover:bg-gray-700 hover:text-white
-            "
+            class="block px-3 py-2 text-base font-medium text-gray-300 rounded-md  hover:bg-gray-700 hover:text-white"
             >Cart</a
           >
         </c:otherwise>
