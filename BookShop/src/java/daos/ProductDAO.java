@@ -124,16 +124,15 @@ public class ProductDAO {
         }
     }
 
-    public ArrayList<Product> getProductsByName(String name) throws Exception {
-        ArrayList<Product> products = new ArrayList<Product>();
+    public Product getProductByName(String name) throws Exception {
+        Product product = null;
         try {
-            Product product;
             conn = Connector.getConnection();
             String sql = "SELECT * FROM bookshop_product WHERE name = ?";
             preStm = conn.prepareStatement(sql);
             preStm.setString(1, name);
             rs = preStm.executeQuery();
-            while (rs.next()) {
+            if (rs.next()) {
                 Integer productId = rs.getInt("productId");
                 Integer categoryId = rs.getInt("categoryId");
                 String imageUrl = rs.getString("image");
@@ -143,11 +142,10 @@ public class ProductDAO {
                 String publishedDate = rs.getString("publishedDate");
                 String createdDate = rs.getString("createdDate");
                 product = new Product(productId, categoryId, name, imageUrl, quantity, price, description, publishedDate, createdDate);
-                products.add(product);
             }
         } finally {
             this.closeConnection();
         }
-        return products;
+        return product;
     }
 }
