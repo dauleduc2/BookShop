@@ -42,6 +42,12 @@ public class UpdateProductController extends HttpServlet {
         String publishedDate = GetParam.getStringParam(request, "publishedDate", "Published date", 7, 12, null);
         Integer categoryId = GetParam.getIntParams(request, "type", "Type", 0, Integer.MAX_VALUE, null);
 
+        // check duplicated name
+        if (name != null && !name.equals(product.getName()) && productDao.getProductByName(name) != null) {
+            request.setAttribute("nameError", "This product's name is already existed");
+            return false;
+        }
+
         // check null value for params
         if (name == null) {
             name = product.getName();
