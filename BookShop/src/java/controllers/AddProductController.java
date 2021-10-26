@@ -19,7 +19,6 @@ public class AddProductController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     *
      */
     protected boolean processRequest(HttpServletRequest request, HttpServletResponse response)
             throws Exception {
@@ -35,7 +34,7 @@ public class AddProductController extends HttpServlet {
         Float price = GetParam.getFloatParams(request, "price", "Price", 0, Float.MAX_VALUE, null);
         String description = GetParam.getStringParam(request, "description", "Description", 5, Integer.MAX_VALUE, null);
         String publishedDate = GetParam.getStringParam(request, "publishedDate", "Published date", 7, 12, null);
-        Integer categoryId = 1;
+        Integer categoryId = GetParam.getIntParams(request, "type", "Category Id", 0, Integer.MAX_VALUE, null);
 
         //check params
         if (name == null || imageUrl == null || quantity == null || price == null || description == null || publishedDate == null) {
@@ -59,7 +58,6 @@ public class AddProductController extends HttpServlet {
 
     /**
      * Handles the HTTP <code>GET</code> method.
-     *
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -69,7 +67,6 @@ public class AddProductController extends HttpServlet {
 
     /**
      * Handles the HTTP <code>POST</code> method.
-     *
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

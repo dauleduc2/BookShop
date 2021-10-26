@@ -15,20 +15,20 @@ import utils.GetParam;
 import utils.Helper;
 
 @WebServlet(name = "ProfileController", urlPatterns = {"/" + Router.PROFILE_CONTROLLER})
-@MultipartConfig(fileSizeThreshold = 1024 * 1024 * 1024, maxFileSize = 1024 * 1024 * 1024, maxRequestSize = 1024 * 1024 * 1024)
+@MultipartConfig(fileSizeThreshold = 1024 * 1024 * 1024, maxFileSize = 1024 * 1024 * 1024, maxRequestSize = 1024 * 1024
+        * 1024)
 public class ProfileController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * method
      */
-    protected boolean processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws Exception {
+    protected boolean processRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=UTF-8");
         UserDAO userDao = new UserDAO();
 
-        //get current user
+        // get current user
         HttpSession session = request.getSession();
         String userId = (String) session.getAttribute("userId");
         User user = userDao.getUserById(userId);
@@ -40,21 +40,22 @@ public class ProfileController extends HttpServlet {
         String phone = GetParam.getPhoneParams(request, "phone", "Phone number");
         String imageUrl = GetParam.getFileParam(request, "avatar", "Avatar", 1080 * 1080);
 
-        // check existed email
-        User isExistedEmail = userDao.getUserByEmail(email);
-        if (!user.getEmail().equals(email) && isExistedEmail != null) {
-            request.setAttribute("emailError", "The given email is already existed");
-            email = null;
-        }
-
         // check imageUrl and assign to current user's avatar if null
         if (imageUrl == null) {
             imageUrl = user.getAvatar();
         }
 
         // remove required error message
-        if (request.getAttribute("avatarError") != null && request.getAttribute("avatarError").toString().contains("required")) {
+        if (request.getAttribute("avatarError") != null
+                && request.getAttribute("avatarError").toString().contains("required")) {
             request.setAttribute("avatarError", "");
+        }
+
+        // check existed email
+        User isExistedEmail = userDao.getUserByEmail(email);
+        if (!user.getEmail().equals(email) && isExistedEmail != null) {
+            request.setAttribute("emailError", "The given email is already existed");
+            email = null;
         }
 
         // check params
@@ -68,7 +69,7 @@ public class ProfileController extends HttpServlet {
         //send success message
         request.setAttribute("successMessage", "Change profile successful.");
 
-        //save avatar url to session
+        // save avatar url to session
         session.setAttribute("avatarUrl", imageUrl == null ? "asset/avatar.png" : imageUrl);
         return true;
     }
