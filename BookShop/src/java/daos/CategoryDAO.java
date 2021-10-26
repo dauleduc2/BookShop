@@ -3,10 +3,8 @@ package daos;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import models.Category;
-import org.apache.jasper.tagplugins.jstl.core.ForEach;
 import utils.Connector;
 
 public class CategoryDAO {
@@ -15,7 +13,7 @@ public class CategoryDAO {
     private PreparedStatement preStm;
     private ResultSet rs;
 
-    //close connection of database
+    // close connection of database
     private void closeConnection() throws Exception {
         if (rs != null) {
             rs.close();
@@ -30,7 +28,7 @@ public class CategoryDAO {
         }
     }
 
-    //add a new category
+    // add a new category
     public void addNewCategory(Category category) throws Exception {
         try {
             conn = Connector.getConnection();
@@ -45,7 +43,7 @@ public class CategoryDAO {
         }
     }
 
-    //get Category by name
+    // get Category by name
     public Category getCategoryByName(String caterogyName) throws Exception {
         Category category = null;
         try {

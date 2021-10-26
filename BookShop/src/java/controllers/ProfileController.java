@@ -51,6 +51,13 @@ public class ProfileController extends HttpServlet {
             request.setAttribute("avatarError", "");
         }
 
+        // check existed email
+        User isExistedEmail = userDao.getUserByEmail(email);
+        if (!user.getEmail().equals(email) && isExistedEmail != null) {
+            request.setAttribute("emailError", "The given email is already existed");
+            email = null;
+        }
+
         // check params
         if (fullName == null || email == null) {
             return false;

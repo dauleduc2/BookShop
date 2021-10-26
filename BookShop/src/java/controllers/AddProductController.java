@@ -26,18 +26,23 @@ public class AddProductController extends HttpServlet {
         ProductDAO productDao = new ProductDAO();
         boolean isTrue = true;
 
-        String name = GetParam.getStringParam(request, "name", "Book's Name", 5, 50, null);
-
         //validate param
+        String name = GetParam.getStringParam(request, "name", "Book's Name", 5, 50, null);
         String imageUrl = GetParam.getFileParam(request, "productAvatar", "Product avatar", 1080 * 1080);
         Integer quantity = GetParam.getIntParams(request, "quantity", "Quantity", 0, Integer.MAX_VALUE, null);
         Float price = GetParam.getFloatParams(request, "price", "Price", 0, Float.MAX_VALUE, null);
         String description = GetParam.getStringParam(request, "description", "Description", 5, Integer.MAX_VALUE, null);
         String publishedDate = GetParam.getStringParam(request, "publishedDate", "Published date", 7, 12, null);
-        Integer categoryId = 1;
+        Integer categoryId = GetParam.getIntParams(request, "type", "Type", 0, Integer.MAX_VALUE, null);
 
         //check params
         if (name == null || imageUrl == null || quantity == null || price == null || description == null || publishedDate == null) {
+            isTrue = false;
+        }
+
+        // check duplicated name
+        if (name != null && productDao.getProductByName(name) != null) {
+            request.setAttribute("nameError", "This product's name is already existed");
             isTrue = false;
         }
 
