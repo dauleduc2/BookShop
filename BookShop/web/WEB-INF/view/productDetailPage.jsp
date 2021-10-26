@@ -1,3 +1,4 @@
+<%@page import="constant.Router"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%> <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
         <head>
@@ -40,7 +41,7 @@
                                                                 </p>
                                                         </div>
                                                         <div class="flex flex-col mt-6">
-                                                                <form class="flex flex-col"  method="POST" action="#">
+                                                            <form class="flex flex-col"  method="POST" action="<%=Router.ADD_PRODUCT_TO_CART_CONTROLLER%>?productId=${requestScope.product.getProductId()}">
 
                                                                         <input class="hidden" value="${requestScope.product.getDescription()}" readonly/>
                                                                         <label for="quantity" class="text-sm font-medium text-gray-700"
