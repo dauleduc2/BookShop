@@ -9,9 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import models.Product;
+import utils.GetParam;
 import utils.Helper;
 
-@WebServlet(name = "ProductDetailController", urlPatterns = {"/product"})
+@WebServlet(name = "ProductDetailController", urlPatterns = {"/" + Router.PRODUCT_DETAIL_CONTROLLER})
 public class ProductDetailController extends HttpServlet {
 
     /**
@@ -24,7 +25,7 @@ public class ProductDetailController extends HttpServlet {
         ProductDAO productDao = new ProductDAO();
 
         // get productId
-        Integer productId = Integer.parseInt(request.getParameter("productId"));
+        Integer productId = GetParam.getIntParams(request, "productId", "Product", 1, Integer.MAX_VALUE, 0);
 
         // find product by given id
         Product product = productDao.getProductById(productId);
