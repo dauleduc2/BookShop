@@ -34,4 +34,10 @@ public class CartController extends HttpServlet {
         processRequest(request, response);
         request.getRequestDispatcher(Router.CART_PAGE).forward(request, response);
     }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        this.doGet(req, resp);
+    }
+
 }

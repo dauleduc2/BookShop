@@ -31,7 +31,11 @@
                     Shopping Cart
                 </h1>
 
-                <form class="mt-12">
+                <form
+                    action="<%=Router.CHECKOUT_CONTROLLER%>"
+                    method="POST"
+                    class="mt-12"
+                >
                     <section aria-labelledby="cart-heading">
                         <h2 id="cart-heading" class="sr-only">
                             Items in your shopping cart
