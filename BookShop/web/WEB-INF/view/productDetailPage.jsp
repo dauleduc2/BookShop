@@ -48,6 +48,7 @@
                                                                         >
                                                                         <input
                                                                             min="1"
+                                                                            max="${requestScope.product.getQuantity()}"
                                                                             value="1"
                                                                             id="quantity"
                                                                             name="quantity"
