@@ -125,7 +125,7 @@ public class ProductDetailController extends HttpServlet {
             throws ServletException, IOException {
         try {
             if (!postHandler(request, response)) {
-                // forward on 400
+                // forward on 404
                 request.getRequestDispatcher(Router.ERROR).forward(request, response);
                 return;
             }
