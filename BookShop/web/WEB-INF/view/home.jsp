@@ -32,9 +32,15 @@
                                             <div class="group relative">
                                                     <a  href="<%=Router.PRODUCT_DETAIL_CONTROLLER%>?productId=${product.getProductId()}">
                                                             <div class="w-full min-h-80 bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:h-80 lg:aspect-none">
-                                                                    <img src="https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg" alt="Front of men&#039;s Basic Tee in black." class="w-full h-full object-center object-cover lg:w-full lg:h-full">
+                                                                    <c:choose>
+                                                                        <c:when test="${product.getImageUrl() != null}">
+                                                                            <img src="${product.getImageUrl()}" alt="${product.getName()}" class="w-full h-full object-center object-cover lg:w-full lg:h-full">
+                                                                        </c:when>
+                                                                        <c:otherwise>
+                                                                            <img src="asset/images/product.png"alt="${product.getName()}" class="w-full h-full object-center object-cover lg:w-full lg:h-full">
 
-
+                                                                        </c:otherwise>
+                                                                    </c:choose>
                                                             </div>
                                                             <div class="mt-4 flex justify-between">
                                                                     <div>
