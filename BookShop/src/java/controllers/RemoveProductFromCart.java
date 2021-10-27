@@ -4,6 +4,7 @@ import constant.Router;
 import daos.ProductDAO;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Objects;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,7 +15,7 @@ import models.Product;
 import utils.GetParam;
 import utils.Helper;
 
-@WebServlet(name = "RemoveProductFromCart", urlPatterns = {"/RemoveProductFromCart"})
+@WebServlet(name = "RemoveProductFromCart", urlPatterns = {"/" + Router.REMOVE_PRODUCT_CONTROLLER})
 public class RemoveProductFromCart extends HttpServlet {
 
     /**
@@ -43,7 +44,12 @@ public class RemoveProductFromCart extends HttpServlet {
         }
 
         // remove product from cart
-        products.remove(product);
+        for (Product pro : products) {
+            if (Objects.equals(pro.getProductId(), productId)) {
+                products.remove(pro);
+                break;
+            }
+        }
 
         // set products to session
         session.setAttribute("products", products);
@@ -68,7 +74,7 @@ public class RemoveProductFromCart extends HttpServlet {
             // forward on 200
             response.sendRedirect(Router.CART_CONTROLLER);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            System.out.println(e);
             // forward on 500
             Helper.setAttribute(request, 500, "Something failed", "Please try again later");
             request.getRequestDispatcher(Router.ERROR).forward(request, response);
