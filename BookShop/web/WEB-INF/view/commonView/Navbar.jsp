@@ -77,7 +77,7 @@ session.getAttribute("avatarUrl");%> <%@page import="constant.Router"%>
           <c:when test="${avatarUrl != null}">
             <div class="relative flex self-center">
               <a
-                href="<%=Router.CART_CONTROLLER %>"
+                href="<%=Router.CART_CONTROLLER%>"
                 class="z-50 hidden mr-6 text-gray-100 lg:block"
               >
                 <svg
