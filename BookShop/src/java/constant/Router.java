@@ -26,4 +26,5 @@ public class Router {
     public static final String UPDATE_PRODUCT_CONTROLLER = "updateproduct";
     public static final String ADD_CATEGORY_CONTROLLER = "addcategory";
     public static final String CART_CONTROLLER = "cart";
+    public static final String REMOVE_PRODUCT_CONTROLLER = "remove";
 }

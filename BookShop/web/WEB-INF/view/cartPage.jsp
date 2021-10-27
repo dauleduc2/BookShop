@@ -1,5 +1,6 @@
 <%-- Document : cartPage Created on : Oct 26, 2021, 5:07:26 PM Author : Admin
---%> <%@page contentType="text/html" pageEncoding="UTF-8"%>
+--%> <%@page import="constant.Router"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -79,8 +80,8 @@
 
                                         <div class="mt-4 flex-1 flex items-end justify-end">
                                             <div class="ml-4">
-                                                <button
-                                                    type="button"
+                                                <a
+                                                    href="<%=Router.REMOVE_PRODUCT_CONTROLLER%>?productId=${product.getProductId()}"
                                                     class="
                                                     text-sm
                                                     font-medium
@@ -89,7 +90,7 @@
                                                     "
                                                     >
                                                     <span>Remove</span>
-                                                </button>
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
