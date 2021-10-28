@@ -148,6 +148,19 @@
 
                         </div>
                         <div class="mt-5">
+                            <label for="phoneNumber" class="block text-sm font-medium text-gray-700">Phone Number</label>
+                            <div class="mt-1">
+                                <input   type="text" name="phoneNumber" id="phoneNumber" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"  >
+                            </div>
+                        </div>
+                        <div class="mt-5">
+                            <label for="receiver" class="block text-sm font-medium text-gray-700">Receiver</label>
+                            <div class="mt-1">
+                                <input   type="text" name="receiver" id="receiver" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"  >
+                            </div>
+
+                        </div>
+                        <div class="mt-5">
                             <label for="address" class="block text-sm font-medium text-gray-700">Address</label>
                             <div class="mt-1">
                                 <input type="text" name="address" id="address" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"  >
