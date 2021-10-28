@@ -1,4 +1,5 @@
 
+<%@page import="constant.Router"%>
 <%@page import="models.Product"%>
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -56,7 +57,7 @@
                     Shopping Cart
                 </h1>
 
-                <form class="mt-12">
+                <form action="<%=Router.CHECKOUT_CONTROLLER%>" method="POST" class="mt-12">
                     <section aria-labelledby="cart-heading">
                         <h2 id="cart-heading" class="sr-only">
                             Items in your shopping cart
@@ -98,7 +99,7 @@
                                                     </a>
                                                 </h4>
                                                 <p class="ml-4 text-sm font-medium text-gray-900">
-                                                    $${product.getPrice()}
+                                                    ${product.getPrice()}
                                                 </p>
                                             </div>
 
@@ -116,8 +117,8 @@
                                                     </button>
                                                 </div>
                                                 <div class="ml-4">
-                                                    <button
-                                                        type="button"
+                                                    <a
+                                                        href="<%=Router.REMOVE_PRODUCT_CONTROLLER%>?productId=${product.getProductId()}"
                                                         class="
                                                         text-sm
                                                         font-medium
@@ -126,7 +127,7 @@
                                                         "
                                                         >
                                                         <span>Remove</span>
-                                                    </button>
+                                                    </a>
                                                 </div>
                                             </div>
 

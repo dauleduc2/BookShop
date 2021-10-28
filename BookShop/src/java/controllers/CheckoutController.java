@@ -31,9 +31,9 @@ public class CheckoutController extends HttpServlet {
         boolean isTrue = true;
 
         // check params
-        String consigneeName = GetParam.getStringParam(request, "consigneeName", "Consignee name", 5, 255, null);
+        String consigneeName = GetParam.getStringParam(request, "receiver", "Receiver", 5, 255, null);
         String address = GetParam.getStringParam(request, "address", "Address", 5, 255, null);
-        String phone = GetParam.getPhoneParams(request, "phone", "Phone number");
+        String phone = GetParam.getPhoneParams(request, "phoneNumber", "Phone number");
 
         if (consigneeName == null || address == null || phone == null) {
             isTrue = false;
@@ -42,15 +42,6 @@ public class CheckoutController extends HttpServlet {
         // get products from cart
         ArrayList<Product> products = (ArrayList<Product>) session.getAttribute("products");
 
-//        // check quantity
-//        Product product;
-//        for (Product p : products) {
-//            product = productDao.getProductById(p.getProductId());
-//            if (product.getQuantity() < p.getQuantity()) {
-//                request.setAttribute(product.getProductId() + "Error", "The current quantity in stock: " + product.getQuantity());
-//                isTrue = false;
-//            }
-//        }
         if (!isTrue) {
             return isTrue;
         }
