@@ -13,7 +13,7 @@ public class Router {
     public static final String PRODUCT_DETAIL_PAGE = "WEB-INF/view/productDetailPage.jsp";
     public static final String UPDATE_PRODUCT_PAGE = "WEB-INF/view/updateProductPage.jsp";
     public static final String ADD_CATEGORY_PAGE = "WEB-INF/view/addCategoryPage.jsp";
-
+    public static final String CART_PAGE = "WEB-INF/view/cartPage.jsp";
     // router mapping
     public static final String LOGIN_CONTROLLER = "login";
     public static final String REGISTER_CONTROLLER = "register";
@@ -25,5 +25,7 @@ public class Router {
     public static final String PRODUCT_DETAIL_CONTROLLER = "product";
     public static final String UPDATE_PRODUCT_CONTROLLER = "updateproduct";
     public static final String ADD_CATEGORY_CONTROLLER = "addcategory";
-
+    public static final String CART_CONTROLLER = "cart";
+    public static final String REMOVE_PRODUCT_CONTROLLER = "remove";
+    public static final String CHECKOUT_CONTROLLER = "checkout";
 }
