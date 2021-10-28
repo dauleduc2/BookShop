@@ -84,12 +84,6 @@ public class ProductDetailController extends HttpServlet {
             return false;
         }
 
-        // check quantity
-        if (quantity > product.getQuantity()) {
-            request.setAttribute("quantityError", "The maximun quantity of product is " + product.getQuantity());
-            return false;
-        }
-
         // get products in cart
         HttpSession session = request.getSession();
         ArrayList<Product> products = (ArrayList<Product>) session.getAttribute("products");
