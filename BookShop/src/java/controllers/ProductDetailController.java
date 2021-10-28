@@ -103,6 +103,7 @@ public class ProductDetailController extends HttpServlet {
             if (Objects.equals(pro.getProductId(), productId)) {
                 quantity += pro.getQuantity();
                 pro.setQuantity(quantity);
+                request.setAttribute("successMessage", "Add product to cart successful");
                 return true;
             }
         }
@@ -124,7 +125,7 @@ public class ProductDetailController extends HttpServlet {
             throws ServletException, IOException {
         try {
             if (!postHandler(request, response)) {
-                // forward on 400
+                // forward on 404
                 request.getRequestDispatcher(Router.ERROR).forward(request, response);
                 return;
             }

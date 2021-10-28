@@ -1,4 +1,9 @@
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%-- 
+    Document   : checkoutSuccess
+    Created on : Oct 28, 2021, 12:57:32 AM
+    Author     : locnh
+--%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -8,9 +13,5 @@
     </head>
     <body>
         <h1>Hello World!</h1>
-        <c:forEach var="product" items="${sessionScope.products}">
-            <h1>${product.getName()}</h1>
-            <h1>${product.getQuantity()}</h1>
-        </c:forEach>
     </body>
 </html>

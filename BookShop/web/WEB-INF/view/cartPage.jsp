@@ -25,6 +25,7 @@
             products.get(index).setQuantity(products.get(index).getQuantity() - 1);
         }
         session.setAttribute("products", products);
+
     }
 %>
 
