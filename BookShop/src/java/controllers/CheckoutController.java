@@ -35,22 +35,22 @@ public class CheckoutController extends HttpServlet {
         String address = GetParam.getStringParam(request, "address", "Address", 5, 255, null);
         String phone = GetParam.getPhoneParams(request, "phone", "Phone number");
 
-//        if (consigneeName == null || address == null || phone == null) {
-//            isTrue = false;
-//        }
+        if (consigneeName == null || address == null || phone == null) {
+            isTrue = false;
+        }
+
         // get products from cart
         ArrayList<Product> products = (ArrayList<Product>) session.getAttribute("products");
 
-        // check quantity
-        Product product;
-        for (Product p : products) {
-            product = productDao.getProductById(p.getProductId());
-            if (product.getQuantity() < p.getQuantity()) {
-                request.setAttribute(product.getProductId() + "Error", "The current quantity in stock: " + product.getQuantity());
-                isTrue = false;
-            }
-        }
-
+//        // check quantity
+//        Product product;
+//        for (Product p : products) {
+//            product = productDao.getProductById(p.getProductId());
+//            if (product.getQuantity() < p.getQuantity()) {
+//                request.setAttribute(product.getProductId() + "Error", "The current quantity in stock: " + product.getQuantity());
+//                isTrue = false;
+//            }
+//        }
         if (!isTrue) {
             return isTrue;
         }
@@ -59,7 +59,7 @@ public class CheckoutController extends HttpServlet {
         String userId = (String) session.getAttribute("userId");
 
         // save to db
-        if (!orderDao.addNewOrder(products, 0, userId, "Hoang Loc", "263/4 Phu Loi", "0835184291")) {
+        if (!orderDao.addNewOrder(products, 0, userId, consigneeName, address, phone)) {
             throw new Exception();
         }
 
