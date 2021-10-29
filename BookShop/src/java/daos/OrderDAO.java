@@ -62,14 +62,6 @@ public class OrderDAO {
                 preStm.executeUpdate();
             }
 
-            // update quantity
-            ProductDAO productDao = new ProductDAO();
-            Product p = null;
-            for (Product product : products) {
-                p = productDao.getProductById(product.getProductId());
-                productDao.updateProductQuantity(p.getQuantity() - product.getQuantity(), product.getProductId());
-            }
-
             // commit if success
             conn.commit();
         } catch (Exception e) {
