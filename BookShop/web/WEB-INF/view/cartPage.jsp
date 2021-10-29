@@ -31,7 +31,7 @@
                                         Shopping Cart
                                 </h1>
                                 <c:choose>
-                                    <c:when test="${sessionScope.products != null}" >
+                                    <c:when test="${sessionScope.products != null and sessionScope.products.length() > 0}" >
 
                                         <form
                                             action="<%=Router.CHECKOUT_CONTROLLER%>"
