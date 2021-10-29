@@ -4,7 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.UUID;
+import models.Order;
 import models.Product;
 import utils.Connector;
 
@@ -50,7 +52,6 @@ public class OrderDAO {
             preStm1.executeUpdate();
 
             // insert order items to db
-//            OrderItemDAO orderItemDao = new OrderItemDAO();
             for (Product product : products) {
                 String sql = "INSERT INTO bookshop_order_item (orderId, quantity, price, productId) VALUES (?, ?, ?, ?)";
                 preStm = conn.prepareStatement(sql);
@@ -59,7 +60,6 @@ public class OrderDAO {
                 preStm.setFloat(3, product.getPrice());
                 preStm.setInt(4, product.getProductId());
                 preStm.executeUpdate();
-                //orderItemDao.addNewOrderItems(uuid, product);
             }
 
             // update quantity
@@ -79,5 +79,30 @@ public class OrderDAO {
             this.closeConnection();
         }
         return isTrue;
+    }
+
+    public ArrayList<Order> getOrdersByUserId(String userId) throws Exception {
+        ArrayList<Order> orders = null;
+        try {
+            conn = Connector.getConnection();
+            String sql = "SELECT * FROM bookshop_order WHERE userId=?";
+            preStm = conn.prepareStatement(sql);
+            preStm.setString(1, userId);
+            rs = preStm.executeQuery();
+            Order order = null;
+            while (rs.next()) {
+                String orderId = rs.getString("orderId");
+                Integer status = rs.getInt("status");
+                String address = rs.getString("address");
+                String phoneNumber = rs.getString("phoneNumber");
+                String consigneeName = rs.getString("consigneeName");
+                Date createdDate = rs.getDate("createdDate");
+                order = new Order(orderId, userId, createdDate, status, address, phoneNumber, consigneeName);
+                orders.add(order);
+            }
+        } finally {
+            this.closeConnection();
+        }
+        return orders;
     }
 }
