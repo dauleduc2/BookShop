@@ -50,17 +50,17 @@ public class OrderDAO {
             preStm1.executeUpdate();
 
             // insert order items to db
-            String sqlOrderItem = "INSERT INTO bookshop_order_item (orderId, quantity, price, productId) VALUES ";
-            for (int i = 0; i < products.size(); i++) {
-                Product product = products.get(i);
-                if (i == products.size() - 1) {
-                    sqlOrderItem += "(N'" + uuid + "'," + product.getQuantity() + "," + product.getPrice() + "," + product.getProductId() + ")";
-                } else {
-                    sqlOrderItem += "(N'" + uuid + "'," + product.getQuantity() + "," + product.getPrice() + "," + product.getProductId() + "), ";
-                }
+//            OrderItemDAO orderItemDao = new OrderItemDAO();
+            for (Product product : products) {
+                String sql = "INSERT INTO bookshop_order_item (orderId, quantity, price, productId) VALUES (?, ?, ?, ?)";
+                preStm = conn.prepareStatement(sql);
+                preStm.setString(1, uuid);
+                preStm.setInt(2, product.getQuantity());
+                preStm.setFloat(3, product.getPrice());
+                preStm.setInt(4, product.getProductId());
+                preStm.executeUpdate();
+                //orderItemDao.addNewOrderItems(uuid, product);
             }
-            preStm = conn.prepareStatement(sqlOrderItem);
-            preStm.executeUpdate();
 
             // update quantity
             ProductDAO productDao = new ProductDAO();
