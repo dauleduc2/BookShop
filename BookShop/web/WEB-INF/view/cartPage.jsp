@@ -188,9 +188,10 @@
                                                         <path d="M213.866 180.902L191.253 203.409" stroke="#292D32" stroke-width="8" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
                                                         </svg>
                                                 </div>
-                                                <p class="text-xl text-gray-900 font-medium mt-8">
+                                                <p class="mt-8 text-xl font-medium text-gray-900">
                                                         There are not item in your cart
                                                 </p>
+                                                 <a href="home" class="inline-flex items-center px-6 py-3 mt-8 text-base font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Buy now</a>
                                         </c:otherwise>
                                     </c:choose>
                                 </div>
