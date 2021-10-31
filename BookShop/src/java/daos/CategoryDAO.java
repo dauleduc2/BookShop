@@ -4,10 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-<<<<<<< HEAD
 
-=======
->>>>>>> test
 import models.Category;
 import utils.Connector;
 
@@ -17,11 +14,6 @@ public class CategoryDAO {
     private PreparedStatement preStm;
     private ResultSet rs;
 
-<<<<<<< HEAD
-    //this function will close connection of database
-=======
-    // close connection of database
->>>>>>> test
     private void closeConnection() throws Exception {
         if (rs != null) {
             rs.close();
@@ -36,11 +28,7 @@ public class CategoryDAO {
         }
     }
 
-<<<<<<< HEAD
-    //this function will add a new category
-=======
     // add a new category
->>>>>>> test
     public void addNewCategory(Category category) throws Exception {
         try {
             conn = Connector.getConnection();
@@ -55,11 +43,7 @@ public class CategoryDAO {
         }
     }
 
-<<<<<<< HEAD
-    //this function will get Category by name
-=======
     // get Category by name
->>>>>>> test
     public Category getCategoryByName(String caterogyName) throws Exception {
         Category category = null;
         try {
@@ -80,10 +64,7 @@ public class CategoryDAO {
         return category;
     }
 
-<<<<<<< HEAD
-=======
     // get all categories
->>>>>>> test
     public ArrayList<Category> getAllCategory() throws Exception {
         ArrayList<Category> categories = new ArrayList<Category>();
         try {
@@ -102,10 +83,6 @@ public class CategoryDAO {
         } finally {
             this.closeConnection();
         }
-<<<<<<< HEAD
-
-=======
->>>>>>> test
         return categories;
     }
 }
