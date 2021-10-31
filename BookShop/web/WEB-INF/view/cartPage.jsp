@@ -12,24 +12,6 @@
 %>
 
 
-<%!
-        public void increaseQuantity(HttpSession session, ArrayList<Product> products, int index) {
-                products.get(index).setQuantity(products.get(index).getQuantity() + 1);
-                session.setAttribute("products", products);
-        }
-
-        public void decreaseQuantity(HttpSession session, ArrayList<Product> products, int index) {
-                int newQuantity = products.get(index).getQuantity() - 1;
-                if (newQuantity == 0) {
-                        products.remove(index);
-                } else {
-                        products.get(index).setQuantity(products.get(index).getQuantity() - 1);
-                }
-                session.setAttribute("products", products);
-
-        }
-%>
-
 <!DOCTYPE html>
 <html>
         <head>
@@ -92,13 +74,21 @@
                                                                                             </p>
                                                                                             <div class="flex justify-between w-full h-10 mt-5 custom-number-input ">
                                                                                                     <div class="relative flex flex-row w-full h-10 bg-transparent rounded-lg ">
-                                                                                                            <button  type="button"   data-action="decrement" class="w-10 h-full text-center text-gray-600 bg-gray-100 rounded-l outline-none cursor-pointer hover:text-gray-700 hover:bg-gray-400">
+                                                                                                        <form action="">
+                                                                                                                    <input type="text" name="productIndex" class="hidden" value="${loop.index}">
+                                                                                                                    <input type="number" name="isIncreased" class="hidden" value="1">
+                                                                                                                    <button  type="button"   data-action="decrement" class="w-10 h-full text-center text-gray-600 bg-gray-100 rounded-l outline-none cursor-pointer hover:text-gray-700 hover:bg-gray-400">
                                                                                                                     <span class="m-auto text-2xl font-thin">−</span>
                                                                                                             </button>
+                                                                                                            </form>
                                                                                                             <div  class="flex items-center px-5 font-semibold text-center text-gray-700 bg-gray-100 outline-none focus:outline-none text-md hover:text-black focus:text-black md:text-basecursor-default" name="custom-input-number" >${product.getQuantity()}</div>
-                                                                                                            <button  type="button"  data-action="increment" class="w-10 h-full text-center text-gray-600 bg-gray-100 rounded-r cursor-pointer hover:text-gray-700 hover:bg-gray-400">
+                                                                                                            <form action="">
+                                                                                                                    <input type="text" name="productIndex" class="hidden" value="${loop.index}">
+                                                                                                                    <input type="number" name="isIncreased" class="hidden" value="0">
+                                                                                                                    <button  type="button"  data-action="increment" class="w-10 h-full text-center text-gray-600 bg-gray-100 rounded-r cursor-pointer hover:text-gray-700 hover:bg-gray-400">
                                                                                                                     <span class="m-auto text-2xl font-thin">+</span>
                                                                                                             </button>
+                                                                                                            </form>
                                                                                                     </div>
                                                                                                     <div class="ml-4">
                                                                                                             <a
@@ -124,6 +114,9 @@
                                                                 <label for="receiver" class="block text-sm font-medium text-gray-700">Receiver</label>
                                                                 <div class="mt-1">
                                                                         <input   type="text" name="receiver" id="receiver" class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"  >
+                                                                        <p class="mt-2 text-sm text-red-600" id="email-error">
+                                                                                ${requestScope.categoryError}
+                                                                        </p>
                                                                 </div>
 
                                                         </div>
@@ -131,12 +124,18 @@
                                                                 <label for="phoneNumber" class="block text-sm font-medium text-gray-700">Phone Number</label>
                                                                 <div class="mt-1">
                                                                         <input   type="text" name="phoneNumber" id="phoneNumber" class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"  >
+                                                                        <p class="mt-2 text-sm text-red-600" id="email-error">
+                                                                                ${requestScope.categoryError}
+                                                                        </p>
                                                                 </div>
                                                         </div>
                                                         <div class="mt-5">
                                                                 <label for="address" class="block text-sm font-medium text-gray-700">Address</label>
                                                                 <div class="mt-1">
                                                                         <input type="text" name="address" id="address" class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"  >
+                                                                        <p class="mt-2 text-sm text-red-600" id="email-error">
+                                                                                ${requestScope.categoryError}
+                                                                        </p>
                                                                 </div>
                                                         </div>
                                                 </div>
