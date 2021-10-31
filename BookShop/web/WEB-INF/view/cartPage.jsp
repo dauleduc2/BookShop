@@ -10,25 +10,6 @@
     ArrayList<Product> products = (ArrayList<Product>) session.getAttribute("products");
 %>
 
-
-<%!
-    public void increaseQuantity(HttpSession session, ArrayList<Product> products, int index) {
-        products.get(index).setQuantity(products.get(index).getQuantity() + 1);
-        session.setAttribute("products", products);
-    }
-
-    public void decreaseQuantity(HttpSession session, ArrayList<Product> products, int index) {
-        int newQuantity = products.get(index).getQuantity() - 1;
-        if (newQuantity == 0) {
-            products.remove(index);
-        } else {
-            products.get(index).setQuantity(products.get(index).getQuantity() - 1);
-        }
-        session.setAttribute("products", products);
-
-    }
-%>
-
 <!DOCTYPE html>
 <html>
     <head>
