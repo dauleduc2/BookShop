@@ -52,7 +52,7 @@ public class ShowOrderController extends HttpServlet {
 		try {
 			processRequest(request, response);
 			// forward on 200
-			request.getRequestDispatcher("WEB-INF/view/showOrderPage.jsp").forward(request, response);
+			request.getRequestDispatcher(Router.SHOW_ORDERS_PAGE).forward(request, response);
 		} catch (Exception e) {
 			System.out.println(e);
 			// forward on 500
