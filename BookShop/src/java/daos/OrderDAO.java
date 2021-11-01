@@ -4,7 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.UUID;
+import models.Order;
 import models.Product;
 import utils.Connector;
 
@@ -50,24 +52,14 @@ public class OrderDAO {
             preStm1.executeUpdate();
 
             // insert order items to db
-            String sqlOrderItem = "INSERT INTO bookshop_order_item (orderId, quantity, price, productId) VALUES ";
-            for (int i = 0; i < products.size(); i++) {
-                Product product = products.get(i);
-                if (i == products.size() - 1) {
-                    sqlOrderItem += "(N'" + uuid + "'," + product.getQuantity() + "," + product.getPrice() + "," + product.getProductId() + ")";
-                } else {
-                    sqlOrderItem += "(N'" + uuid + "'," + product.getQuantity() + "," + product.getPrice() + "," + product.getProductId() + "), ";
-                }
-            }
-            preStm = conn.prepareStatement(sqlOrderItem);
-            preStm.executeUpdate();
-
-            // update quantity
-            ProductDAO productDao = new ProductDAO();
-            Product p = null;
             for (Product product : products) {
-                p = productDao.getProductById(product.getProductId());
-                productDao.updateProductQuantity(p.getQuantity() - product.getQuantity(), product.getProductId());
+                String sql = "INSERT INTO bookshop_order_item (orderId, quantity, price, productId) VALUES (?, ?, ?, ?)";
+                preStm = conn.prepareStatement(sql);
+                preStm.setString(1, uuid);
+                preStm.setInt(2, product.getQuantity());
+                preStm.setFloat(3, product.getPrice());
+                preStm.setInt(4, product.getProductId());
+                preStm.executeUpdate();
             }
 
             // commit if success
@@ -79,5 +71,30 @@ public class OrderDAO {
             this.closeConnection();
         }
         return isTrue;
+    }
+
+    public ArrayList<Order> getOrdersByUserId(String userId) throws Exception {
+        ArrayList<Order> orders = new ArrayList<Order>();
+        try {
+            conn = Connector.getConnection();
+            String sql = "SELECT * FROM bookshop_order WHERE userId=?";
+            preStm = conn.prepareStatement(sql);
+            preStm.setString(1, userId);
+            rs = preStm.executeQuery();
+            Order order = null;
+            while (rs.next()) {
+                String orderId = rs.getString("orderId");
+                Integer status = rs.getInt("status");
+                String address = rs.getString("address");
+                String phoneNumber = rs.getString("phoneNumber");
+                String consigneeName = rs.getString("consigneeName");
+                Date createDate = rs.getDate("createDate");
+                order = new Order(orderId, userId, createDate, status, address, phoneNumber, consigneeName);
+                orders.add(order);
+            }
+        } finally {
+            this.closeConnection();
+        }
+        return orders;
     }
 }

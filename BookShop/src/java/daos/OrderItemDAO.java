@@ -3,7 +3,6 @@ package daos;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.ArrayList;
 import models.Product;
 import utils.Connector;
 
@@ -28,20 +27,15 @@ public class OrderItemDAO {
         }
     }
 
-    public void addNewOrderItems(String orderId, ArrayList<Product> products) throws Exception {
+    public void addNewOrderItems(String orderId, Product product) throws Exception {
         try {
             conn = Connector.getConnection();
-            String sql = "INSERT INTO bookshop_order_item (orderId, quantity, price, productId) VALUES ";
-            for (int i = 0; i < products.size(); i++) {
-                Product product = products.get(i);
-                if (i == products.size() - 1) {
-                    sql += "(N'" + orderId + "'," + product.getQuantity() + "," + product.getPrice() + "," + product.getProductId() + ")";
-                } else {
-                    sql += "(N'" + orderId + "'," + product.getQuantity() + "," + product.getPrice() + "," + product.getProductId() + "), ";
-                }
-            }
-            System.out.println(sql);
+            String sql = "INSERT INTO bookshop_order_item (orderId, quantity, price, productId) VALUES (?, ?, ?, ?)";
             preStm = conn.prepareStatement(sql);
+            preStm.setString(1, orderId);
+            preStm.setInt(2, product.getQuantity());
+            preStm.setFloat(3, product.getPrice());
+            preStm.setInt(4, product.getProductId());
             preStm.executeUpdate();
         } finally {
             this.closeConnection();
