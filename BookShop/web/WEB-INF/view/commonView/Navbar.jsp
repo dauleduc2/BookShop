@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> <%@page
-    contentType="text/html" pageEncoding="UTF-8"%> <% String avatarUrl = (String) session.getAttribute("avatarUrl");%> <%@page import="constant.Router"%>
+contentType="text/html" pageEncoding="UTF-8"%> <% String avatarUrl = (String) session.getAttribute("avatarUrl");%> <%@page import="constant.Router"%>
     <nav class="bg-gray-800">
             <div class="w-full px-2 mx-auto sm:px-6 lg:px-8">
                     <div class="relative flex items-center justify-between h-16">
@@ -98,7 +98,7 @@
                                                                 >
                                                                     <img class="object-cover w-8 h-8 rounded-full"
                                                                          src="<%=avatarUrl == null ? "asset/images/avatar.png"
-			  : avatarUrl%>" alt="" />
+										 : avatarUrl%>" alt="" />
                                                             </button>
                                                     </div>
 
@@ -118,7 +118,14 @@
                                                                 id="user-menu-item-0"
                                                                 >Your Profile</a
                                                             >
-
+                                                            <a
+                                                                href="<%=Router.SHOW_ORDERS_CONTROLLER%>"
+                                                                class="block px-4 py-2 text-sm text-gray-700 transition duration-300  hover:bg-gray-700 hover:text-white"
+                                                                role="menuitem"
+                                                                tabindex="-1"
+                                                                id="user-menu-item-0"
+                                                                >My orders</a
+                                                            >
                                                             <a
                                                                 href="<%=Router.SIGNOUT_CONTROLLER%>"
                                                                 class="block px-4 py-2 text-sm text-gray-700 transition duration-300  hover:bg-gray-700 hover:text-white"
@@ -160,11 +167,7 @@
                                 aria-current="page"
                                 >Home</a
                             >
-                            <a
-                                href="#"
-                                class="block px-3 py-2 text-base font-medium text-gray-300 rounded-md  hover:bg-gray-700 hover:text-white"
-                                >Category</a
-                            >
+
                             <c:choose>
                                 <c:when test="${avatarUrl == null}">
                                     <a
