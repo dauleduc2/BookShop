@@ -53,7 +53,7 @@
                                     </p>
                                     <div class="mt-6">
                                         <a
-                                            href="#"
+                                            href="<%=Router.HOME_CONTROLLER%>"
                                             class="
                                             inline-block
                                             bg-indigo-600

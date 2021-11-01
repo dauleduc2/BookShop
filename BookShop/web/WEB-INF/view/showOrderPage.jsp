@@ -59,7 +59,7 @@
                                                                                         ${order.getStatus()}
                                                                                 </td>
                                                                                 <td class="hidden py-6 font-medium sm:table-cell">
-                                                                                        ${order.getAdress()}
+                                                                                        ${order.getAddress()}
                                                                                 </td>
                                                                                 <td class="hidden py-6 font-medium sm:table-cell">
                                                                                         ${order.getPhoneNumber()}
@@ -69,30 +69,6 @@
                                                                                 </td>
                                                                         </tr>
                                                                 </c:forEach>
-                                                                <tr>
-                                                                        <td class="py-6 pr-8">
-                                                                                <div>
-                                                                                        <div class="font-medium text-gray-900">#55151314</div>
-                                                                                        <div class="mt-1 sm:hidden">Delivered Jan 25, 2021</div>
-                                                                                        <a href="#" class="text-indigo-600">View<span class="hidden lg:inline"> Product</span><span class="sr-only">, Machined Pen and Pencil Set</span></a>
-                                                                                </div>
-                                                                        </td>
-                                                                        <td class="hidden py-6 pr-8 sm:table-cell">
-                                                                                Jan 25, 2021
-                                                                        </td>
-                                                                        <td class="py-6 pr-8 sm:table-cell">
-                                                                                Pending
-                                                                        </td>
-                                                                        <td class="hidden py-6 font-medium sm:table-cell">
-                                                                                195 khom 2
-                                                                        </td>
-                                                                        <td class="hidden py-6 font-medium sm:table-cell">
-                                                                                0987709812
-                                                                        </td>
-                                                                        <td class="hidden py-6 font-medium sm:table-cell">
-                                                                                Pham Vinh Tai
-                                                                        </td>
-                                                                </tr>
 
                                                                 <!-- More products... -->
                                                                 </tbody>
