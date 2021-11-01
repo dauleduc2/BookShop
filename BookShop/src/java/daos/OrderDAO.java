@@ -74,7 +74,7 @@ public class OrderDAO {
     }
 
     public ArrayList<Order> getOrdersByUserId(String userId) throws Exception {
-        ArrayList<Order> orders = null;
+        ArrayList<Order> orders = new ArrayList<Order>();
         try {
             conn = Connector.getConnection();
             String sql = "SELECT * FROM bookshop_order WHERE userId=?";
@@ -88,8 +88,8 @@ public class OrderDAO {
                 String address = rs.getString("address");
                 String phoneNumber = rs.getString("phoneNumber");
                 String consigneeName = rs.getString("consigneeName");
-                Date createdDate = rs.getDate("createdDate");
-                order = new Order(orderId, userId, createdDate, status, address, phoneNumber, consigneeName);
+                Date createDate = rs.getDate("createDate");
+                order = new Order(orderId, userId, createDate, status, address, phoneNumber, consigneeName);
                 orders.add(order);
             }
         } finally {
