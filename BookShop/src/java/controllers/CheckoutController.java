@@ -75,7 +75,7 @@ public class CheckoutController extends HttpServlet {
                 return;
             }
             // forward on 200
-            request.getRequestDispatcher("WEB-INF/view/checkoutSuccess.jsp").forward(request, response);
+            response.sendRedirect(Router.HOME_CONTROLLER);
         } catch (Exception e) {
             // forward on 500
             System.out.println(e);
