@@ -62,11 +62,11 @@
                                                                         </p>
                                                                         <div class="flex justify-between w-full h-10 mt-5 custom-number-input ">
                                                                             <div class="relative flex flex-row w-full h-10 bg-transparent rounded-lg ">
-                                                                                <a href="?productIndex=${loop.index}&isIncreased=1" type="button" data-action="increment" class="w-10 h-full text-center text-gray-600 bg-gray-100 rounded-r cursor-pointer hover:text-gray-700 hover:bg-gray-400">
+                                                                                <a href="<%=Router.CHANGE_QUANTITY_CONTROLLER%>?productIndex=${loop.index}&isIncreased=0" type="button" data-action="increment" class="w-10 h-full text-center text-gray-600 bg-gray-100 rounded-r cursor-pointer hover:text-gray-700 hover:bg-gray-400">
                                                                                     <span class="m-auto text-2xl font-thin">-</span>
                                                                                 </a>
                                                                                 <div class="flex items-center px-5 font-semibold text-center text-gray-700 bg-gray-100 outline-none focus:outline-none text-md hover:text-black focus:text-black md:text-basecursor-default" name="custom-input-number">${product.getQuantity()}</div>
-                                                                                <a href="?productIndex=${loop.index}&isIncreased=0" type="button" data-action="increment" class="w-10 h-full text-center text-gray-600 bg-gray-100 rounded-r cursor-pointer hover:text-gray-700 hover:bg-gray-400">
+                                                                                <a href="<%=Router.CHANGE_QUANTITY_CONTROLLER%>?productIndex=${loop.index}&isIncreased=1" type="button" data-action="increment" class="w-10 h-full text-center text-gray-600 bg-gray-100 rounded-r cursor-pointer hover:text-gray-700 hover:bg-gray-400">
                                                                                     <span class="m-auto text-2xl font-thin">+</span>
                                                                                 </a>
                                                                             </div>

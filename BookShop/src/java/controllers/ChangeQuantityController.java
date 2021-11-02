@@ -1,13 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controllers;
 
 import constant.Router;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,21 +13,12 @@ import models.Product;
 import utils.GetParam;
 import utils.Helper;
 
-/**
- *
- * @author Bana-na
- */
-@WebServlet(name = "ChangeQuantityController", urlPatterns = {"/ChangeQuantityController"})
+@WebServlet(name = "ChangeQuantityController", urlPatterns = {"/" + Router.CHANGE_QUANTITY_CONTROLLER})
 public class ChangeQuantityController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
      */
     protected boolean processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -42,48 +27,41 @@ public class ChangeQuantityController extends HttpServlet {
         //get list of products
         ArrayList<Product> products = (ArrayList<Product>) session.getAttribute("products");
 
-        //index
-        int index = GetParam.getIntParams(request, "productIndex", "Product's index", 0, Integer.MAX_VALUE, -1);
+        //get index of product
+        Integer index = GetParam.getIntParams(request, "productIndex", "Product's index", 0, Integer.MAX_VALUE, null);
 
-        //increase or descrease
-        int isIncreased = GetParam.getIntParams(request, "isIncreased", "Is increased", 0, 1, -1);
+        //check option increase or descrease
+        Integer isIncreased = GetParam.getIntParams(request, "isIncreased", "Is increased", 0, 1, null);
 
-        if (products == null || index == -1 || isIncreased == -1) {
+        // check params
+        if (products == null || index == null || isIncreased == null) {
             return false;
         }
 
+        // decrease
         if (isIncreased == 0) {
             int newQuantity = products.get(index).getQuantity() - 1;
-            if (newQuantity == 0) {
-                products.remove(index);
+            if (newQuantity == 0) { // remove if quantity = 0
+                products.remove((int) index);
             } else {
                 products.get(index).setQuantity(products.get(index).getQuantity() - 1);
                 request.setAttribute("changeQuantityMessage", "Descrease quantity successfull");
             }
-        } else {
+        } else { // increase
             products.get(index).setQuantity(products.get(index).getQuantity() + 1);
             request.setAttribute("changeQuantityMessage", "Increase quantity successfull");
         }
+
+        // set products to session
         session.setAttribute("products", products);
         return true;
     }
 
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-
-    }
-
     /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * Handles the HTTP <code>GET</code> method.
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try {
