@@ -77,7 +77,7 @@ public class OrderDAO {
         ArrayList<Order> orders = new ArrayList<Order>();
         try {
             conn = Connector.getConnection();
-            String sql = "SELECT * FROM bookshop_order WHERE userId=?";
+            String sql = "SELECT * FROM bookshop_order WHERE userId=? ORDER BY createDate DESC";
             preStm = conn.prepareStatement(sql);
             preStm.setString(1, userId);
             rs = preStm.executeQuery();
