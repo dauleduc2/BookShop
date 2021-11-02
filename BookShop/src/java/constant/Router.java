@@ -30,9 +30,6 @@ public class Router {
     public static final String REMOVE_PRODUCT_CONTROLLER = "remove";
     public static final String CHECKOUT_CONTROLLER = "checkout";
     public static final String SHOW_ORDERS_CONTROLLER = "orders";
-<<<<<<< HEAD
     public static final String CHANGE_QUANTITY_CONTROLLER = "changequantity";
-=======
     public static final String SHOW_PRODUCT_IN_CATEGORY_CONTROLLER = "categoryproducts";
->>>>>>> test
 }
