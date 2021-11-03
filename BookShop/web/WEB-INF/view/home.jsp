@@ -51,7 +51,7 @@
                                                                             </h3>
 
                                                                     </div>
-                                                                    <p class="mt-1 text-sm font-medium text-gray-900">$${product.getPrice()}</p>
+                                                                    <p class="mt-1 text-sm font-medium text-gray-900">${product.getPrice()} đ</p>
                                                             </div>
                                                     </a>
                                             </div>
