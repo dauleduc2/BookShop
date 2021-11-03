@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+
 import models.Category;
 import utils.Connector;
 
@@ -13,7 +14,6 @@ public class CategoryDAO {
     private PreparedStatement preStm;
     private ResultSet rs;
 
-    // close connection of database
     private void closeConnection() throws Exception {
         if (rs != null) {
             rs.close();

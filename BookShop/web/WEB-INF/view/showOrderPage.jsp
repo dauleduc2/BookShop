@@ -34,67 +34,67 @@
                                                                 </caption>
                                                                 <thead class="sr-only text-sm text-gray-500 text-left sm:not-sr-only">
                                                                         <tr>
-                                                                                <th scope="col" class="hidden w-1/5 pr-8 py-3 font-normal sm:table-cell">Order ID</th>
-                                                                                <th scope="col" class="hidden w-1/5 pr-8 py-3 font-normal sm:table-cell">Create Date</th>
+                                                                                <th scope="col" class="hidden pr-8 py-3 font-normal sm:table-cell">Order</th>
+                                                                                <th scope="col" class="hidden pr-8 py-3 font-normal sm:table-cell">Create Date</th>
                                                                                 <th scope="col" class="hidden pr-8 py-3 font-normal sm:table-cell">Status</th>
                                                                                 <th scope="col" class="hidden w-1/5 pr-8 py-3 font-normal sm:table-cell">Address</th>
                                                                                 <th scope="col" class="hidden pr-8 py-3 font-normal sm:table-cell">Phone number</th>
                                                                                 <th scope="col" class="hidden w-1/5 pr-8 py-3 font-normal sm:table-cell">Consignee Name</th>
+                                                                                <th scope="col" class="hidden pr-8 py-3 font-normal sm:table-cell"></th>
                                                                         </tr>
                                                                 </thead>
                                                                 <tbody class="border-b border-gray-200 divide-y divide-gray-200 text-sm sm:border-t">
-                                                                <c:forEach var="order" items="${requestScope.orders}">
-                                                                        <tr>
-                                                                                <td class="py-6 pr-8">
-                                                                                        <div>
-                                                                                                <div class="font-medium text-gray-900">#${order.getOrderId()}</div>
-                                                                                                <div class="mt-1 sm:hidden">${order.getCreatedDate()}</div>
-                                                                                                <a href="#" class="text-indigo-600">View<span class="hidden lg:inline">#${order.getOrderId()}</span><span class="sr-only">, ${order.getCreatedDate()}</span></a>
-                                                                                        </div>
-                                                                                </td>
-                                                                                <td class="hidden py-6 pr-8 sm:table-cell">
-                                                                                        ${order.getCreatedDate()}
-                                                                                </td>
-                                                                                <td class="py-6 pr-8 sm:table-cell">
-                                                                                        ${order.getStatus()}
-                                                                                </td>
-                                                                                <td class="hidden py-6 font-medium sm:table-cell">
-                                                                                        ${order.getAdress()}
-                                                                                </td>
-                                                                                <td class="hidden py-6 font-medium sm:table-cell">
-                                                                                        ${order.getPhoneNumber()}
-                                                                                </td>
-                                                                                <td class="hidden py-6 font-medium sm:table-cell">
-                                                                                        ${order.getConsigneeName()}
-                                                                                </td>
-                                                                        </tr>
-                                                                </c:forEach>
-                                                                <tr>
-                                                                        <td class="py-6 pr-8">
-                                                                                <div>
-                                                                                        <div class="font-medium text-gray-900">#55151314</div>
-                                                                                        <div class="mt-1 sm:hidden">Delivered Jan 25, 2021</div>
-                                                                                        <a href="#" class="text-indigo-600">View<span class="hidden lg:inline"> Product</span><span class="sr-only">, Machined Pen and Pencil Set</span></a>
-                                                                                </div>
-                                                                        </td>
-                                                                        <td class="hidden py-6 pr-8 sm:table-cell">
-                                                                                Jan 25, 2021
-                                                                        </td>
-                                                                        <td class="py-6 pr-8 sm:table-cell">
-                                                                                Pending
-                                                                        </td>
-                                                                        <td class="hidden py-6 font-medium sm:table-cell">
-                                                                                195 khom 2
-                                                                        </td>
-                                                                        <td class="hidden py-6 font-medium sm:table-cell">
-                                                                                0987709812
-                                                                        </td>
-                                                                        <td class="hidden py-6 font-medium sm:table-cell">
-                                                                                Pham Vinh Tai
-                                                                        </td>
-                                                                </tr>
+                                                                        <c:forEach var="order" items="${requestScope.orders}" varStatus="pos">
+                                                                            <tr>
+                                                                                    <td class="py-6 pr-8">
+                                                                                            <div>
+                                                                                                    <div class="font-medium text-gray-900">#${pos.count}</div>
+                                                                                                    <div class="mt-1 sm:hidden">${pos.count}</div>
+                                                                                                    <a href="#" class="text-indigo-600">View <span class="hidden lg:inline">#${pos.count}</span><span class="sr-only">, ${order.getCreatedDate()}</span></a>
+                                                                                            </div>
+                                                                                    </td>
+                                                                                    <td class="hidden py-6 pr-8 sm:table-cell">
+                                                                                            ${order.getCreatedDate()}
+                                                                                    </td>
+                                                                                    <td class="py-6 pr-8 sm:table-cell">
+                                                                                            <c:choose>
+                                                                                                <c:when test="${order.getStatus() == 0}">
+                                                                                                    Waiting
+                                                                                                </c:when>
+                                                                                                <c:when test="${order.getStatus() == 1}">
+                                                                                                    Confirm
+                                                                                                </c:when>
+                                                                                                <c:when test="${order.getStatus() == 2}">
+                                                                                                    Shipping
+                                                                                                </c:when>
+                                                                                                <c:when test="${order.getStatus() == 3}">
+                                                                                                    Done
+                                                                                                </c:when>
+                                                                                                <c:when test="${order.getStatus() == 4}">
+                                                                                                    Cancel
+                                                                                                </c:when>
+                                                                                            </c:choose>
+                                                                                    </td>
+                                                                                    <td class="hidden py-6 font-medium sm:table-cell">
+                                                                                            ${order.getAddress()}
+                                                                                    </td>
+                                                                                    <td class="hidden py-6 font-medium sm:table-cell">
+                                                                                            ${order.getPhoneNumber()}
+                                                                                    </td>
+                                                                                    <td class="hidden py-6 font-medium sm:table-cell">
+                                                                                            ${order.getConsigneeName()}
+                                                                                    </td>
+                                                                                    <c:if test="${(order.getStatus() == 0) || (order.getStatus() == 1)}">
+                                                                                        <td class="hidden py-6 font-medium sm:table-cell">
+                                                                                                <a href="#" class="inline-flex items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded shadow-sm text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
+                                                                                                        Cancel
+                                                                                                </a>
+                                                                                        </td>
+                                                                                    </c:if>
+                                                                            </tr>
+                                                                        </c:forEach>
 
-                                                                <!-- More products... -->
+                                                                        <!-- More products... -->
                                                                 </tbody>
                                                         </table>
                                                 </div>
