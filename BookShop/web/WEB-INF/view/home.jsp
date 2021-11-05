@@ -31,7 +31,7 @@
 
                                             <div class="relative group">
                                                     <a  href="<%=Router.PRODUCT_DETAIL_CONTROLLER%>?productId=${product.getProductId()}">
-                                                            <div class="flex items-center justify-center w-full overflow-hidden bg-gray-200 rounded-md min-h-80 aspect-w-1 aspect-h-1 group-hover:opacity-75 lg:h-80 lg:aspect-none">
+                                                            <div class="flex items-center justify-center w-full overflow-hidden bg-gray-100 rounded-md min-h-80 aspect-w-1 aspect-h-1 group-hover:opacity-75 lg:h-80 lg:aspect-none">
                                                                     <c:choose>
                                                                         <c:when test="${product.getImageUrl() != null}">
                                                                             <img src="${product.getImageUrl()}" alt="${product.getName()}" class="object-cover object-center h-5/6 lg:h-5/6">
