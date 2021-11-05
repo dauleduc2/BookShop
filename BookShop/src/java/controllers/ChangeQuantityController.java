@@ -23,7 +23,7 @@ import utils.Helper;
  *
  * @author Bana-na
  */
-@WebServlet(name = "ChangeQuantityController", urlPatterns = {"/ChangeQuantityController"})
+@WebServlet(name = "ChangeQuantityController", urlPatterns = {"/" + Router.CHANGE_QUANTITY_CONTROLLER})
 public class ChangeQuantityController extends HttpServlet {
 
     /**
