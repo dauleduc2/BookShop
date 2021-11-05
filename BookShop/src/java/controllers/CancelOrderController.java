@@ -1,14 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controllers;
 
 import constant.Router;
 import daos.OrderDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,45 +13,45 @@ import javax.servlet.http.HttpSession;
 import models.Order;
 import utils.Helper;
 
-/**
- *
- * @author Bana-na
- */
 @WebServlet(name = "CancelOrderController", urlPatterns = {"/" + Router.CANCEL_ORDER_CONTROLLER})
 public class CancelOrderController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    protected boolean processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, Exception {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
         OrderDAO orderDao = new OrderDAO();
-
+        boolean isTrue = false;
         // get current userId
         String userId = (String) session.getAttribute("userId");
 
         //get orderId
         String orderId = (String) request.getParameter("orderId");
 
-        //update status on database
-        if (orderDao.updateOrderStatus(orderId, userId, 4)) {
-            return;
-        }
-
         // get user's orders
         ArrayList<Order> orders = orderDao.getOrdersByUserId(userId);
 
+        //update status on database
+        for (Order order : orders) {
+            if (order.getOrderId().equals(orderId)) {
+                isTrue = true;
+                break;
+            }
+        }
+
+        if (!isTrue) {
+            Helper.setAttribute(request, 404, "Not found", "The requested URL was not found on this server");
+            return false;
+        }
+
+        orderDao.updateOrderStatus(orderId, userId, 4);
+
         // send to request
         request.setAttribute("orders", orders);
-        return;
+        return isTrue;
     }
 
     /**
@@ -67,7 +61,12 @@ public class CancelOrderController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            processRequest(request, response);
+            if (!processRequest(request, response)) {
+                // forward on 404
+                request.getRequestDispatcher(Router.ERROR).forward(request, response);
+                return;
+            }
+
             // forward on 200
             request.getRequestDispatcher(Router.SHOW_ORDERS_PAGE).forward(request, response);
         } catch (Exception e) {
