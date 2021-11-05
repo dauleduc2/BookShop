@@ -3,6 +3,7 @@ package daos;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.UUID;
@@ -96,5 +97,24 @@ public class OrderDAO {
             this.closeConnection();
         }
         return orders;
+    }
+
+    //this function will update order status
+    public boolean updateOrderStatus(String orderId, String userId, Integer status) throws Exception {
+        boolean isTrue = true;
+        try {
+            conn = Connector.getConnection();
+            String sql = "UPDATE bookshop_order SET status = ? WHERE orderId = ? AND userId = ?";
+            preStm = conn.prepareStatement(sql);
+            preStm.setInt(1, status);
+            preStm.setString(2, orderId);
+            preStm.setString(3, userId);
+            preStm.executeUpdate();
+        } finally {
+            isTrue = false;
+            this.closeConnection();
+        }
+
+        return isTrue;
     }
 }
