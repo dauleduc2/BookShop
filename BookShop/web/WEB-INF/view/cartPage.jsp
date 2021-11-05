@@ -36,7 +36,6 @@
                                 <h2 id="cart-heading" class="sr-only">
                                     Items in your shopping cart
                                 </h2>
-
                                 <ul role="list" class="border-t border-b border-gray-200 divide-y divide-gray-200">
                                     <c:forEach items="${sessionScope.products}" var="product" varStatus="loop">
                                         <li class="flex py-6">
