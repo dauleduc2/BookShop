@@ -1,6 +1,7 @@
 package controllers;
 
 import constant.Router;
+import daos.CategoryDAO;
 import daos.ProductDAO;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import models.Category;
 import models.Product;
 import utils.GetParam;
 import utils.Helper;
@@ -26,13 +28,13 @@ public class ProductDetailController extends HttpServlet {
             throws Exception {
         response.setContentType("text/html;charset=UTF-8");
         ProductDAO productDao = new ProductDAO();
-
+        CategoryDAO categoryDAO = new CategoryDAO();
         // get productId
         Integer productId = GetParam.getIntParams(request, "productId", "Product", 1, Integer.MAX_VALUE, 0);
 
         // find product by given id
         Product product = productDao.getProductById(productId);
-
+        Category category = categoryDAO.getCategoryByID(product.getCategoryId());
         // check existed product
         if (product == null) {
             Helper.setAttribute(request, 404, "Not found", "The requested URL was not found on this server");
@@ -40,6 +42,7 @@ public class ProductDetailController extends HttpServlet {
         }
 
         // set attribute product
+        request.setAttribute("category", category);
         request.setAttribute("product", product);
         return true;
     }
