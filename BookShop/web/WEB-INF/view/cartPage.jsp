@@ -36,46 +36,12 @@
                                 <h2 id="cart-heading" class="sr-only">
                                     Items in your shopping cart
                                 </h2>
-
-<<<<<<< HEAD
-                                                                                            <p class="mt-1 text-sm text-gray-500">
-                                                                                                    public date : ${product.getPublishedDate()}
-                                                                                            </p>
-                                                                                            <div class="flex justify-between w-full h-10 mt-5 custom-number-input ">
-                                                                                                    <div class="relative flex flex-row w-full h-10 bg-transparent rounded-lg ">
-                                                                                                        <form action="<%=Router.CHANGE_QUANTITY_CONTROLLER%>" method="POST">
-                                                                                                                    <input type="text" name="productIndex" class="hidden" value="${loop.index}">
-                                                                                                                    <input type="number" name="isIncreased" class="hidden" value="1">
-                                                                                                                    <button  type="button"   data-action="decrement" class="w-10 h-full text-center text-gray-600 bg-gray-100 rounded-l outline-none cursor-pointer hover:text-gray-700 hover:bg-gray-400">
-                                                                                                                    <span class="m-auto text-2xl font-thin">−</span>
-                                                                                                            </button>
-                                                                                                            </form>
-                                                                                                            <div  class="flex items-center px-5 font-semibold text-center text-gray-700 bg-gray-100 outline-none focus:outline-none text-md hover:text-black focus:text-black md:text-basecursor-default" name="custom-input-number" >${product.getQuantity()}</div>
-                                                                                                            <form action="<%=Router.CHANGE_QUANTITY_CONTROLLER%>" method="POST">
-                                                                                                                    <input type="text" name="productIndex" class="hidden" value="${loop.index}">
-                                                                                                                    <input type="number" name="isIncreased" class="hidden" value="0">
-                                                                                                                    <button  type="button"  data-action="increment" class="w-10 h-full text-center text-gray-600 bg-gray-100 rounded-r cursor-pointer hover:text-gray-700 hover:bg-gray-400">
-                                                                                                                    <span class="m-auto text-2xl font-thin">+</span>
-                                                                                                            </button>
-                                                                                                            </form>
-                                                                                                    </div>
-                                                                                                    <div class="ml-4">
-                                                                                                            <a
-                                                                                                                href="<%=Router.REMOVE_PRODUCT_CONTROLLER%>?productId=${product.getProductId()}"
-                                                                                                                class="text-sm font-medium text-indigo-600 hover:text-indigo-500"
-                                                                                                                >
-                                                                                                                    <span>Remove</span>
-                                                                                                            </a>
-                                                                                                    </div>
-                                                                                            </div>
-=======
                                 <ul role="list" class="border-t border-b border-gray-200 divide-y divide-gray-200">
                                     <c:forEach items="${sessionScope.products}" var="product" varStatus="loop">
                                         <li class="flex py-6">
                                             <div class="flex-shrink-0">
                                                 <img src="${product.getImageUrl()}" alt="${product.getName()}" class="object-cover object-center w-20 h-20 rounded-md sm:w-20 sm:h-20" />
                                             </div>
->>>>>>> test
 
                                             <div class="flex flex-col flex-1 ml-4 sm:ml-6">
                                                 <div>

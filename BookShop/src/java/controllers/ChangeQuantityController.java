@@ -13,13 +13,6 @@ import models.Product;
 import utils.GetParam;
 import utils.Helper;
 
-<<<<<<< HEAD
-/**
- *
- * @author Bana-na
- */
-=======
->>>>>>> test
 @WebServlet(name = "ChangeQuantityController", urlPatterns = {"/" + Router.CHANGE_QUANTITY_CONTROLLER})
 public class ChangeQuantityController extends HttpServlet {
 
