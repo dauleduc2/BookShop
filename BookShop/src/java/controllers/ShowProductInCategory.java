@@ -39,7 +39,6 @@ public class ShowProductInCategory extends HttpServlet {
 
         // send to request
         request.setAttribute("products", products);
-        System.out.println(products.size());
         return true;
     }
 

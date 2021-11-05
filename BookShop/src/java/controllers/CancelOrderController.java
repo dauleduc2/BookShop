@@ -68,7 +68,7 @@ public class CancelOrderController extends HttpServlet {
             }
 
             // forward on 200
-            request.getRequestDispatcher(Router.SHOW_ORDERS_PAGE).forward(request, response);
+            response.sendRedirect(Router.SHOW_ORDERS_CONTROLLER);
         } catch (Exception e) {
             System.out.println(e);
             // forward on 500
