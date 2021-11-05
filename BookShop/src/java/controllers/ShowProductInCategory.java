@@ -39,6 +39,7 @@ public class ShowProductInCategory extends HttpServlet {
 
         // send to request
         request.setAttribute("products", products);
+        System.out.println(products.size());
         return true;
     }
 
@@ -55,7 +56,7 @@ public class ShowProductInCategory extends HttpServlet {
                 return;
             }
             // forward on 200
-            request.getRequestDispatcher("WEB-INF/view/showProductInCategory.jsp").forward(request, response);
+            request.getRequestDispatcher("WEB-INF/view/categoryShowcasePage.jsp").forward(request, response);
         } catch (Exception e) {
             System.out.println(e.getMessage());
             // forward on 500
