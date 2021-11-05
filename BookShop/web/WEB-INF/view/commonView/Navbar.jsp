@@ -103,7 +103,7 @@ contentType="text/html" pageEncoding="UTF-8"%> <% String avatarUrl = (String) se
                                                     </div>
 
                                                     <div
-                                                        class="absolute z-50 hidden w-48 mt-2 overflow-hidden origin-top-right bg-white rounded-md shadow-lg  top-5 right-10 ring-1 ring-black ring-opacity-5 focus:outline-none dropdownMenu"
+                                                        class="absolute z-50 hidden w-48 mt-2 overflow-hidden origin-top-right bg-white rounded-md shadow-lg  top-10 right-10 ring-1 ring-black ring-opacity-5 focus:outline-none dropdownMenu"
                                                         role="menu"
                                                         aria-orientation="vertical"
                                                         aria-labelledby="user-menu-button"

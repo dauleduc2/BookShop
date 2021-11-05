@@ -1,7 +1,7 @@
 package controllers;
 
 import constant.Router;
-import daos.ProductDAO;
+import daos.OrderDAO;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
@@ -9,37 +9,49 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import models.Product;
-import utils.GetParam;
+import javax.servlet.http.HttpSession;
+import models.Order;
 import utils.Helper;
 
-@WebServlet(name = "ShowProductInCategory", urlPatterns = {"/" + Router.SHOW_PRODUCT_IN_CATEGORY_CONTROLLER})
-public class ShowProductInCategory extends HttpServlet {
+@WebServlet(name = "CancelOrderController", urlPatterns = {"/" + Router.CANCEL_ORDER_CONTROLLER})
+public class CancelOrderController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
      */
     protected boolean processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws Exception {
+            throws ServletException, IOException, Exception {
         response.setContentType("text/html;charset=UTF-8");
-        ProductDAO productDao = new ProductDAO();
+        HttpSession session = request.getSession();
+        OrderDAO orderDao = new OrderDAO();
+        boolean isTrue = false;
+        // get current userId
+        String userId = (String) session.getAttribute("userId");
 
-        // get params
-        Integer categoryId = GetParam.getIntParams(request, "categoryId", "Category", 0, Integer.MAX_VALUE, null);
+        //get orderId
+        String orderId = (String) request.getParameter("orderId");
 
-        // check params
-        if (categoryId == null) {
+        // get user's orders
+        ArrayList<Order> orders = orderDao.getOrdersByUserId(userId);
+
+        //update status on database
+        for (Order order : orders) {
+            if (order.getOrderId().equals(orderId)) {
+                isTrue = true;
+                break;
+            }
+        }
+
+        if (!isTrue) {
             Helper.setAttribute(request, 404, "Not found", "The requested URL was not found on this server");
             return false;
         }
 
-        // get products in category
-        ArrayList<Product> products = productDao.getProductsByCategoryId(categoryId);
+        orderDao.updateOrderStatus(orderId, userId, 4);
 
         // send to request
-        request.setAttribute("products", products);
-        return true;
+        request.setAttribute("orders", orders);
+        return isTrue;
     }
 
     /**
@@ -54,10 +66,11 @@ public class ShowProductInCategory extends HttpServlet {
                 request.getRequestDispatcher(Router.ERROR).forward(request, response);
                 return;
             }
+
             // forward on 200
-            request.getRequestDispatcher("WEB-INF/view/categoryShowcasePage.jsp").forward(request, response);
+            response.sendRedirect(Router.SHOW_ORDERS_CONTROLLER);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            System.out.println(e);
             // forward on 500
             Helper.setAttribute(request, 500, "Something failed", "Please try again later");
             request.getRequestDispatcher(Router.ERROR).forward(request, response);
