@@ -63,6 +63,27 @@ public class CategoryDAO {
         }
         return category;
     }
+    // get Category by name
+
+    public Category getCategoryByID(int Id) throws Exception {
+        Category category = null;
+        try {
+            conn = Connector.getConnection();
+            String sql = "SELECT * FROM bookshop_category WHERE categoryId = ?";
+            preStm = conn.prepareStatement(sql);
+            preStm.setInt(1, Id);
+            rs = preStm.executeQuery();
+            if (rs.next()) {
+                Integer categoryId = rs.getInt("categoryId");
+                String name = rs.getString("name");
+                String createdDate = rs.getString("createdDate");
+                category = new Category(categoryId, name, createdDate);
+            }
+        } finally {
+            this.closeConnection();
+        }
+        return category;
+    }
 
     // get all categories
     public ArrayList<Category> getAllCategory() throws Exception {
