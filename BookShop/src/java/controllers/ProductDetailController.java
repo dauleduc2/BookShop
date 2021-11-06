@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import models.Category;
 import models.Product;
+import models.StatusCode;
 import utils.GetParam;
 import utils.Helper;
 
@@ -37,7 +38,7 @@ public class ProductDetailController extends HttpServlet {
         Category category = categoryDAO.getCategoryByID(product.getCategoryId());
         // check existed product
         if (product == null) {
-            Helper.setAttribute(request, 404, "Not found", "The requested URL was not found on this server");
+            Helper.setAttribute(request, StatusCode.NOT_FOUND.ordinal(), "Not found", "The requested URL was not found on this server");
             return false;
         }
 
@@ -64,7 +65,7 @@ public class ProductDetailController extends HttpServlet {
         } catch (Exception e) {
             System.out.println(e.getMessage());
             // forward on 500
-            Helper.setAttribute(request, 500, "Something failed", "Please try again later");
+            Helper.setAttribute(request, StatusCode.INTERNAL_SERVER_ERROR.ordinal(), "Something failed", "Please try again later");
             request.getRequestDispatcher(Router.ERROR).forward(request, response);
         }
     }
@@ -83,7 +84,7 @@ public class ProductDetailController extends HttpServlet {
 
         // check existed product
         if (product == null) {
-            Helper.setAttribute(request, 404, "Not found", "The requested URL was not found on this server");
+            Helper.setAttribute(request, StatusCode.NOT_FOUND.ordinal(), "Not found", "The requested URL was not found on this server");
             return false;
         }
 
@@ -131,7 +132,7 @@ public class ProductDetailController extends HttpServlet {
         } catch (Exception e) {
             e.printStackTrace();
             // forward on 500
-            Helper.setAttribute(request, 500, "Something failed", "Please try again later");
+            Helper.setAttribute(request, StatusCode.INTERNAL_SERVER_ERROR.ordinal(), "Something failed", "Please try again later");
             request.getRequestDispatcher(Router.ERROR).forward(request, response);
         }
     }

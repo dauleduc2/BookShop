@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import models.Order;
+import models.OrderStatus;
+import models.StatusCode;
 import utils.Helper;
 
 @WebServlet(name = "CancelOrderController", urlPatterns = {"/" + Router.CANCEL_ORDER_CONTROLLER})
@@ -43,11 +45,11 @@ public class CancelOrderController extends HttpServlet {
         }
 
         if (!isTrue) {
-            Helper.setAttribute(request, 404, "Not found", "The requested URL was not found on this server");
+            Helper.setAttribute(request, StatusCode.NOT_FOUND.ordinal(), "Not found", "The requested URL was not found on this server");
             return false;
         }
 
-        orderDao.updateOrderStatus(orderId, userId, 4);
+        orderDao.updateOrderStatus(orderId, userId, OrderStatus.CANCEL.ordinal());
 
         // send to request
         request.setAttribute("orders", orders);
@@ -72,7 +74,7 @@ public class CancelOrderController extends HttpServlet {
         } catch (Exception e) {
             System.out.println(e);
             // forward on 500
-            Helper.setAttribute(request, 500, "Something failed", "Please try again later");
+            Helper.setAttribute(request, StatusCode.INTERNAL_SERVER_ERROR.ordinal(), "Something failed", "Please try again later");
             request.getRequestDispatcher(Router.ERROR).forward(request, response);
         }
     }

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import models.Product;
+import models.StatusCode;
 import utils.GetParam;
 import utils.Helper;
 
@@ -30,7 +31,7 @@ public class ShowProductInCategory extends HttpServlet {
 
         // check params
         if (categoryId == null) {
-            Helper.setAttribute(request, 404, "Not found", "The requested URL was not found on this server");
+            Helper.setAttribute(request, StatusCode.NOT_FOUND.ordinal(), "Not found", "The requested URL was not found on this server");
             return false;
         }
 
@@ -59,7 +60,7 @@ public class ShowProductInCategory extends HttpServlet {
         } catch (Exception e) {
             System.out.println(e.getMessage());
             // forward on 500
-            Helper.setAttribute(request, 500, "Something failed", "Please try again later");
+            Helper.setAttribute(request, StatusCode.INTERNAL_SERVER_ERROR.ordinal(), "Something failed", "Please try again later");
             request.getRequestDispatcher(Router.ERROR).forward(request, response);
         }
     }
