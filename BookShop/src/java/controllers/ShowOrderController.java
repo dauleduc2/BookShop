@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import models.Order;
+import models.StatusCode;
 import utils.Helper;
 
 @WebServlet(name = "ShowOrderController", urlPatterns = {"/" + Router.SHOW_ORDERS_CONTROLLER})
@@ -56,7 +57,7 @@ public class ShowOrderController extends HttpServlet {
         } catch (Exception e) {
             System.out.println(e);
             // forward on 500
-            Helper.setAttribute(request, 500, "Something failed", "Please try again later");
+            Helper.setAttribute(request, StatusCode.INTERNAL_SERVER_ERROR.ordinal(), "Something failed", "Please try again later");
             request.getRequestDispatcher(Router.ERROR).forward(request, response);
         }
     }

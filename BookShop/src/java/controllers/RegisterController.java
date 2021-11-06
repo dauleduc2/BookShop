@@ -12,8 +12,9 @@ import models.User;
 import utils.GetParam;
 import utils.Helper;
 import models.Role;
+import models.StatusCode;
 
-@WebServlet(name = "RegisterController", urlPatterns = { "/" + Router.REGISTER_CONTROLLER })
+@WebServlet(name = "RegisterController", urlPatterns = {"/" + Router.REGISTER_CONTROLLER})
 public class RegisterController extends HttpServlet {
 
     /**
@@ -88,9 +89,10 @@ public class RegisterController extends HttpServlet {
             }
             // forward on 200
             response.sendRedirect(Router.LOGIN_CONTROLLER);
-        } catch (Exception e) {System.out.println(e.getMessage());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
             // forward on 500
-            Helper.setAttribute(request, 500, "Something failed", "Please try again later");
+            Helper.setAttribute(request, StatusCode.INTERNAL_SERVER_ERROR.ordinal(), "Something failed", "Please try again later");
             request.getRequestDispatcher(Router.ERROR).forward(request, response);
         }
     }

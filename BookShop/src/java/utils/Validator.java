@@ -1,9 +1,5 @@
 package utils;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.regex.Pattern;
 
 public class Validator {
@@ -19,7 +15,7 @@ public class Validator {
     }
 
     public static String getPhone(String value) {
-        if (value == "") {
+        if ("".equals(value)) {
             return "";
         }
         Pattern regex = Pattern.compile("^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\\s\\./0-9]*$");
