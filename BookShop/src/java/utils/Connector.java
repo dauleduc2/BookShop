@@ -1,7 +1,6 @@
 package utils;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -20,7 +19,6 @@ public class Connector {
             DataSource env = (DataSource) end.lookup("BookShop");
             Connection conn = env.getConnection();
             return conn;
-
         } catch (SQLException | NamingException e) {
             e.printStackTrace();
             return null;

@@ -3,8 +3,6 @@ package controllers;
 import constant.Router;
 import daos.UserDAO;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -12,24 +10,26 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import models.StatusCode;
 import models.User;
 import utils.GetParam;
 import utils.Helper;
 
 @WebServlet(name = "ProfileController", urlPatterns = {"/" + Router.PROFILE_CONTROLLER})
-@MultipartConfig(fileSizeThreshold = 1024 * 1024 * 1024, maxFileSize = 1024 * 1024 * 1024, maxRequestSize = 1024 * 1024 * 1024)
+@MultipartConfig(fileSizeThreshold = 1024 * 1024 * 1024, maxFileSize = 1024 * 1024 * 1024, maxRequestSize = 1024 * 1024
+        * 1024)
 public class ProfileController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * method
      */
-    protected boolean processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws Exception {
+    protected boolean processRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=UTF-8");
         UserDAO userDao = new UserDAO();
 
-        //get current user
+        // get current user
         HttpSession session = request.getSession();
         String userId = (String) session.getAttribute("userId");
         User user = userDao.getUserById(userId);
@@ -47,8 +47,16 @@ public class ProfileController extends HttpServlet {
         }
 
         // remove required error message
-        if (request.getAttribute("avatarError") != null && request.getAttribute("avatarError").toString().contains("required")) {
+        if (request.getAttribute("avatarError") != null
+                && request.getAttribute("avatarError").toString().contains("required")) {
             request.setAttribute("avatarError", "");
+        }
+
+        // check existed email
+        User isExistedEmail = userDao.getUserByEmail(email);
+        if (!user.getEmail().equals(email) && isExistedEmail != null) {
+            request.setAttribute("emailError", "The given email is already existed");
+            email = null;
         }
 
         // check params
@@ -62,7 +70,7 @@ public class ProfileController extends HttpServlet {
         //send success message
         request.setAttribute("successMessage", "Change profile successful.");
 
-        //save avatar url to session
+        // save avatar url to session
         session.setAttribute("avatarUrl", imageUrl == null ? "asset/avatar.png" : imageUrl);
         return true;
     }
@@ -73,14 +81,14 @@ public class ProfileController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
         try {
             Helper.sendUserResponse(request);
         } catch (Exception e) {
             // forward on 500
-            Helper.setAttribute(request, 500, "Something failed", "Please try again later");
+            Helper.setAttribute(request, StatusCode.INTERNAL_SERVER_ERROR.ordinal(), "Something failed", "Please try again later");
             request.getRequestDispatcher(Router.ERROR).forward(request, response);
         }
-        response.setContentType("text/html;charset=UTF-8");
         request.getRequestDispatcher(Router.ME_PAGE).forward(request, response);
     }
 
@@ -101,7 +109,7 @@ public class ProfileController extends HttpServlet {
         } catch (Exception e) {
             System.out.println(e.getMessage());
             // forward on 500
-            Helper.setAttribute(request, 500, "Something failed", "Please try again later");
+            Helper.setAttribute(request, StatusCode.INTERNAL_SERVER_ERROR.ordinal(), "Something failed", "Please try again later");
             request.getRequestDispatcher(Router.ERROR).forward(request, response);
         }
     }

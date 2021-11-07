@@ -12,6 +12,7 @@ import models.User;
 import utils.GetParam;
 import utils.Helper;
 import models.Role;
+import models.StatusCode;
 
 @WebServlet(name = "RegisterController", urlPatterns = {"/" + Router.REGISTER_CONTROLLER})
 public class RegisterController extends HttpServlet {
@@ -20,12 +21,11 @@ public class RegisterController extends HttpServlet {
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
      */
-    protected boolean processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws Exception {
+    protected boolean processRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
         response.setContentType("text/html;charset=UTF-8");
         UserDAO userDao = new UserDAO();
         boolean isTrue = true;
-        //Validate param
+        // Validate param
         String email = GetParam.getEmailParams(request, "email", "Email");
         String username = GetParam.getStringParam(request, "username", "Username", 5, 50, null);
         String fullName = GetParam.getStringParam(request, "fullName", "Full name", 5, 50, null);
@@ -89,9 +89,10 @@ public class RegisterController extends HttpServlet {
             }
             // forward on 200
             response.sendRedirect(Router.LOGIN_CONTROLLER);
-        } catch (Exception e) {System.out.println(e.getMessage());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
             // forward on 500
-            Helper.setAttribute(request, 500, "Something failed", "Please try again later");
+            Helper.setAttribute(request, StatusCode.INTERNAL_SERVER_ERROR.ordinal(), "Something failed", "Please try again later");
             request.getRequestDispatcher(Router.ERROR).forward(request, response);
         }
     }

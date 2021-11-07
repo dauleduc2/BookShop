@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import models.Product;
+import models.StatusCode;
 import utils.Helper;
 
 @WebServlet(name = "HomeController", urlPatterns = {"/" + Router.HOME_CONTROLLER})
@@ -24,7 +25,7 @@ public class HomeController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         ProductDAO productDao = new ProductDAO();
         // get products
-        ArrayList<Product> products = productDao.getNewProducts();
+        ArrayList<Product> products = productDao.getProductToShow();
         // set attribute
         request.setAttribute("products", products);
         return true;
@@ -47,16 +48,8 @@ public class HomeController extends HttpServlet {
         } catch (Exception e) {
             System.out.println(e.getMessage());
             // forward on 500
-            Helper.setAttribute(request, 500, "Something failed", "Please try again later");
+            Helper.setAttribute(request, StatusCode.INTERNAL_SERVER_ERROR.ordinal(), "Something failed", "Please try again later");
             request.getRequestDispatcher(Router.ERROR).forward(request, response);
         }
-    }
-
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
     }
 }

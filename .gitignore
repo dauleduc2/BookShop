@@ -13,3 +13,4 @@ nbdist/
 **/**.sql
 **context.xml
 /BookShop/dist/
+/SQL_query
