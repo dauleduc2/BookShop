@@ -47,11 +47,9 @@ public class ProductDetailController extends HttpServlet {
         request.setAttribute("product", product);
 
         // get and send successMessage if existed
-        HttpSession session = request.getSession(false);
-        if (session != null) {
-            request.setAttribute("successMessage", (String) session.getAttribute("successMessage"));
-            session.setAttribute("successMessage", null);
-        }
+        HttpSession session = request.getSession();
+        request.setAttribute("successMessage", (String) session.getAttribute("successMessage"));
+        session.setAttribute("successMessage", null);
         return true;
     }
 
@@ -108,7 +106,8 @@ public class ProductDetailController extends HttpServlet {
             if (Objects.equals(pro.getProductId(), productId)) {
                 quantity += pro.getQuantity();
                 pro.setQuantity(quantity);
-                request.setAttribute("successMessage", "Add product to cart successful");
+                request.setAttribute("productId", productId);
+                session.setAttribute("successMessage", "Add product to cart successful");
                 return true;
             }
         }
