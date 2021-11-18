@@ -38,13 +38,20 @@ public class ProductDetailController extends HttpServlet {
         Category category = categoryDAO.getCategoryByID(product.getCategoryId());
         // check existed product
         if (product == null) {
-            Helper.setAttribute(request, StatusCode.NOT_FOUND.ordinal(), "Not found", "The requested URL was not found on this server");
+            Helper.setAttribute(request, StatusCode.NOT_FOUND.getValue(), "Not found", "The requested URL was not found on this server");
             return false;
         }
 
         // set attribute product
         request.setAttribute("category", category);
         request.setAttribute("product", product);
+
+        // get and send successMessage if existed
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            request.setAttribute("successMessage", (String) session.getAttribute("successMessage"));
+            session.setAttribute("successMessage", null);
+        }
         return true;
     }
 
@@ -63,9 +70,9 @@ public class ProductDetailController extends HttpServlet {
             // forward on 200
             request.getRequestDispatcher(Router.PRODUCT_DETAIL_PAGE).forward(request, response);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            System.out.println(e);
             // forward on 500
-            Helper.setAttribute(request, StatusCode.INTERNAL_SERVER_ERROR.ordinal(), "Something failed", "Please try again later");
+            Helper.setAttribute(request, StatusCode.INTERNAL_SERVER_ERROR.getValue(), "Something failed", "Please try again later");
             request.getRequestDispatcher(Router.ERROR).forward(request, response);
         }
     }
@@ -111,7 +118,7 @@ public class ProductDetailController extends HttpServlet {
         products.add(product);
         request.setAttribute("productId", productId);
         session.setAttribute("products", products);
-        request.setAttribute("successMessage", "Add product to cart successful");
+        session.setAttribute("successMessage", "Add product to cart successful");
         return true;
     }
 
@@ -128,9 +135,9 @@ public class ProductDetailController extends HttpServlet {
                 return;
             }
             // forward on 200
-            this.doGet(request, response);
+            response.sendRedirect(Router.PRODUCT_DETAIL_CONTROLLER + "?productId=" + request.getAttribute("productId"));
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println(e);
             // forward on 500
             Helper.setAttribute(request, StatusCode.INTERNAL_SERVER_ERROR.ordinal(), "Something failed", "Please try again later");
             request.getRequestDispatcher(Router.ERROR).forward(request, response);
