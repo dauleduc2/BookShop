@@ -10,4 +10,8 @@ public enum StatusCode {
     private StatusCode(int value) {
         this.value = value;
     }
+
+    public Integer getValue() {
+        return this.value;
+    }
 }
