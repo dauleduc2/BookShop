@@ -132,8 +132,12 @@ public class ProductDAO {
             conn = Connector.getConnection();
             String sql = "SELECT * FROM bookshop_product WHERE name = ?";
             preStm = conn.prepareStatement(sql);
+
             preStm.setString(1, name);
+
             rs = preStm.executeQuery();
+
+            System.out.println(rs.getInt("productId"));
             if (rs.next()) {
                 Integer productId = rs.getInt("productId");
                 Integer categoryId = rs.getInt("categoryId");
@@ -149,6 +153,34 @@ public class ProductDAO {
             this.closeConnection();
         }
         return product;
+    }
+
+    // search product by name
+    public ArrayList<Product> searchProductByName(String name) throws Exception {
+        ArrayList<Product> productList = new ArrayList<Product>();
+        try {
+            conn = Connector.getConnection();
+            String sql = "SELECT * FROM bookshop_product WHERE name LIKE ?";
+            preStm = conn.prepareStatement(sql);
+            preStm.setString(1, "%" + name + "%");
+            rs = preStm.executeQuery();
+            while (rs.next()) {
+                Integer productId = rs.getInt("productId");
+                String productName = rs.getString("name");
+                String imageUrl = rs.getString("image");
+                Integer quantity = rs.getInt("quantity");
+                Integer categoryId = rs.getInt("categoryId");
+                Float price = rs.getFloat("price");
+                String description = rs.getString("description");
+                String publishedDate = rs.getString("publishedDate");
+                String createdDate = rs.getString("createdDate");
+                Product product = new Product(productId, categoryId, productName, imageUrl, quantity, price, description, publishedDate, createdDate);
+                productList.add(product);
+            }
+        } finally {
+            this.closeConnection();
+        }
+        return productList;
     }
 
     // update product quantity
