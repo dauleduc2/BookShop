@@ -52,7 +52,7 @@
                             "
                             >
                             <a
-                                href="#"
+                                href="<%=Router.HOME_CONTROLLER%>"
                                 class="
                                 items-center
                                 px-4
