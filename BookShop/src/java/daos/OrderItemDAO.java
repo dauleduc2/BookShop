@@ -3,6 +3,8 @@ package daos;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import models.OrderItem;
 import models.Product;
 import utils.Connector;
 
@@ -40,5 +42,28 @@ public class OrderItemDAO {
         } finally {
             this.closeConnection();
         }
+    }
+
+    public ArrayList<OrderItem> getOrderItemByOrderId(String orderId) throws Exception {
+        ArrayList<OrderItem> orderItems = new ArrayList<OrderItem>();
+
+        try {
+            conn = Connector.getConnection();
+            String sql = "SELECT * FROM bookshop_order_item WHERE orderId=?";
+            preStm = conn.prepareStatement(sql);
+            preStm.setString(1, orderId);
+            rs = preStm.executeQuery();
+            OrderItem orderItem = null;
+            while (rs.next()) {
+                Integer productId = rs.getInt("productId");
+                Integer quantity = rs.getInt("quantity");
+                Double price = rs.getDouble("price");
+                orderItem = new OrderItem(productId, orderId, quantity, price);
+                orderItems.add(orderItem);
+            }
+        } finally {
+            this.closeConnection();
+        }
+        return orderItems;
     }
 }
