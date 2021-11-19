@@ -15,7 +15,7 @@ public class Router {
     public static final String ADD_CATEGORY_PAGE = "WEB-INF/view/addCategoryPage.jsp";
     public static final String CART_PAGE = "WEB-INF/view/cartPage.jsp";
     public static final String SHOW_ORDERS_PAGE = "WEB-INF/view/showOrderPage.jsp";
-    public static final String SEARCH_BOOK_PAGE = "WEB-INF/view/searchPage.jsp";
+    public static final String SEARCH_BOOK_PAGE = "WEB-INF/view/searchBook.jsp";
 
     // router mapping
     public static final String LOGIN_CONTROLLER = "login";

@@ -32,13 +32,13 @@
                                         <div class="sm:mr-8 mb-2 sm:mb-0">
                                                 <label for="minPrice" class="block text-base font-medium text-white">Min price</label>
                                                 <div class="mt-1">
-                                                        <input type="number" name="minPrice" min="0" max="9999999" id="minPrice" class="shadow-sm py-2 px-4 focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                                                        <input type="number" name="minPrice" min="0" max="99999999" value="0" id="minPrice" class="shadow-sm py-2 px-4 focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
                                                 </div>
                                         </div >
                                         <div class="sm:mr-8 mb-2 sm:mb-0">
                                                 <label for="maxPrice" class="block text-base font-medium text-white">Max price</label>
                                                 <div class="mt-1">
-                                                        <input type="number" min="0" max="9999999" name="maxPrice" id="maxPrice" class="shadow-sm py-2 px-4 focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                                                        <input type="number" min="0" max="99999999" name="maxPrice" value="99999999"  id="maxPrice" class="shadow-sm py-2 px-4 focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
                                                 </div>
                                         </div>
                                         <div class="sm:mr-8 sm:mt-0 mt-4 mr-0">

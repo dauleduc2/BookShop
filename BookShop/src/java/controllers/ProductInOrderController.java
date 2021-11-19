@@ -1,15 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controllers;
 
 import constant.Router;
 import daos.OrderDAO;
 import daos.OrderItemDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,10 +17,6 @@ import models.StatusCode;
 import utils.GetParam;
 import utils.Helper;
 
-/**
- *
- * @author Bana-na
- */
 @WebServlet(name = "ProductInOrderController", urlPatterns = {"/ProductInOrderController"})
 public class ProductInOrderController extends HttpServlet {
 
@@ -48,12 +38,13 @@ public class ProductInOrderController extends HttpServlet {
         ArrayList<Order> orders = orderDao.getOrdersByUserId(userId);
 
         //Get orderId
-        String orderId = (String) request.getParameter("orderId");
+        String orderId = GetParam.getStringParam(request, "orderId", "orderId", 0, Integer.MAX_VALUE, null);
 
         //Check params
         if (orderId == null) {
             return false;
         }
+
         //Check userId and orderId that matched
         for (Order order : orders) {
             if (order.getOrderId().equals(orderId)) {
