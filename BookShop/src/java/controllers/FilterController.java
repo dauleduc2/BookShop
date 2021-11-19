@@ -1,6 +1,7 @@
 package controllers;
 
 import constant.Router;
+import daos.CategoryDAO;
 import daos.ProductDAO;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import models.Category;
 import models.Product;
 import models.StatusCode;
 import utils.GetParam;
@@ -18,10 +20,37 @@ import utils.Helper;
 public class FilterController extends HttpServlet {
 
     /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
+     * Processes requests for both HTTP <code>POST</code> methods.
      */
-    protected boolean processRequest(HttpServletRequest request, HttpServletResponse response)
+    protected void getHandler(HttpServletRequest request, HttpServletResponse response)
+            throws Exception {
+        response.setContentType("text/html;charset=UTF-8");
+        CategoryDAO categoryDao = new CategoryDAO();
+        ArrayList<Category> categories = categoryDao.getAllCategory();
+        request.setAttribute("categories", categories);
+    }
+
+    /**
+     * Handles the HTTP <code>GET</code> method.
+     */
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        try {
+            getHandler(request, response);
+        } catch (Exception e) {
+            // forward on 500
+            System.out.println(e);
+            Helper.setAttribute(request, StatusCode.INTERNAL_SERVER_ERROR.getValue(), "Something failed", "Please try again later");
+            request.getRequestDispatcher(Router.ERROR).forward(request, response);
+        }
+        request.getRequestDispatcher("WEB-INF/view/testFilter.jsp").forward(request, response);
+    }
+
+    /**
+     * Processes requests for both HTTP <code>POST</code> methods.
+     */
+    protected boolean postHandler(HttpServletRequest request, HttpServletResponse response)
             throws Exception {
         response.setContentType("text/html;charset=UTF-8");
         ProductDAO productDao = new ProductDAO();
@@ -37,6 +66,11 @@ public class FilterController extends HttpServlet {
             return false;
         }
 
+        // get categories
+        CategoryDAO categoryDao = new CategoryDAO();
+        ArrayList<Category> categories = categoryDao.getAllCategory();
+        request.setAttribute("categories", categories);
+
         // get products
         ArrayList<Product> products = productDao.getProducts(categoryId, minPrice, maxPrice);
 
@@ -46,28 +80,19 @@ public class FilterController extends HttpServlet {
     }
 
     /**
-     * Handles the HTTP <code>GET</code> method.
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        request.getRequestDispatcher("WEB-INF/view/testFilter.jsp").forward(request, response);
-    }
-
-    /**
      * Handles the HTTP <code>POST</code> method.
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            if (!processRequest(request, response)) {
+            if (!postHandler(request, response)) {
                 // forward on 400
-                request.getRequestDispatcher("WEB-INF/view/testFilter.jsp").forward(request, response);
+                request.getRequestDispatcher("WEB-INF/view/testFilter_1.jsp").forward(request, response);
                 return;
             }
             // forward on 200
-            request.getRequestDispatcher("WEB-INF/view/testFilter.jsp").forward(request, response);
+            request.getRequestDispatcher("WEB-INF/view/testFilter_1.jsp").forward(request, response);
         } catch (Exception e) {
             // forward on 500
             System.out.println(e);
