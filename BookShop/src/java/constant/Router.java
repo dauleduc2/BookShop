@@ -37,4 +37,5 @@ public class Router {
     public static final String CANCEL_ORDER_CONTROLLER = "cancelorder";
     public static final String SEARCH_BOOK_CONTROLLER = "searchbook";
     public static final String FILTER_CONTROLLER = "filter";
+    public static final String PRODUCT_IN_ORDER_CONTROLLER = "productinorder";
 }
