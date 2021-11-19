@@ -52,6 +52,7 @@ public class SearchBookController extends HttpServlet {
 			ProductDAO productDAO = new ProductDAO();
 			ArrayList<Product> products = productDAO.searchProductByName(name);
 			request.setAttribute("products", products);
+			request.getRequestDispatcher("WEB-INF/view/testFilter.jsp").forward(request, response);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			// forward on 500

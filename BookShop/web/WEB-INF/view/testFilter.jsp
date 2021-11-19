@@ -12,16 +12,7 @@
                     <jsp:param name="title" value="Sannin SC |  Add Room" />
                 </jsp:include>
         </head>
-        <!--        <body>
-                        <form action="<%=Router.FILTER_CONTROLLER%>" method="POST">
-                                Category: <input type="text" name="categoryId">
-                                <br><br>
-                                Min price: <input type="text" name="minPrice">
-                                <br><br>
-                                Max price: <input type="text" name="maxPrice">
-                                <input type="submit" value="submit">
-                        </form>
-</body>-->
+
         <body>
 
                 <div class="bg-white">
