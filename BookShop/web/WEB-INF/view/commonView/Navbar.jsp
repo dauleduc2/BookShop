@@ -86,7 +86,7 @@ contentType="text/html" pageEncoding="UTF-8"%> <% String avatarUrl = (String) se
                                     </div>
 
                             </div>
-                            <form action="#" method="POST" class="flex">
+                            <form action="<%=Router.SEARCH_BOOK_CONTROLLER%>" method="POST" class="flex">
                                     <label for="productName" class="ml-px pl-4 block text-sm font-medium text-gray-700 sr-only">Search</label>
                                     <input type="text" name="productName" id="productName" class="shadow-sm p-1 sm:w-80 w-40 focus:ring-indigo-500 focus:border-indigo-500 block sm:text-sm border-gray-300 px-4 rounded-full" placeholder="Book name">
                                             <button type="submit" class=" ml-1 inline-flex items-center p-1.5 border border-transparent rounded-full shadow-sm text-white bg-white hover:bg-indigo-300 focus:outline-none h-8 w-8">
