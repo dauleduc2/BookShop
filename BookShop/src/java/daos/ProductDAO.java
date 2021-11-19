@@ -13,7 +13,7 @@ public class ProductDAO {
     private PreparedStatement preStm;
     private ResultSet rs;
 
-    //this function will close connection of database
+    // close connection of database
     private void closeConnection() throws Exception {
         if (rs != null) {
             rs.close();
@@ -28,7 +28,7 @@ public class ProductDAO {
         }
     }
 
-    //this function will add a new product
+    // add a new product
     public void addNewProduct(Product product) throws Exception {
         try {
             conn = Connector.getConnection();
@@ -50,7 +50,7 @@ public class ProductDAO {
         }
     }
 
-    // this function will get products
+    // get products
     public ArrayList<Product> getProductToShow() throws Exception {
         ArrayList<Product> products = new ArrayList<Product>();
         try {
@@ -78,7 +78,7 @@ public class ProductDAO {
         return products;
     }
 
-    // this function will get product by given id
+    // get product by given id
     public Product getProductById(Integer productId) throws Exception {
         Product product = null;
         try {
@@ -206,6 +206,36 @@ public class ProductDAO {
             String sql = "SELECT * FROM bookshop_product WHERE categoryId = ?";
             preStm = conn.prepareStatement(sql);
             preStm.setInt(1, categoryId);
+            rs = preStm.executeQuery();
+            while (rs.next()) {
+                Integer productId = rs.getInt("productId");
+                String name = rs.getString("name");
+                String imageUrl = rs.getString("image");
+                Integer quantity = rs.getInt("quantity");
+                Float price = rs.getFloat("price");
+                String description = rs.getString("description");
+                String publishedDate = rs.getString("publishedDate");
+                String createdDate = rs.getString("createdDate");
+                product = new Product(productId, categoryId, name, imageUrl, quantity, price, description, publishedDate, createdDate);
+                products.add(product);
+            }
+        } finally {
+            this.closeConnection();
+        }
+        return products;
+    }
+
+    // get product with filter
+    public ArrayList<Product> getProducts(Integer categoryId, Float minPrice, Float maxPrice) throws Exception {
+        ArrayList<Product> products = new ArrayList<Product>();
+        try {
+            Product product = null;
+            conn = Connector.getConnection();
+            String sql = "SELECT * FROM bookshop_product WHERE categoryId = ? AND price BETWEEN ? AND ?";
+            preStm = conn.prepareStatement(sql);
+            preStm.setInt(1, categoryId);
+            preStm.setFloat(2, minPrice);
+            preStm.setFloat(3, maxPrice);
             rs = preStm.executeQuery();
             while (rs.next()) {
                 Integer productId = rs.getInt("productId");
