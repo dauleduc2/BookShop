@@ -1,7 +1,5 @@
 package models;
 
-import java.util.Date;
-
 public class Product {
 
     private Integer productId;

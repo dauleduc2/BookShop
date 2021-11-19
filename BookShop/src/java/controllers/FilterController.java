@@ -14,8 +14,8 @@ import models.StatusCode;
 import utils.GetParam;
 import utils.Helper;
 
-@WebServlet(name = "ShowProductInCategory", urlPatterns = {"/" + Router.SHOW_PRODUCT_IN_CATEGORY_CONTROLLER})
-public class ShowProductInCategory extends HttpServlet {
+@WebServlet(name = "FilterController", urlPatterns = {"/" + Router.FILTER_CONTROLLER})
+public class FilterController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -27,18 +27,20 @@ public class ShowProductInCategory extends HttpServlet {
         ProductDAO productDao = new ProductDAO();
 
         // get params
-        Integer categoryId = GetParam.getIntParams(request, "categoryId", "Category", 0, Integer.MAX_VALUE, null);
+        Integer categoryId = GetParam.getIntParams(request, "categoryId", "category", 0, Integer.MAX_VALUE, 1033);
+        Float minPrice = GetParam.getFloatParams(request, "minPrice", "min price", 0, Float.MAX_VALUE, 0.0f);
+        Float maxPrice = GetParam.getFloatParams(request, "maxPrice", "max price", 0, Float.MAX_VALUE, Float.MAX_VALUE);
 
-        // check params
-        if (categoryId == null) {
-            Helper.setAttribute(request, StatusCode.NOT_FOUND.getValue(), "Not found", "The requested URL was not found on this server");
+        // check price
+        if (minPrice > maxPrice) {
+            request.setAttribute("priceError", "Min price cannot greater than max price");
             return false;
         }
 
-        // get products in category
-        ArrayList<Product> products = productDao.getProductsByCategoryId(categoryId);
+        // get products
+        ArrayList<Product> products = productDao.getProducts(categoryId, minPrice, maxPrice);
 
-        // send to request
+        // send products
         request.setAttribute("products", products);
         return true;
     }
@@ -49,17 +51,26 @@ public class ShowProductInCategory extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.getRequestDispatcher("WEB-INF/view/testFilter.jsp").forward(request, response);
+    }
+
+    /**
+     * Handles the HTTP <code>POST</code> method.
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         try {
             if (!processRequest(request, response)) {
-                // forward on 404
-                request.getRequestDispatcher(Router.ERROR).forward(request, response);
+                // forward on 400
+                request.getRequestDispatcher("WEB-INF/view/testFilter.jsp").forward(request, response);
                 return;
             }
             // forward on 200
-            request.getRequestDispatcher("WEB-INF/view/categoryShowcasePage.jsp").forward(request, response);
+            request.getRequestDispatcher("WEB-INF/view/testFilter.jsp").forward(request, response);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
             // forward on 500
+            System.out.println(e);
             Helper.setAttribute(request, StatusCode.INTERNAL_SERVER_ERROR.getValue(), "Something failed", "Please try again later");
             request.getRequestDispatcher(Router.ERROR).forward(request, response);
         }

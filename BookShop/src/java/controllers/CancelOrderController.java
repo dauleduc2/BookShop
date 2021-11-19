@@ -11,37 +11,49 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import models.Order;
+import models.OrderStatus;
 import models.StatusCode;
 import utils.Helper;
 
-@WebServlet(name = "ShowOrderController", urlPatterns = {"/" + Router.SHOW_ORDERS_CONTROLLER})
-public class ShowOrderController extends HttpServlet {
+@WebServlet(name = "CancelOrderController", urlPatterns = {"/" + Router.CANCEL_ORDER_CONTROLLER})
+public class CancelOrderController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws Exception {
+    protected boolean processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException, Exception {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
         OrderDAO orderDao = new OrderDAO();
-
+        boolean isTrue = false;
         // get current userId
         String userId = (String) session.getAttribute("userId");
+
+        //get orderId
+        String orderId = (String) request.getParameter("orderId");
 
         // get user's orders
         ArrayList<Order> orders = orderDao.getOrdersByUserId(userId);
 
-        // check empty
-        if (orders == null) {
-            request.setAttribute("emptyMessage", "There is no order yet");
-            return;
+        //update status on database
+        for (Order order : orders) {
+            if (order.getOrderId().equals(orderId)) {
+                isTrue = true;
+                break;
+            }
         }
+
+        if (!isTrue) {
+            Helper.setAttribute(request, StatusCode.NOT_FOUND.getValue(), "Not found", "The requested URL was not found on this server");
+            return false;
+        }
+
+        orderDao.updateOrderStatus(orderId, userId, OrderStatus.CANCEL.ordinal());
 
         // send to request
         request.setAttribute("orders", orders);
-        return;
+        return isTrue;
     }
 
     /**
@@ -51,9 +63,14 @@ public class ShowOrderController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            processRequest(request, response);
+            if (!processRequest(request, response)) {
+                // forward on 404
+                request.getRequestDispatcher(Router.ERROR).forward(request, response);
+                return;
+            }
+
             // forward on 200
-            request.getRequestDispatcher(Router.SHOW_ORDERS_PAGE).forward(request, response);
+            response.sendRedirect(Router.SHOW_ORDERS_CONTROLLER);
         } catch (Exception e) {
             System.out.println(e);
             // forward on 500
@@ -61,4 +78,5 @@ public class ShowOrderController extends HttpServlet {
             request.getRequestDispatcher(Router.ERROR).forward(request, response);
         }
     }
+
 }

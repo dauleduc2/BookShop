@@ -2,7 +2,6 @@ package controllers;
 
 import constant.Router;
 import daos.OrderDAO;
-import daos.ProductDAO;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
@@ -11,7 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import models.OrderStatus;
 import models.Product;
+import models.StatusCode;
 import utils.GetParam;
 import utils.Helper;
 
@@ -26,7 +27,6 @@ public class CheckoutController extends HttpServlet {
             throws Exception {
         response.setContentType("text/html;charset=UTF-8");
         OrderDAO orderDao = new OrderDAO();
-        ProductDAO productDao = new ProductDAO();
         HttpSession session = request.getSession();
         boolean isTrue = true;
 
@@ -50,7 +50,7 @@ public class CheckoutController extends HttpServlet {
         String userId = (String) session.getAttribute("userId");
 
         // save to db
-        if (!orderDao.addNewOrder(products, 0, userId, consigneeName, address, phone)) {
+        if (!orderDao.addNewOrder(products, OrderStatus.WAITING.ordinal(), userId, consigneeName, address, phone)) {
             throw new Exception();
         }
 
@@ -79,7 +79,7 @@ public class CheckoutController extends HttpServlet {
         } catch (Exception e) {
             // forward on 500
             System.out.println(e);
-            Helper.setAttribute(request, 500, "Something failed", "Please try again later");
+            Helper.setAttribute(request, StatusCode.INTERNAL_SERVER_ERROR.getValue(), "Something failed", "Please try again later");
             request.getRequestDispatcher(Router.ERROR).forward(request, response);
         }
     }

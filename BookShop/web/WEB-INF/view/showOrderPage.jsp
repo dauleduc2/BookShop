@@ -1,3 +1,4 @@
+<%@page import="constant.Router"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -86,7 +87,7 @@
                                                                                     </td>
                                                                                     <c:if test="${(order.getStatus() == 0) || (order.getStatus() == 1)}">
                                                                                         <td class="hidden py-6 font-medium sm:table-cell">
-                                                                                                <a href="#" class="inline-flex items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded shadow-sm text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
+                                                                                                <a href="<%=Router.CANCEL_ORDER_CONTROLLER%>?orderId=${order.getOrderId()}" class="inline-flex items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded shadow-sm text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
                                                                                                         Cancel
                                                                                                 </a>
                                                                                         </td>

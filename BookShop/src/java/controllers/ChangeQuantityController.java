@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import models.Product;
+import models.StatusCode;
 import utils.GetParam;
 import utils.Helper;
 
@@ -75,7 +76,7 @@ public class ChangeQuantityController extends HttpServlet {
         } catch (Exception e) {
             // forward on 500
             System.out.println(e.getMessage());
-            Helper.setAttribute(request, 500, "Something failed", "Please try again later");
+            Helper.setAttribute(request, StatusCode.INTERNAL_SERVER_ERROR.getValue(), "Something failed", "Please try again later");
             request.getRequestDispatcher(Router.ERROR).forward(request, response);
         }
     }
