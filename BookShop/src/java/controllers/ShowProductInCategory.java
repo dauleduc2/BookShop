@@ -56,7 +56,7 @@ public class ShowProductInCategory extends HttpServlet {
                 return;
             }
             // forward on 200
-            request.getRequestDispatcher("WEB-INF/view/categoryShowcasePage.jsp").forward(request, response);
+            request.getRequestDispatcher(Router.CATEGORY_SHOWCASE_PAGE).forward(request, response);
         } catch (Exception e) {
             System.out.println(e.getMessage());
             // forward on 500
