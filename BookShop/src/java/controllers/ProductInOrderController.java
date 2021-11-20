@@ -12,12 +12,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import models.Order;
-import models.OrderItem;
+import models.OrderItemDto;
 import models.StatusCode;
 import utils.GetParam;
 import utils.Helper;
 
-@WebServlet(name = "ProductInOrderController", urlPatterns = {"/ProductInOrderController"})
+@WebServlet(name = "ProductInOrderController", urlPatterns = {"/" + Router.PRODUCT_IN_ORDER_CONTROLLER})
 public class ProductInOrderController extends HttpServlet {
 
     /**
@@ -58,11 +58,11 @@ public class ProductInOrderController extends HttpServlet {
             return false;
         }
 
-        // Get list of orderItem
-        ArrayList<OrderItem> orderItems = orderItemDao.getOrderItemByOrderId(orderId);
+        // Get list of orderItemDtos
+        ArrayList<OrderItemDto> orderItemDtos = orderItemDao.getOrderItemDtoByOrderId(orderId);
 
         //send request
-        request.setAttribute("orderItems", orderItems);
+        request.setAttribute("orderItems", orderItemDtos);
         return isTrue;
     }
 
@@ -78,7 +78,7 @@ public class ProductInOrderController extends HttpServlet {
                 return;
             }
             // forward on 200
-
+            request.getRequestDispatcher("WEB-INF/view/productInOrder.jsp").forward(request, response);
         } catch (Exception e) {
             System.out.println(e);
             // forward on 500

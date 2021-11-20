@@ -7,10 +7,15 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
-        <c:forEach var="product" items="${requestScope.products}">
-            ${product.getProductId()}
-            ${product.getName()}
+        <c:forEach var="orderItem" items="${requestScope.orderItems}">
+            ${orderItem.getName()}
+            <br>
+            ${orderItem.getImageUrl()}
+            <br>
+            ${orderItem.getQuantity()}
+            <br>
+            ${orderItem.getPrice()}
+            <br>
         </c:forEach>
     </body>
 </html>
