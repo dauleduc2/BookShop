@@ -22,7 +22,6 @@
             <jsp:param name="title" value="Sannin SC |  Add Room" />
         </jsp:include>
     </head>
-
     <body>
         <div class="bg-white">
             <div class="max-w-2xl px-4 py-16 mx-auto sm:py-24 sm:px-6 lg:px-0">
