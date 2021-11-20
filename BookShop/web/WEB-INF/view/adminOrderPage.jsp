@@ -1,23 +1,18 @@
-<%-- 
-    Document   : adminOrderPage
-    Created on : Nov 20, 2021, 2:44:23 PM
-    Author     : Admin
---%>
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%-- Document : adminOrderPage Created on : Nov 20, 2021, 2:44:23 PM Author :
+Admin --%> <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>Add new category</title>
-        <link rel="stylesheet" href="asset/styles.css" type="text/css" />
-        <jsp:include page="./commonView/Navbar.jsp">
-            <jsp:param name="title" value="Sannin SC |  Add Room" />
-        </jsp:include>
-    </head>
-    <body>
-        <div>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Add new category</title>
+    <link rel="stylesheet" href="asset/styles.css" type="text/css" />
+    <jsp:include page="./commonView/Navbar.jsp">
+      <jsp:param name="title" value="Sannin SC |  Add Room" />
+    </jsp:include>
+  </head>
+  <body>
+    <div>
       <div class="hidden md:flex md:w-64 md:flex-col md:fixed md:inset-y-0">
         <div class="flex flex-col flex-1 min-h-0 bg-gray-800">
           <div class="flex flex-col flex-1 pt-5 pb-4 overflow-y-auto">
@@ -219,5 +214,5 @@
         </main>
       </div>
     </div>
-    </body>
+  </body>
 </html>
