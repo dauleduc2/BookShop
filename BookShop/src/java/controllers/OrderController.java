@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import models.Order;
-import models.OrderItem;
+import models.OrderItemDto;
 import models.StatusCode;
 import utils.GetParam;
 import utils.Helper;
@@ -55,19 +55,28 @@ public class OrderController extends HttpServlet {
     protected boolean postHandler(HttpServletRequest request, HttpServletResponse response)
             throws Exception {
         response.setContentType("text/html;charset=UTF-8");
+        OrderDAO orderDao = new OrderDAO();
         OrderItemDAO orderItemDao = new OrderItemDAO();
 
         // get orderId
         String orderId = GetParam.getStringParam(request, "orderId", "orderId", 0, 50, null);
 
-        // get order items
-        ArrayList<OrderItem> orderItems = orderItemDao.getOrderItemByOrderId(orderId);
-        if (orderItems.isEmpty()) {
+        // get order
+        Order order = orderDao.getOrderByOrderId(orderId);
+        if (order == null) {
             Helper.setAttribute(request, StatusCode.NOT_FOUND.getValue(), "Not found", "The requested URL was not found on this server");
             return false;
         }
 
-        request.setAttribute("orderItems", orderItems);
+        // get order items
+        ArrayList<OrderItemDto> orderItemDtos = orderItemDao.getOrderItemDtoByOrderId(orderId);
+        if (orderItemDtos.isEmpty()) {
+            Helper.setAttribute(request, StatusCode.NOT_FOUND.getValue(), "Not found", "The requested URL was not found on this server");
+            return false;
+        }
+
+        request.setAttribute("order", order);
+        request.setAttribute("orderItems", orderItemDtos);
         return true;
     }
 

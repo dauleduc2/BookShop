@@ -1,21 +1,19 @@
 package controllers;
 
 import constant.Router;
-import daos.ProductDAO;
+import daos.OrderDAO;
 import java.io.IOException;
-import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import models.Product;
 import models.StatusCode;
 import utils.GetParam;
 import utils.Helper;
 
-@WebServlet(name = "ShowProductInCategory", urlPatterns = {"/" + Router.SHOW_PRODUCT_IN_CATEGORY_CONTROLLER})
-public class ShowProductInCategory extends HttpServlet {
+@WebServlet(name = "OrderStatusController", urlPatterns = {"/" + Router.ORDER_STATUS_CONTROLLER})
+public class OrderStatusController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -24,30 +22,27 @@ public class ShowProductInCategory extends HttpServlet {
     protected boolean processRequest(HttpServletRequest request, HttpServletResponse response)
             throws Exception {
         response.setContentType("text/html;charset=UTF-8");
-        ProductDAO productDao = new ProductDAO();
+        OrderDAO orderDao = new OrderDAO();
 
         // get params
-        Integer categoryId = GetParam.getIntParams(request, "categoryId", "Category", 0, Integer.MAX_VALUE, null);
+        String orderId = GetParam.getStringParam(request, "orderId", "orderId", 0, 50, null);
+        Integer newStatus = GetParam.getIntParams(request, "status", "status", 0, 4, null);
 
-        // check params
-        if (categoryId == null) {
+        if (orderId == null || newStatus == null) {
             Helper.setAttribute(request, StatusCode.NOT_FOUND.getValue(), "Not found", "The requested URL was not found on this server");
             return false;
         }
 
-        // get products in category
-        ArrayList<Product> products = productDao.getProductsByCategoryId(categoryId);
-
-        // send to request
-        request.setAttribute("products", products);
+        // update status in db
+        orderDao.updateOrderStatus(orderId, newStatus);
         return true;
     }
 
     /**
-     * Handles the HTTP <code>GET</code> method.
+     * Handles the HTTP <code>POST</code> method.
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
             if (!processRequest(request, response)) {
@@ -55,11 +50,10 @@ public class ShowProductInCategory extends HttpServlet {
                 request.getRequestDispatcher(Router.ERROR).forward(request, response);
                 return;
             }
-            // forward on 200
-            request.getRequestDispatcher(Router.CATEGORY_SHOWCASE_PAGE).forward(request, response);
+            response.sendRedirect(Router.ADMIN_ORDER_CONTROLLER);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
             // forward on 500
+            System.out.println(e);
             Helper.setAttribute(request, StatusCode.INTERNAL_SERVER_ERROR.getValue(), "Something failed", "Please try again later");
             request.getRequestDispatcher(Router.ERROR).forward(request, response);
         }
