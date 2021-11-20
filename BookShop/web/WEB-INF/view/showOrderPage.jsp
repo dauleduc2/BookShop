@@ -25,10 +25,6 @@
 
                                         <div class="space-y-20">
                                                 <div>
-
-
-
-
                                                         <table class="mt-4 w-full text-gray-500 sm:mt-6">
                                                                 <caption class="sr-only">
                                                                         Orders
