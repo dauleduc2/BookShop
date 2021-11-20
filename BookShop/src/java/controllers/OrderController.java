@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import models.Order;
-import models.OrderItem;
+import models.OrderItemDto;
 import models.StatusCode;
 import utils.GetParam;
 import utils.Helper;
@@ -69,14 +69,14 @@ public class OrderController extends HttpServlet {
         }
 
         // get order items
-        ArrayList<OrderItem> orderItems = orderItemDao.getOrderItemByOrderId(orderId);
-        if (orderItems.isEmpty()) {
+        ArrayList<OrderItemDto> orderItemDtos = orderItemDao.getOrderItemDtoByOrderId(orderId);
+        if (orderItemDtos.isEmpty()) {
             Helper.setAttribute(request, StatusCode.NOT_FOUND.getValue(), "Not found", "The requested URL was not found on this server");
             return false;
         }
 
         request.setAttribute("order", order);
-        request.setAttribute("orderItems", orderItems);
+        request.setAttribute("orderItems", orderItemDtos);
         return true;
     }
 
