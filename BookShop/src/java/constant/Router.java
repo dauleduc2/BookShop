@@ -41,4 +41,5 @@ public class Router {
     public static final String FILTER_CONTROLLER = "filter";
     public static final String PRODUCT_IN_ORDER_CONTROLLER = "productinorder";
     public static final String ADMIN_ORDER_CONTROLLER = "adminOrder";
+    public static final String ORDER_STATUS_CONTROLLER = "orderStatus";
 }
