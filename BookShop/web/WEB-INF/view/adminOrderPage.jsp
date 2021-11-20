@@ -185,8 +185,9 @@
                                                         <td
                                                             class="px-6 py-4 text-sm font-medium text-right  whitespace-nowrap"
                                                             >
-                                                            <form class="space-y-6" action="<%=Router.ADMIN_ORDER_CONTROLLER%>?orderId=" method="POST">
+                                                            <form class="space-y-6" action="<%=Router.ADMIN_ORDER_CONTROLLER%>?orderId=${order.getOrderId()}" method="POST">
                                                                 <button
+                                                                    type="submit"
                                                                     class="text-indigo-600 hover:text-indigo-900"
                                                                     method="POST"
                                                                     >View</button
