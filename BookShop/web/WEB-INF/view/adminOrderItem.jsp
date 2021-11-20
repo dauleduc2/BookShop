@@ -8,8 +8,12 @@
     </head>
     <body>
         <c:forEach var="orderItem" items="${requestScope.orderItems}">
-            ${orderItem.getProductId()}
+            ${orderItem.getName()}
+            <br>
+            ${orderItem.getImageUrl()}
+            <br>
             ${orderItem.getQuantity()}
+            <br>
             ${orderItem.getPrice()}
             <br>
         </c:forEach>
