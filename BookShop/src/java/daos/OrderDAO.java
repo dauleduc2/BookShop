@@ -140,6 +140,23 @@ public class OrderDAO {
         return isTrue;
     }
 
+    // update order status
+    public boolean updateOrderStatus(String orderId, Integer status) throws Exception {
+        boolean isTrue = true;
+        try {
+            conn = Connector.getConnection();
+            String sql = "UPDATE bookshop_order SET status = ? WHERE orderId = ?";
+            preStm = conn.prepareStatement(sql);
+            preStm.setInt(1, status);
+            preStm.setString(2, orderId);
+            preStm.executeUpdate();
+        } finally {
+            isTrue = false;
+            this.closeConnection();
+        }
+        return isTrue;
+    }
+
     // get all orders
     public ArrayList<Order> getAllOrder() throws Exception {
         ArrayList<Order> orders = new ArrayList<Order>();
