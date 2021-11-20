@@ -56,7 +56,7 @@ public class ProductDAO {
         try {
             Product product;
             conn = Connector.getConnection();
-            String sql = "SELECT TOP 24 * FROM bookshop_product ORDER BY publishedDate DESC";
+            String sql = "SELECT TOP 24 * FROM bookshop_product ORDER BY createdDate DESC";
             preStm = conn.prepareStatement(sql);
             rs = preStm.executeQuery();
             while (rs.next()) {
@@ -132,12 +132,8 @@ public class ProductDAO {
             conn = Connector.getConnection();
             String sql = "SELECT * FROM bookshop_product WHERE name = ?";
             preStm = conn.prepareStatement(sql);
-
             preStm.setString(1, name);
-
             rs = preStm.executeQuery();
-
-            System.out.println(rs.getInt("productId"));
             if (rs.next()) {
                 Integer productId = rs.getInt("productId");
                 Integer categoryId = rs.getInt("categoryId");

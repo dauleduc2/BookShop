@@ -35,12 +35,14 @@ public class ProductDetailController extends HttpServlet {
 
         // find product by given id
         Product product = productDao.getProductById(productId);
-        Category category = categoryDAO.getCategoryByID(product.getCategoryId());
+
         // check existed product
         if (product == null) {
             Helper.setAttribute(request, StatusCode.NOT_FOUND.getValue(), "Not found", "The requested URL was not found on this server");
             return false;
         }
+
+        Category category = categoryDAO.getCategoryByID(product.getCategoryId());
 
         // set attribute product
         request.setAttribute("category", category);
