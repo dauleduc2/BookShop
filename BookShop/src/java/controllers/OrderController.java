@@ -55,10 +55,18 @@ public class OrderController extends HttpServlet {
     protected boolean postHandler(HttpServletRequest request, HttpServletResponse response)
             throws Exception {
         response.setContentType("text/html;charset=UTF-8");
+        OrderDAO orderDao = new OrderDAO();
         OrderItemDAO orderItemDao = new OrderItemDAO();
 
         // get orderId
         String orderId = GetParam.getStringParam(request, "orderId", "orderId", 0, 50, null);
+
+        // get order
+        Order order = orderDao.getOrderByOrderId(orderId);
+        if (order == null) {
+            Helper.setAttribute(request, StatusCode.NOT_FOUND.getValue(), "Not found", "The requested URL was not found on this server");
+            return false;
+        }
 
         // get order items
         ArrayList<OrderItem> orderItems = orderItemDao.getOrderItemByOrderId(orderId);
@@ -67,6 +75,7 @@ public class OrderController extends HttpServlet {
             return false;
         }
 
+        request.setAttribute("order", order);
         request.setAttribute("orderItems", orderItems);
         return true;
     }
