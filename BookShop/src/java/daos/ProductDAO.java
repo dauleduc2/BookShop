@@ -257,4 +257,33 @@ public class ProductDAO {
         }
         return products;
     }
+
+    public ArrayList<Product> getProductForAdmin(Integer offset, Integer limit) throws Exception {
+        ArrayList<Product> products = new ArrayList<Product>();
+        try {
+            Product product = null;
+            conn = Connector.getConnection();
+            String sql = "SELECT * FROM bookshop_product ORDER BY createdDate DESC OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
+            preStm = conn.prepareStatement(sql);
+            preStm.setInt(1, offset);
+            preStm.setInt(2, limit);
+            rs = preStm.executeQuery();
+            while (rs.next()) {
+                Integer productId = rs.getInt("productId");
+                Integer categoryId = rs.getInt("categoryId");
+                String name = rs.getString("name");
+                String imageUrl = rs.getString("image");
+                Integer quantity = rs.getInt("quantity");
+                Float price = rs.getFloat("price");
+                String description = rs.getString("description");
+                String publishedDate = rs.getString("publishedDate");
+                String createdDate = rs.getString("createdDate");
+                product = new Product(productId, categoryId, name, imageUrl, quantity, price, description, publishedDate, createdDate);
+                products.add(product);
+            }
+        } finally {
+            this.closeConnection();
+        }
+        return products;
+    }
 }
