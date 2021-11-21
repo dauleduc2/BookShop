@@ -42,7 +42,7 @@ This website is an online book store which provides an online shopping cart for 
   - Servlet - Server Core
   - SQL Server 2019 - Database
 - Deployment
-  - Docker - Container Management
+  - Docker - Container Management.
 
 ## Team Member
 
@@ -58,6 +58,10 @@ This website is an online book store which provides an online shopping cart for 
   - Gmail: chikhang4566@gmail.com
   - Linkedin: www.linkedin.com/in/thachchikhang
   - Github: https://github.com/Banan-a
+- Phạm Vĩnh Tài | Frontend
+  - Gmail: kainesv86@gmail.com
+  - Linkedin: www.linkedin.com/in/phamvinhtai
+  - Github: https://github.com/kainesv86
 
 ## Project Picture
 
