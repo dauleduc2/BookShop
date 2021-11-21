@@ -18,17 +18,12 @@
     <div class="flex-1 bg-white">
         <main class="px-4 pt-16 pb-24 bg-white sm:px-6 sm:pt-24 lg:px-8 lg:py-32">
             <div class="max-w-3xl mx-auto">
-
                 <h1 class="text-3xl font-extrabold tracking-tight text-center text-gray-900 sm:text-4xl">
                     Order hitory detail
                 </h1>
-
                 <section aria-labelledby="order-heading" class="mt-10 border-t border-gray-200">
                     <h2 id="order-heading" class="sr-only">Your order</h2>
-
                     <h3 class="sr-only">Items</h3>
-
-
                     <c:forEach var="orderItem" items="${requestScope.orderItems}" varStatus="pos">
                         <div class="flex py-10 space-x-6 border-b border-gray-200">
                             <img src="${orderItem.getImageUrl()}" alt="Glass bottle with black plastic pour top and mesh insert."  class="object-cover object-center rounded-md w-28 sm:w-28 ">
