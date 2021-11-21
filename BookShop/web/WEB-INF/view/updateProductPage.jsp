@@ -1,3 +1,4 @@
+<%@page import="models.Product"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="daos.CategoryDAO"%>
 <%@page import="constant.Router"%>
@@ -20,6 +21,10 @@
 
         %>
         <form action="<%=Router.UPDATE_PRODUCT_CONTROLLER%>" method="POST" enctype="multipart/form-data" class="max-w-2xl p-2 m-auto my-5 space-y-8 bg-white border-2 border-black divide-y divide-gray-200 rounded-md lg:p-7">
+            <%
+                Product product = (Product) request.getAttribute("product");
+                request.setAttribute("productId", product.getProductId());
+            %>
             <div class="space-y-8 divide-y divide-gray-200 sm:space-y-5">
                 <div>
                     <div class="mb-3">
@@ -35,7 +40,7 @@
                             Name
                         </label>
                         <div class="mt-1 sm:mt-0 sm:col-span-2">
-                            <input value="test book" type="text" name="name" id="name" autocomplete="name" class="block w-full max-w-lg border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm" />
+                            <input value="${requestScope.product.getName()}" type="text" name="name" id="name" autocomplete="name" class="block w-full max-w-lg border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm" />
                             <p class="mt-1 text-sm text-red-600" id="email-error">
                                 ${requestScope.nameError}
                             </p>
@@ -48,7 +53,7 @@
                             </label>
                             <div class="mt-1 sm:mt-0 sm:col-span-2">
                                 <div class="flex max-w-lg rounded-md shadow-sm">
-                                    <input value="12" type="number" name="price" id="price" autocomplete="price" class="flex-1 block w-full min-w-0 border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
+                                    <input value="${requestScope.product.getPrice()}" type="number" name="price" id="price" autocomplete="price" class="flex-1 block w-full min-w-0 border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
                                 </div>
                                 <p class="mt-1 text-sm text-red-600" id="email-error">
                                     ${requestScope.priceError}
@@ -61,7 +66,7 @@
                             </label>
                             <div class="mt-1 sm:mt-0 sm:col-span-2">
                                 <div class="flex max-w-lg rounded-md shadow-sm">
-                                    <input value="100" type="number" name="quantity" id="quantity" autocomplete="quantity" class="flex-1 block w-full min-w-0 border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
+                                    <input value="${requestScope.product.getQuantity()}" type="number" name="quantity" id="quantity" autocomplete="quantity" class="flex-1 block w-full min-w-0 border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
                                 </div>
                                 <p class="mt-1 text-sm text-red-600" id="email-error">
                                     ${requestScope.quantityError}
@@ -74,7 +79,7 @@
                             </label>
                             <div class="mt-1 sm:mt-0 sm:col-span-2">
                                 <div class="flex max-w-lg rounded-md shadow-sm">
-                                    <input value="2001-10-19" type="date" name="publishedDate " id="publishedDate " autocomplete="publishedDate " class="flex-1 block w-full min-w-0 border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
+                                    <input value="${requestScope.product.getPublishedDate()}" type="date" name="publishedDate " id="publishedDate " autocomplete="publishedDate " class="flex-1 block w-full min-w-0 border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
                                 </div>
                                 <p class="mt-1 text-sm text-red-600" id="email-error">
                                     ${requestScope.publishedDateError}
@@ -101,13 +106,19 @@
                                 </select>
                             </div>
                         </div>
-                        <div class=" sm:grid sm:grid-cols-3 sm:gap-4 sm:items-center sm:border-t sm:border-gray-200 sm:pt-5">
-                            <label for="photo" class="block text-sm font-medium text-gray-700">
+                        <div
+                            class=" sm:grid sm:grid-cols-3 sm:gap-4 sm:items-center sm:border-t sm:border-gray-200 sm:pt-5">
+                            <label for="photo"
+                                   class="block text-sm font-medium text-gray-700">
                                 Photo
                             </label>
-                            <div class="mt-1 sm:mt-0 sm:col-span-2">
-                                <input type="file" id="productAvatar" name="productAvatar" />
-                                <p class="mt-1 text-sm text-red-600" id="email-error">
+                            <div
+                                class="mt-1 sm:mt-0 sm:col-span-2">
+                                <input type="file"
+                                       id="productAvatar"
+                                       name="productAvatar" />
+                                <p class="mt-1 text-sm text-red-600"
+                                   id="email-error">
                                     ${requestScope.productAvatarError}
                                 </p>
                             </div>
@@ -117,7 +128,7 @@
                                 Description
                             </label>
                             <div class="mt-1 sm:mt-0 sm:col-span-2">
-                                <textarea  id="description" name="description" rows="3" placeholder="Write a few sentences about product." class="block w-full max-w-lg border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">heeheheheheheh</textarea>
+                                <textarea  id="description" name="description" rows="3" placeholder="Write a few sentences about product." class="block w-full max-w-lg border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"></textarea>
                                 <p class="mt-1 text-sm text-red-600" id="email-error">
                                     ${requestScope.descriptionError}
                                 </p>
@@ -135,5 +146,7 @@
                         Save
                     </button>
                 </div>
-                </body>
-                </html>
+            </div>
+        </form>
+    </body>
+</html>
