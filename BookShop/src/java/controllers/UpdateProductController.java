@@ -4,6 +4,7 @@ import constant.Router;
 import daos.ProductDAO;
 import java.io.IOException;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +15,8 @@ import utils.GetParam;
 import utils.Helper;
 
 @WebServlet(name = "UpdateProductController", urlPatterns = {"/" + Router.UPDATE_PRODUCT_CONTROLLER})
+@MultipartConfig(fileSizeThreshold = 1024 * 1024 * 1024, maxFileSize = 1024 * 1024 * 1024, maxRequestSize = 1024 * 1024
+        * 1024)
 public class UpdateProductController extends HttpServlet {
 
     /**
@@ -23,15 +26,14 @@ public class UpdateProductController extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=UTF-8");
         ProductDAO productDao = new ProductDAO();
-
         // get the current product
         Integer productId = GetParam.getIntParams(request, "productId", "ProductId", 0, Integer.MAX_VALUE, null);
+
         if (productId == null) {
             Helper.setAttribute(request, StatusCode.NOT_FOUND.getValue(), "Not found", "The requested URL was not found on this server");
             return false;
         }
         Product product = productDao.getProductById(productId);
-
         // check existed product
         if (product == null) {
             Helper.setAttribute(request, StatusCode.NOT_FOUND.getValue(), "Not found", "The requested URL was not found on this server");
@@ -40,6 +42,7 @@ public class UpdateProductController extends HttpServlet {
 
         // validate params
         String name = GetParam.getStringParam(request, "name", "Product's name", 3, 50, null);
+        System.out.println(name);
         String imageUrl = GetParam.getFileParam(request, "productAvatar", "Product avatar", 1080 * 1080);
         Integer quantity = GetParam.getIntParams(request, "quantity", "Quantity", 0, Integer.MAX_VALUE, null);
         Float price = GetParam.getFloatParams(request, "price", "Price", 0, Float.MAX_VALUE, null);
@@ -77,8 +80,8 @@ public class UpdateProductController extends HttpServlet {
         }
 
         // update to database
-        productDao.updateProduct(product.getProductId(), name, imageUrl, quantity, price, description, publishedDate,
-                categoryId);
+        productDao.updateProduct(product.getProductId(), name, imageUrl, quantity, price, description, publishedDate, categoryId);
+
         // send success message
         request.setAttribute("successMessage", "Update product successful.");
         return true;
@@ -94,7 +97,6 @@ public class UpdateProductController extends HttpServlet {
 
         // get the current product
         Integer productId = GetParam.getIntParams(request, "productId", "ProductId", 0, Integer.MAX_VALUE, null);
-        System.out.println(productId);
         Product product = productDao.getProductById(productId);
 
         // check existed product
@@ -104,6 +106,7 @@ public class UpdateProductController extends HttpServlet {
         }
 
         request.setAttribute("product", product);
+
         return true;
     }
 
@@ -115,6 +118,7 @@ public class UpdateProductController extends HttpServlet {
             throws ServletException, IOException {
         try {
             if (!getHandler(request, response)) {
+
                 //forward on 404
                 request.getRequestDispatcher(Router.ERROR).forward(request, response);
                 return;

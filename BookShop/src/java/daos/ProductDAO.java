@@ -106,10 +106,11 @@ public class ProductDAO {
 
     // update product information
     public void updateProduct(Integer productId, String name, String image, Integer quantity, Float price, String description, String publishedDate, Integer categoryId) throws Exception {
+
         try {
             conn = Connector.getConnection();
-            String sql = "UPDATE bookshop_product(name, image, quantity, price, description, publishedDate, categoryId) "
-                    + "SET name = ?, image = ?, quantity = ?, price = ?, description = ?, publishedDate = ?, categoryId = ? WHERE productId = ?";
+            String sql = "UPDATE bookshop_product "
+                    + "SET name = ?, image = ?, quantity = ?, price = ?, description = ?, publishedDate = ?, categoryId = ? WHERE productId = ?;";
             preStm = conn.prepareStatement(sql);
             preStm.setString(1, name);
             preStm.setString(2, image);
@@ -120,6 +121,7 @@ public class ProductDAO {
             preStm.setInt(7, categoryId);
             preStm.setInt(8, productId);
             preStm.executeUpdate();
+
         } finally {
             this.closeConnection();
         }

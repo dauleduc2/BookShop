@@ -3,6 +3,7 @@
 <%@page import="daos.CategoryDAO"%>
 <%@page import="constant.Router"%>
 <%@page import="models.Category" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -18,13 +19,11 @@
         <% CategoryDAO ct = new CategoryDAO();
             ArrayList<Category> list
                     = ct.getAllCategory();
-
+            Product product = (Product) request.getAttribute("product");
+            request.setAttribute("productId", product.getProductId());
         %>
-        <form action="<%=Router.UPDATE_PRODUCT_CONTROLLER%>" method="POST" enctype="multipart/form-data" class="max-w-2xl p-2 m-auto my-5 space-y-8 bg-white border-2 border-black divide-y divide-gray-200 rounded-md lg:p-7">
-            <%
-                Product product = (Product) request.getAttribute("product");
-                request.setAttribute("productId", product.getProductId());
-            %>
+        <form action="<%=Router.UPDATE_PRODUCT_CONTROLLER%>?productId=<%= product.getProductId()%>" method="POST" enctype="multipart/form-data" class="max-w-2xl p-2 m-auto my-5 space-y-8 bg-white border-2 border-black divide-y divide-gray-200 rounded-md lg:p-7">
+
             <div class="space-y-8 divide-y divide-gray-200 sm:space-y-5">
                 <div>
                     <div class="mb-3">
@@ -53,7 +52,7 @@
                             </label>
                             <div class="mt-1 sm:mt-0 sm:col-span-2">
                                 <div class="flex max-w-lg rounded-md shadow-sm">
-                                    <input value="${requestScope.product.getPrice()}" type="number" name="price" id="price" autocomplete="price" class="flex-1 block w-full min-w-0 border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
+                                    <input value="<%= product.getPrice()%>" type="number" name="price" id="price" autocomplete="price" class="flex-1 block w-full min-w-0 border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
                                 </div>
                                 <p class="mt-1 text-sm text-red-600" id="email-error">
                                     ${requestScope.priceError}
@@ -66,7 +65,7 @@
                             </label>
                             <div class="mt-1 sm:mt-0 sm:col-span-2">
                                 <div class="flex max-w-lg rounded-md shadow-sm">
-                                    <input value="${requestScope.product.getQuantity()}" type="number" name="quantity" id="quantity" autocomplete="quantity" class="flex-1 block w-full min-w-0 border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
+                                    <input value="<%= product.getQuantity()%>" type="number" name="quantity" id="quantity" autocomplete="quantity" class="flex-1 block w-full min-w-0 border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
                                 </div>
                                 <p class="mt-1 text-sm text-red-600" id="email-error">
                                     ${requestScope.quantityError}
@@ -79,7 +78,7 @@
                             </label>
                             <div class="mt-1 sm:mt-0 sm:col-span-2">
                                 <div class="flex max-w-lg rounded-md shadow-sm">
-                                    <input value="${requestScope.product.getPublishedDate()}" type="date" name="publishedDate " id="publishedDate " autocomplete="publishedDate " class="flex-1 block w-full min-w-0 border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
+                                    <input value="<%= product.getPublishedDate()%>" type="date" name="publishedDate " id="publishedDate " autocomplete="publishedDate " class="flex-1 block w-full min-w-0 border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
                                 </div>
                                 <p class="mt-1 text-sm text-red-600" id="email-error">
                                     ${requestScope.publishedDateError}
@@ -91,17 +90,25 @@
                                 Type
                             </label>
                             <div class="mt-1 sm:mt-0 sm:col-span-2">
-                                <select id="type" name="type" autocomplete="type" class="block w-full max-w-lg border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm">
+                                ${requestScope.product.getCategoryId()}
+                                <% int productId = (int) product.getCategoryId();%>
+                                <select id="type" name="type" value="<%= productId%>" autocomplete="type" class="block w-full max-w-lg border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm">
 
-                                    <% for (int i = 0;
-                                                i
-                                                < list.size();
-                                                i++) {%>
-                                    <option
-                                        value=<%=list.get(i).getCategoryId()%>
-                                        >
+                                    <% for (int i = 0; i < list.size(); i++) {%>
+                                    <option value="<%= list.get(i).getCategoryId()%>"
+                                            <c:choose>
+                                                <c:when test="${list.get(i).getCategoryId().equals(productId)}">
+                                                    selected="selected"
+                                                </c:when>
+                                                <c:otherwise>
+                                                    abcxyz
+                                                </c:otherwise>
+                                            </c:choose>
+                                            >
                                         <%=list.get(i).getName()%>
+                                        <%= list.get(i).getCategoryId() == productId%>
                                     </option>
+
                                     <% }%>
                                 </select>
                             </div>
@@ -128,7 +135,9 @@
                                 Description
                             </label>
                             <div class="mt-1 sm:mt-0 sm:col-span-2">
-                                <textarea  id="description" name="description" rows="3" placeholder="Write a few sentences about product." class="block w-full max-w-lg border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"></textarea>
+                                <textarea  id="description" name="description" rows="3" placeholder="Write a few sentences about product." class="block w-full max-w-lg border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                    <%= product.getDescription()%>
+                                </textarea>
                                 <p class="mt-1 text-sm text-red-600" id="email-error">
                                     ${requestScope.descriptionError}
                                 </p>

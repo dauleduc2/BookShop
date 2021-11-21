@@ -156,6 +156,9 @@ public class GetParam {
     public static String getFileParam(HttpServletRequest request, String field, String label, long maxSize) throws IOException, ServletException {
         //get upload file;
         Part filePart = request.getPart(field);
+        if (filePart == null) {
+            return null;
+        }
         if (Helper.getFileName(filePart).equals("")) {
             request.setAttribute(field + "Error", label + " is required");
             return null;
