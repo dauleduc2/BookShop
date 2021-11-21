@@ -19,7 +19,7 @@ import utils.Helper;
 @WebServlet(name = "java", urlPatterns = {"/" + Router.SEARCH_BOOK_CONTROLLER})
 public class SearchBookController extends HttpServlet {
 
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    protected void postHandler(HttpServletRequest request, HttpServletResponse response)
             throws Exception {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=UTF-8");
@@ -38,11 +38,41 @@ public class SearchBookController extends HttpServlet {
         request.setAttribute("categories", categories);
     }
 
+    protected void getHandler(HttpServletRequest request, HttpServletResponse response)
+            throws Exception {
+        request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
+        ProductDAO productDAO = new ProductDAO();
+
+        // get products by given name
+        ArrayList<Product> products = productDAO.getProducts(null, 0f, Float.MAX_VALUE);
+        request.setAttribute("products", products);
+
+        // get categories for filter
+        CategoryDAO categoryDao = new CategoryDAO();
+        ArrayList<Category> categories = categoryDao.getAllCategory();
+        request.setAttribute("categories", categories);
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        try {
+            getHandler(request, response);
+            request.getRequestDispatcher(Router.SEARCH_BOOK_PAGE).forward(request, response);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            // forward on 500
+            Helper.setAttribute(request, StatusCode.INTERNAL_SERVER_ERROR.getValue(), "Something failed", "Please try again later");
+            request.getRequestDispatcher(Router.ERROR).forward(request, response);
+        }
+    }
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            processRequest(request, response);
+            postHandler(request, response);
             request.getRequestDispatcher(Router.SEARCH_BOOK_PAGE).forward(request, response);
         } catch (Exception e) {
             System.out.println(e.getMessage());

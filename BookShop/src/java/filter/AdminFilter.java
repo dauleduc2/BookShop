@@ -24,7 +24,7 @@ public class AdminFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
         try {
-            if (!Helper.protectedRouter(req, res, 1, 1, Router.LOGIN_PAGE)) {
+            if (!Helper.protectedRouter(req, res, 1, 1, Router.HOME_CONTROLLER)) {
                 return;
             }
             chain.doFilter(request, response);

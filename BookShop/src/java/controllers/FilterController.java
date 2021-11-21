@@ -56,7 +56,7 @@ public class FilterController extends HttpServlet {
         ProductDAO productDao = new ProductDAO();
 
         // get params
-        Integer categoryId = GetParam.getIntParams(request, "categoryId", "category", 0, Integer.MAX_VALUE, 1033);
+        Integer categoryId = GetParam.getIntParams(request, "categoryId", "category", 0, Integer.MAX_VALUE, null);
         Float minPrice = GetParam.getFloatParams(request, "minPrice", "min price", 0, Float.MAX_VALUE, 0.0f);
         Float maxPrice = GetParam.getFloatParams(request, "maxPrice", "max price", 0, Float.MAX_VALUE, Float.MAX_VALUE);
 
