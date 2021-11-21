@@ -130,6 +130,9 @@ public class ProductDetailController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
+            if (!Helper.protectedRouter(request, response, 0, 0, Router.LOGIN_PAGE)) {
+                return;
+            }
             if (!postHandler(request, response)) {
                 // forward on 404
                 request.getRequestDispatcher(Router.ERROR).forward(request, response);

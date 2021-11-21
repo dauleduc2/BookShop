@@ -57,7 +57,7 @@ public class LoginController extends HttpServlet {
             throws ServletException, IOException {
         if (Helper.isLogin(request)) {
             request.setAttribute("errorMessage",
-                    "You have already login before, do you want to login to other account");
+                    "You have already login before, do you want to login to other account?");
         }
         response.setContentType("text/html;charset=UTF-8");
         request.getRequestDispatcher(Router.LOGIN_PAGE).forward(request, response);
