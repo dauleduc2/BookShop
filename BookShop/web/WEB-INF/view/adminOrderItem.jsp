@@ -71,8 +71,7 @@
                         </div>  
                         <div class="flex flex-row mt-5 self-baseline">
                             <label for="status" class="self-center block text-sm font-medium text-gray-700">Status : </label>
-
-                            <select  id="status" value='${requestScope.order.getStatus()}' name="status" class="block py-2 pl-3 pr-10 mt-1 ml-5 text-base border-gray-300 rounded-md w-2xl focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                            <select id="status"  name="status" class="block py-2 pl-3 pr-10 mt-1 ml-5 text-base border-gray-300 rounded-md w-2xl focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                 <option value='0' <c:if test="${requestScope.order.getStatus() == 0}"> selected="selected"</c:if>>Waiting</option>
                                 <option value='1' <c:if test="${requestScope.order.getStatus() == 1}"> selected="selected"</c:if>>Confirm</option>
                                 <option value='2' <c:if test="${requestScope.order.getStatus() == 2}"> selected="selected"</c:if>>Shipping</option>

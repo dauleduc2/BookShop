@@ -14,7 +14,7 @@ import models.StatusCode;
 import utils.GetParam;
 import utils.Helper;
 
-@WebServlet(name = "AdminViewProductController", urlPatterns = {"/AdminViewProductController"})
+@WebServlet(name = "AdminViewProductController", urlPatterns = {"/" + Router.ADMIN_VIEW_PRODUCT_CONTROLLER})
 public class AdminViewProductController extends HttpServlet {
 
     /**
@@ -54,7 +54,7 @@ public class AdminViewProductController extends HttpServlet {
                 return;
             }
             // forward on 200
-            request.getRequestDispatcher("").forward(request, response);
+            request.getRequestDispatcher(Router.ADMIN_VIEW_PRODUCT_PAGE).forward(request, response);
         } catch (Exception e) {
             // forward on 500
             System.out.println(e);
