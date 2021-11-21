@@ -94,6 +94,7 @@ public class UpdateProductController extends HttpServlet {
 
         // get the current product
         Integer productId = GetParam.getIntParams(request, "productId", "ProductId", 0, Integer.MAX_VALUE, null);
+        System.out.println(productId);
         Product product = productDao.getProductById(productId);
 
         // check existed product

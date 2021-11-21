@@ -144,7 +144,8 @@
                                                     text-sm text-gray-500
                                                     whitespace-nowrap
                                                     ">
-                                                            <button type="button" class="
+                                                            <a  href="<%=Router.UPDATE_PRODUCT_CONTROLLER%>?productId=${product.getProductId()}"
+                                                                 class="
                                                         inline-flex
                                                         items-center
                                                         px-2.5
@@ -163,7 +164,7 @@
                                                         focus:ring-indigo-500
                                                         ">
                                                         Edit
-                                                    </button>
+                                                    </a>
                                                         </td>
                                                     </tr>
                                                 </c:forEach>
