@@ -35,9 +35,18 @@ public class AdminViewProductController extends HttpServlet {
             Helper.setAttribute(request, StatusCode.NOT_FOUND.getValue(), "Not found", "The requested URL was not found on this server");
             return false;
         }
-
+        if (offset == 0) {
+            offset = 1;
+        }
         ArrayList<Product> products = productDao.getProductForAdmin((offset - 1) * 10, limit);
+        if (products.isEmpty()) {
+            offset = 1;
+            products = productDao.getProductForAdmin((offset - 1) * 10, limit);
+        }
+
         request.setAttribute("products", products);
+        request.setAttribute("page", offset);
+
         return true;
     }
 

@@ -10,9 +10,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>JSP Page</title>
         <link rel="stylesheet" href="asset/styles.css" type="text/css" />
-        <jsp:include page="./commonView/Navbar.jsp">
-            <jsp:param name="title" value="Sannin SC |  Add Room" />
-        </jsp:include>
+       
     </head>
 
     <body class="bg-gradient-to-b min-h-screen from-gray-200 to-gray-300">
@@ -21,13 +19,13 @@
                     = ct.getAllCategory();
 
         %>
-        <div class="flex">
+        <div class="flex min-h-screen">
             <jsp:include page="./commonView/adminSideBar.jsp">
                 <jsp:param name="title" value="Sannin SC |  Add Room" />
             </jsp:include>
             <form action="<%=Router.ADD_PRODUCT_CONTROLLER%>" method="POST"
                   enctype="multipart/form-data"
-                  class="max-w-2xl p-2 m-auto my-5 space-y-8 bg-white border-2 border-black divide-y divide-gray-200 rounded-md lg:p-7 bg-gradient-to-b from-gray-50 to-gray-100">
+                  class="max-w-2xl  p-2 m-auto my-5 space-y-8 bg-white border-2 border-black divide-y divide-gray-200 rounded-md lg:p-7 bg-gradient-to-b from-gray-50 to-gray-100">
                 <div class="space-y-8 divide-y divide-gray-200 sm:space-y-5">
                     <div>
                         <div class="mb-3">
