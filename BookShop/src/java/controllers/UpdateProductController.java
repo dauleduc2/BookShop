@@ -26,7 +26,10 @@ public class UpdateProductController extends HttpServlet {
 
         // get the current product
         Integer productId = GetParam.getIntParams(request, "productId", "ProductId", 0, Integer.MAX_VALUE, null);
-        System.out.println(productId);
+        if (productId == null) {
+            Helper.setAttribute(request, StatusCode.NOT_FOUND.getValue(), "Not found", "The requested URL was not found on this server");
+            return false;
+        }
         Product product = productDao.getProductById(productId);
 
         // check existed product
@@ -37,7 +40,6 @@ public class UpdateProductController extends HttpServlet {
 
         // validate params
         String name = GetParam.getStringParam(request, "name", "Product's name", 3, 50, null);
-        System.out.println(name);
         String imageUrl = GetParam.getFileParam(request, "productAvatar", "Product avatar", 1080 * 1080);
         Integer quantity = GetParam.getIntParams(request, "quantity", "Quantity", 0, Integer.MAX_VALUE, null);
         Float price = GetParam.getFloatParams(request, "price", "Price", 0, Float.MAX_VALUE, null);
@@ -135,14 +137,14 @@ public class UpdateProductController extends HttpServlet {
             throws ServletException, IOException {
         try {
             if (!postHandler(request, response)) {
-                // forward on 400
-                this.doGet(request, response);
+                //forward on 404
+                request.getRequestDispatcher(Router.ERROR).forward(request, response);
                 return;
             }
             // forward on 200
             this.doGet(request, response);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            System.out.println(e);
             // forward on 500
             Helper.setAttribute(request, StatusCode.INTERNAL_SERVER_ERROR.getValue(), "Something failed", "Please try again later");
             request.getRequestDispatcher(Router.ERROR).forward(request, response);
