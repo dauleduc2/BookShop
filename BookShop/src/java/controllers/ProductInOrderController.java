@@ -20,43 +20,43 @@ import utils.Helper;
 @WebServlet(name = "ProductInOrderController", urlPatterns = {"/" + Router.PRODUCT_IN_ORDER_CONTROLLER})
 public class ProductInOrderController extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     */
-    protected boolean processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws Exception {
-        response.setContentType("text/html;charset=UTF-8");
-        HttpSession session = request.getSession();
-        OrderDAO orderDao = new OrderDAO();
-        OrderItemDAO orderItemDao = new OrderItemDAO();
-        boolean isTrue = false;
-        //Get userId
-        String userId = (String) session.getAttribute("userId");
+	/**
+	 * Processes requests for both HTTP <code>GET</code> and
+	 * <code>POST</code> methods.
+	 */
+	protected boolean processRequest(HttpServletRequest request, HttpServletResponse response)
+		throws Exception {
+		response.setContentType("text/html;charset=UTF-8");
+		HttpSession session = request.getSession();
+		OrderDAO orderDao = new OrderDAO();
+		OrderItemDAO orderItemDao = new OrderItemDAO();
+		boolean isTrue = false;
+		//Get userId
+		String userId = (String) session.getAttribute("userId");
 
-        //Get user's order
-        ArrayList<Order> orders = orderDao.getOrdersByUserId(userId);
+		//Get user's order
+		ArrayList<Order> orders = orderDao.getOrdersByUserId(userId);
 
-        //Get orderId
-        String orderId = GetParam.getStringParam(request, "orderId", "orderId", 0, Integer.MAX_VALUE, null);
+		//Get orderId
+		String orderId = GetParam.getStringParam(request, "orderId", "orderId", 0, Integer.MAX_VALUE, null);
 
-        //Check params
-        if (orderId == null) {
-            return false;
-        }
+		//Check params
+		if (orderId == null) {
+			return false;
+		}
 
-        //Check userId and orderId that matched
-        for (Order order : orders) {
-            if (order.getOrderId().equals(orderId)) {
-                isTrue = true;
-                break;
-            }
-        }
+		//Check userId and orderId that matched
+		for (Order order : orders) {
+			if (order.getOrderId().equals(orderId)) {
+				isTrue = true;
+				break;
+			}
+		}
 
-        if (!isTrue) {
-            Helper.setAttribute(request, StatusCode.NOT_FOUND.getValue(), "Not found", "The requested URL was not found on this server");
-            return false;
-        }
+		if (!isTrue) {
+			Helper.setAttribute(request, StatusCode.NOT_FOUND.getValue(), "Not found", "The requested URL was not found on this server");
+			return false;
+		}
 
         // Get list of orderItemDtos
         ArrayList<OrderItemDto> orderItemDtos = orderItemDao.getOrderItemDtoByOrderId(orderId);
