@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.UUID;
 import models.Order;
+import models.OrderItem;
 import models.Product;
 import utils.Connector;
 
@@ -141,23 +142,46 @@ public class OrderDAO {
     }
 
     // update order status
-    public boolean updateOrderStatus(String orderId, Integer status) throws Exception {
+    public boolean updateOrderStatus(Order order, Integer oStatus, Integer nStatus) throws Exception {
         boolean isTrue = true;
         try {
             conn = Connector.getConnection();
+            conn.setAutoCommit(false);
             String sql = "UPDATE bookshop_order SET status = ? WHERE orderId = ?";
             preStm = conn.prepareStatement(sql);
-            preStm.setInt(1, status);
-            preStm.setString(2, orderId);
+            preStm.setInt(1, nStatus);
+            preStm.setString(2, order.getOrderId());
             preStm.executeUpdate();
-        } finally {
+
+            // check status
+            if (order.getStatus() == 0 && nStatus != 4) {
+                OrderItemDAO orderItemDao = new OrderItemDAO();
+                ProductDAO productDao = new ProductDAO();
+                ArrayList<OrderItem> orderItems = orderItemDao.getOrderItemByOrderId(order.getOrderId());
+                for (OrderItem orderItem : orderItems) {
+                    Product product = productDao.getProductById(orderItem.getProductId());
+                    productDao.updateProductQuantity(product.getQuantity() - orderItem.getQuantity(), orderItem.getProductId());
+                }
+            } else if (order.getStatus() != 0 && nStatus == 4) {
+                OrderItemDAO orderItemDao = new OrderItemDAO();
+                ProductDAO productDao = new ProductDAO();
+                ArrayList<OrderItem> orderItems = orderItemDao.getOrderItemByOrderId(order.getOrderId());
+                for (OrderItem orderItem : orderItems) {
+                    Product product = productDao.getProductById(orderItem.getProductId());
+                    productDao.updateProductQuantity(product.getQuantity() + orderItem.getQuantity(), orderItem.getProductId());
+                }
+            }
+            conn.commit();
+        } catch (Exception e) {
             isTrue = false;
+            conn.rollback();
+        } finally {
             this.closeConnection();
         }
         return isTrue;
     }
 
-    // get all orders
+// get all orders
     public ArrayList<Order> getAllOrder() throws Exception {
         ArrayList<Order> orders = new ArrayList<Order>();
         try {
