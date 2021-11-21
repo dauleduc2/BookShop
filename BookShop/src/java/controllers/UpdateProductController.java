@@ -17,16 +17,17 @@ import utils.Helper;
 public class UpdateProductController extends HttpServlet {
 
     /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
+     * Processes requests for both HTTP <code>POST</code> methods.
      */
-    protected boolean processRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    protected boolean postHandler(HttpServletRequest request, HttpServletResponse response) throws Exception {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=UTF-8");
         ProductDAO productDao = new ProductDAO();
 
         // get the current product
-        Product product = (Product) request.getAttribute("product");
+        Integer productId = GetParam.getIntParams(request, "productId", "ProductId", 0, Integer.MAX_VALUE, null);
+        System.out.println(productId);
+        Product product = productDao.getProductById(productId);
 
         // check existed product
         if (product == null) {
@@ -36,7 +37,8 @@ public class UpdateProductController extends HttpServlet {
 
         // validate params
         String name = GetParam.getStringParam(request, "name", "Product's name", 3, 50, null);
-        String image = GetParam.getFileParam(request, "image", "Product's image", 1080 * 1080);
+        System.out.println(name);
+        String imageUrl = GetParam.getFileParam(request, "productAvatar", "Product avatar", 1080 * 1080);
         Integer quantity = GetParam.getIntParams(request, "quantity", "Quantity", 0, Integer.MAX_VALUE, null);
         Float price = GetParam.getFloatParams(request, "price", "Price", 0, Float.MAX_VALUE, null);
         String description = GetParam.getStringParam(request, "description", "Discription", 3, 255, null);
@@ -53,8 +55,8 @@ public class UpdateProductController extends HttpServlet {
         if (name == null) {
             name = product.getName();
         }
-        if (image == null) {
-            image = product.getImageUrl();
+        if (imageUrl == null) {
+            imageUrl = product.getImageUrl();
         }
         if (quantity == null) {
             quantity = product.getQuantity();
@@ -73,10 +75,32 @@ public class UpdateProductController extends HttpServlet {
         }
 
         // update to database
-        productDao.updateProduct(product.getProductId(), name, image, quantity, price, description, publishedDate,
+        productDao.updateProduct(product.getProductId(), name, imageUrl, quantity, price, description, publishedDate,
                 categoryId);
         // send success message
         request.setAttribute("successMessage", "Update product successful.");
+        return true;
+    }
+
+    /**
+     * Processes requests for both HTTP <code>GET</code> methods.
+     */
+    protected boolean getHandler(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
+        ProductDAO productDao = new ProductDAO();
+
+        // get the current product
+        Integer productId = GetParam.getIntParams(request, "productId", "ProductId", 0, Integer.MAX_VALUE, null);
+        Product product = productDao.getProductById(productId);
+
+        // check existed product
+        if (product == null) {
+            Helper.setAttribute(request, StatusCode.NOT_FOUND.getValue(), "Not found", "The requested URL was not found on this server");
+            return false;
+        }
+
+        request.setAttribute("product", product);
         return true;
     }
 
@@ -86,7 +110,21 @@ public class UpdateProductController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher(Router.UPDATE_PRODUCT_PAGE).forward(request, response);
+        try {
+            if (!getHandler(request, response)) {
+                //forward on 404
+                request.getRequestDispatcher(Router.ERROR).forward(request, response);
+                return;
+            }
+            // forward on 200
+            request.getRequestDispatcher(Router.UPDATE_PRODUCT_PAGE).forward(request, response);
+        } catch (Exception e) {
+            // forward on 500
+            System.out.println(e);
+            Helper.setAttribute(request, StatusCode.INTERNAL_SERVER_ERROR.getValue(), "Something failed", "Please try again later");
+            request.getRequestDispatcher(Router.ERROR).forward(request, response);
+        }
+
     }
 
     /**
@@ -96,7 +134,7 @@ public class UpdateProductController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            if (!processRequest(request, response)) {
+            if (!postHandler(request, response)) {
                 // forward on 400
                 this.doGet(request, response);
                 return;
