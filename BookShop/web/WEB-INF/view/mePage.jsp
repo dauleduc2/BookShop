@@ -7,7 +7,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>JSP Page</title>
+          <title>BFF Shop</title>
         <link rel="stylesheet" href="asset/styles.css" type="text/css" />
 
         <jsp:include page="./commonView/Navbar.jsp">
@@ -25,7 +25,7 @@
         <form
             action="<%=Router.PROFILE_CONTROLLER%>"
             method="POST"
-            class="w-full max-w-3xl overflow-hidden bg-white  sm:shadow sm:rounded-lg sm:w-180"
+            class="w-full max-w-3xl overflow-hidden bg-white sm:shadow sm:rounded-lg sm:w-180"
             enctype="multipart/form-data"
             >
             <div class="px-4 py-5 sm:px-6">
@@ -56,7 +56,7 @@
                                 autocomplete="email"
                                 required
                                 value="<%= user.getEmail() == null ? "" : user.getEmail()%>"
-                                class="block w-full px-3 py-2 placeholder-gray-400 border border-gray-300 rounded-md shadow-sm appearance-none  focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                class="block w-full px-3 py-2 placeholder-gray-400 border border-gray-300 rounded-md shadow-sm appearance-none focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                 />
                             <p class="mt-2 text-sm text-red-600" id="email-error">
                                 ${requestScope.emailError}
@@ -74,7 +74,7 @@
                                 type="text"
                                 required
                                 value="<%= user.getFullName() == null ? "" : user.getFullName()%>"
-                                class="block w-full px-3 py-2 placeholder-gray-400 border border-gray-300 rounded-md shadow-sm appearance-none  focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                class="block w-full px-3 py-2 placeholder-gray-400 border border-gray-300 rounded-md shadow-sm appearance-none focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                 />
                             <p class="mt-2 text-sm text-red-600" id="email-error">
                                 ${requestScope.fullNameError}
@@ -91,7 +91,7 @@
                                 name="address"
                                 type="text"
                                 value="<%= user.getAddress() == null ? "" : user.getAddress()%>"
-                                class="block w-full px-3 py-2 placeholder-gray-400 border border-gray-300 rounded-md shadow-sm appearance-none  focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                class="block w-full px-3 py-2 placeholder-gray-400 border border-gray-300 rounded-md shadow-sm appearance-none focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                 />
                             <p class="mt-2 text-sm text-red-600" id="email-error">
                                 ${requestScope.addressError}
@@ -108,7 +108,7 @@
                                 name="phone"
                                 type="text"
                                 value="<%= user.getPhone() == null ? "" : user.getPhone()%>"
-                                class="block w-full px-3 py-2 placeholder-gray-400 border border-gray-300 rounded-md shadow-sm appearance-none  focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                class="block w-full px-3 py-2 placeholder-gray-400 border border-gray-300 rounded-md shadow-sm appearance-none focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                 />
                             <p class="mt-2 text-sm text-red-600" id="email-error">
                                 ${requestScope.phoneError}
@@ -125,7 +125,7 @@
                                 name="avatar"
                                 type="text"
                                 value="<%= user.getAvatar() == null ? "" : user.getAvatar()%>"
-                                class="block w-full px-3 py-2 placeholder-gray-400 border border-gray-300 rounded-md shadow-sm appearance-none  focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                class="block w-full px-3 py-2 placeholder-gray-400 border border-gray-300 rounded-md shadow-sm appearance-none focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                              /> -->
                             <input
                                 type="file"
@@ -145,13 +145,13 @@
             <div class="flex justify-end px-4 py-5 sm:px-6">
                 <a
                     href="<%=Router.CHANGE_PASSWORD_CONTROLLER%>"
-                    class="inline-flex items-center px-3 py-2 mr-5 text-sm font-medium leading-4 text-white bg-red-500 border border-transparent rounded-md shadow-sm  hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    class="inline-flex items-center px-3 py-2 mr-5 text-sm font-medium leading-4 text-white bg-red-500 border border-transparent rounded-md shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                     >
                     Change password
                 </a>
                 <input
                     type="submit"
-                    class="inline-flex items-center px-3 py-2 text-sm font-medium leading-4 text-white bg-indigo-600 border border-transparent rounded-md shadow-sm  hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    class="inline-flex items-center px-3 py-2 text-sm font-medium leading-4 text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                     value="Save"
                     >
             </div>
