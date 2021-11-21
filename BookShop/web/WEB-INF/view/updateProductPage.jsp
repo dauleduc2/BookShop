@@ -9,7 +9,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>JSP Page</title>
+          <title>BFF Shop</title>
         <link rel="stylesheet" href="asset/styles.css" type="text/css" />
 
     </head>
@@ -24,7 +24,7 @@
             <jsp:include page="./commonView/adminSideBar.jsp">
                 <jsp:param name="title" value="Sannin SC |  Add Room" />
             </jsp:include>
-            <div class="min-h-screen w-full">
+            <div class="w-full min-h-screen">
                 <form action="<%=Router.UPDATE_PRODUCT_CONTROLLER%>?productId=<%= product.getProductId()%>" method="POST" enctype="multipart/form-data" class="max-w-2xl p-2 m-auto my-5 space-y-8 bg-white border-2 border-black divide-y divide-gray-200 rounded-md lg:p-7">
 
                     <div class="space-y-8 divide-y divide-gray-200 sm:space-y-5">

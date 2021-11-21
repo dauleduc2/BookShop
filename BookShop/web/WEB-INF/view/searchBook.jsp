@@ -6,7 +6,7 @@
         <head>
                 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
-                <title>JSP Page</title>
+                  <title>BFF Shop</title>
                 <link rel="stylesheet" href="asset/styles.css" type="text/css" />
                 <jsp:include page="./commonView/Navbar.jsp">
                     <jsp:param name="title" value="Sannin SC |  Add Room" />
@@ -17,10 +17,10 @@
 
                 <div class="bg-white">
                         <div class="max-w-2xl px-0 mx-auto sm:px-6 lg:max-w-7xl lg:px-8 sm:py-5">
-                                <form class="flex sm:flex-row flex-col bg-gray-700 sm:p-4 sm:items-end p-4 sm:rounded" action="<%=Router.FILTER_CONTROLLER%>" method="POST">
-                                        <div class="sm:mr-8 mb-2 sm:mb-0">
+                                <form class="flex flex-col p-4 bg-gray-700 sm:flex-row sm:p-4 sm:items-end sm:rounded" action="<%=Router.FILTER_CONTROLLER%>" method="POST">
+                                        <div class="mb-2 sm:mr-8 sm:mb-0">
                                                 <label for="category" class="block text-base font-medium text-white">Category</label>
-                                                <select id="categoryId" name="categoryId" class="mt-1 block w-full px-2 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                                                <select id="categoryId" name="categoryId" class="block w-full px-2 py-2 mt-1 text-base border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
 
                                                         <option selected value=''>Select Category</option>
                                                         <c:forEach var="category" items="${requestScope.categories}">
@@ -29,21 +29,21 @@
 
                                                 </select>
                                         </div>
-                                        <div class="sm:mr-8 mb-2 sm:mb-0">
+                                        <div class="mb-2 sm:mr-8 sm:mb-0">
                                                 <label for="minPrice" class="block text-base font-medium text-white">Min price</label>
                                                 <div class="mt-1">
-                                                        <input type="number" name="minPrice" min="0" max="99999999" value="0" id="minPrice" class="shadow-sm py-2 px-4 focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                                                        <input type="number" name="minPrice" min="0" max="99999999" value="0" id="minPrice" class="block w-full px-4 py-2 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                                 </div>
                                         </div >
-                                        <div class="sm:mr-8 mb-2 sm:mb-0">
+                                        <div class="mb-2 sm:mr-8 sm:mb-0">
                                                 <label for="maxPrice" class="block text-base font-medium text-white">Max price</label>
                                                 <div class="mt-1">
-                                                        <input type="number" min="0" max="99999999" name="maxPrice" value="99999999"  id="maxPrice" class="shadow-sm py-2 px-4 focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                                                        <input type="number" min="0" max="99999999" name="maxPrice" value="99999999"  id="maxPrice" class="block w-full px-4 py-2 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                                 </div>
                                         </div>
-                                        <div class="sm:mr-8 sm:mt-0 mt-4 mr-0">
+                                        <div class="mt-4 mr-0 sm:mr-8 sm:mt-0">
                                                 <label class="block text-base font-medium text-white sr-only">Filters</label>
-                                                <button type="submit" class="items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white w-full bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                                <button type="submit" class="items-center w-full px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
 
 
                                                         Filters
