@@ -16,8 +16,7 @@
         </jsp:include>
 
         <div class="flex-1 bg-white">
-            <form  action="<%= Router.ORDER_STATUS_CONTROLLER%>" class="px-4 pt-16 pb-24 bg-white sm:px-6 sm:pt-24 lg:px-8 lg:py-32">
-
+            <form  action="<%= Router.ORDER_STATUS_CONTROLLER%>?orderId=${requestScope.order.getOrderId()}" class="px-4 pt-16 pb-24 bg-white sm:px-6 sm:pt-24 lg:px-8 lg:py-32" method="POST">
                 <div class="max-w-3xl mx-auto">
                     <h1 class="text-3xl font-extrabold tracking-tight text-center text-gray-900 sm:text-4xl">
                         Order hitory detail
