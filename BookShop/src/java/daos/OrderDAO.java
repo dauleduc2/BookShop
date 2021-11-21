@@ -154,7 +154,7 @@ public class OrderDAO {
             preStm.executeUpdate();
 
             // check status
-            if (order.getStatus() == 0 && nStatus != 4) {
+            if ((order.getStatus() == 0 || order.getStatus() == 4) && nStatus != 4) {
                 OrderItemDAO orderItemDao = new OrderItemDAO();
                 ProductDAO productDao = new ProductDAO();
                 ArrayList<OrderItem> orderItems = orderItemDao.getOrderItemByOrderId(order.getOrderId());
