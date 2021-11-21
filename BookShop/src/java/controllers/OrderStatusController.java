@@ -77,7 +77,7 @@ public class OrderStatusController extends HttpServlet {
                 return;
             } else if (check == 2) {
                 // forward on 400
-                request.getRequestDispatcher("").forward(request, response);
+                response.sendRedirect(Router.ADMIN_ORDER_CONTROLLER);
                 return;
             }
             // forward on 200
