@@ -28,7 +28,6 @@
 
                                 <div class="grid grid-cols-1 mt-6 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
                                         <c:forEach var="product" items="${requestScope.products}">
-
                                             <div class="relative group">
                                                     <a  href="<%=Router.PRODUCT_DETAIL_CONTROLLER%>?productId=${product.getProductId()}">
                                                             <div class="flex items-center justify-center w-full overflow-hidden bg-gray-100 rounded-md min-h-80 aspect-w-1 aspect-h-1 group-hover:opacity-75 lg:h-80 lg:aspect-none">
@@ -51,7 +50,7 @@
                                                                             </h3>
 
                                                                     </div>
-                                                                    <p class="mt-1 text-sm font-medium text-gray-900">${product.getPrice()} đ</p>
+                                                                    <p class="mt-1 text-sm font-medium text-gray-900">${product.getPrice()}đ</p>
                                                             </div>
                                                     </a>
                                             </div>

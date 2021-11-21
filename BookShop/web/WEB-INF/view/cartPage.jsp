@@ -22,7 +22,6 @@
             <jsp:param name="title" value="Sannin SC |  Add Room" />
         </jsp:include>
     </head>
-
     <body>
         <div class="bg-white">
             <div class="max-w-2xl px-4 py-16 mx-auto sm:py-24 sm:px-6 lg:px-0">
@@ -40,7 +39,7 @@
                                     <c:forEach items="${sessionScope.products}" var="product" varStatus="loop">
                                         <li class="flex py-6">
                                             <div class="flex-shrink-0">
-                                                <img src="${product.getImageUrl()}" alt="${product.getName()}" class="object-cover object-center w-20 h-20 rounded-md sm:w-20 sm:h-20" />
+                                                <img src="${product.getImageUrl()}" alt="${product.getName()}" class="object-cover object-center rounded-md w-28 sm:w-28 " />
                                             </div>
 
                                             <div class="flex flex-col flex-1 ml-4 sm:ml-6">

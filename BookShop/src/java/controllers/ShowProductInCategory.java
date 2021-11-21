@@ -31,7 +31,7 @@ public class ShowProductInCategory extends HttpServlet {
 
         // check params
         if (categoryId == null) {
-            Helper.setAttribute(request, StatusCode.NOT_FOUND.ordinal(), "Not found", "The requested URL was not found on this server");
+            Helper.setAttribute(request, StatusCode.NOT_FOUND.getValue(), "Not found", "The requested URL was not found on this server");
             return false;
         }
 
@@ -56,11 +56,11 @@ public class ShowProductInCategory extends HttpServlet {
                 return;
             }
             // forward on 200
-            request.getRequestDispatcher("WEB-INF/view/categoryShowcasePage.jsp").forward(request, response);
+            request.getRequestDispatcher(Router.CATEGORY_SHOWCASE_PAGE).forward(request, response);
         } catch (Exception e) {
             System.out.println(e.getMessage());
             // forward on 500
-            Helper.setAttribute(request, StatusCode.INTERNAL_SERVER_ERROR.ordinal(), "Something failed", "Please try again later");
+            Helper.setAttribute(request, StatusCode.INTERNAL_SERVER_ERROR.getValue(), "Something failed", "Please try again later");
             request.getRequestDispatcher(Router.ERROR).forward(request, response);
         }
     }

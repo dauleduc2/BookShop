@@ -13,7 +13,7 @@ public class ProductDAO {
     private PreparedStatement preStm;
     private ResultSet rs;
 
-    //this function will close connection of database
+    // close connection of database
     private void closeConnection() throws Exception {
         if (rs != null) {
             rs.close();
@@ -28,7 +28,7 @@ public class ProductDAO {
         }
     }
 
-    //this function will add a new product
+    // add a new product
     public void addNewProduct(Product product) throws Exception {
         try {
             conn = Connector.getConnection();
@@ -50,13 +50,13 @@ public class ProductDAO {
         }
     }
 
-    // this function will get products
+    // get products
     public ArrayList<Product> getProductToShow() throws Exception {
         ArrayList<Product> products = new ArrayList<Product>();
         try {
             Product product;
             conn = Connector.getConnection();
-            String sql = "SELECT TOP 24 * FROM bookshop_product ORDER BY publishedDate DESC";
+            String sql = "SELECT TOP 24 * FROM bookshop_product ORDER BY createdDate DESC";
             preStm = conn.prepareStatement(sql);
             rs = preStm.executeQuery();
             while (rs.next()) {
@@ -78,7 +78,7 @@ public class ProductDAO {
         return products;
     }
 
-    // this function will get product by given id
+    // get product by given id
     public Product getProductById(Integer productId) throws Exception {
         Product product = null;
         try {
@@ -106,10 +106,11 @@ public class ProductDAO {
 
     // update product information
     public void updateProduct(Integer productId, String name, String image, Integer quantity, Float price, String description, String publishedDate, Integer categoryId) throws Exception {
+
         try {
             conn = Connector.getConnection();
-            String sql = "UPDATE bookshop_product(name, image, quantity, price, description, publishedDate, categoryId) "
-                    + "SET name = ?, image = ?, quantity = ?, price = ?, description = ?, publishedDate = ?, categoryId = ? WHERE productId = ?";
+            String sql = "UPDATE bookshop_product "
+                    + "SET name = ?, image = ?, quantity = ?, price = ?, description = ?, publishedDate = ?, categoryId = ? WHERE productId = ?;";
             preStm = conn.prepareStatement(sql);
             preStm.setString(1, name);
             preStm.setString(2, image);
@@ -120,6 +121,7 @@ public class ProductDAO {
             preStm.setInt(7, categoryId);
             preStm.setInt(8, productId);
             preStm.executeUpdate();
+
         } finally {
             this.closeConnection();
         }
@@ -151,6 +153,34 @@ public class ProductDAO {
         return product;
     }
 
+    // search product by name
+    public ArrayList<Product> searchProductByName(String name) throws Exception {
+        ArrayList<Product> productList = new ArrayList<Product>();
+        try {
+            conn = Connector.getConnection();
+            String sql = "SELECT * FROM bookshop_product WHERE name LIKE ?";
+            preStm = conn.prepareStatement(sql);
+            preStm.setString(1, "%" + name + "%");
+            rs = preStm.executeQuery();
+            while (rs.next()) {
+                Integer productId = rs.getInt("productId");
+                String productName = rs.getString("name");
+                String imageUrl = rs.getString("image");
+                Integer quantity = rs.getInt("quantity");
+                Integer categoryId = rs.getInt("categoryId");
+                Float price = rs.getFloat("price");
+                String description = rs.getString("description");
+                String publishedDate = rs.getString("publishedDate");
+                String createdDate = rs.getString("createdDate");
+                Product product = new Product(productId, categoryId, productName, imageUrl, quantity, price, description, publishedDate, createdDate);
+                productList.add(product);
+            }
+        } finally {
+            this.closeConnection();
+        }
+        return productList;
+    }
+
     // update product quantity
     public void updateProductQuantity(Integer quantity, Integer productId) throws Exception {
         try {
@@ -177,6 +207,72 @@ public class ProductDAO {
             rs = preStm.executeQuery();
             while (rs.next()) {
                 Integer productId = rs.getInt("productId");
+                String name = rs.getString("name");
+                String imageUrl = rs.getString("image");
+                Integer quantity = rs.getInt("quantity");
+                Float price = rs.getFloat("price");
+                String description = rs.getString("description");
+                String publishedDate = rs.getString("publishedDate");
+                String createdDate = rs.getString("createdDate");
+                product = new Product(productId, categoryId, name, imageUrl, quantity, price, description, publishedDate, createdDate);
+                products.add(product);
+            }
+        } finally {
+            this.closeConnection();
+        }
+        return products;
+    }
+
+    // get product with filter
+    public ArrayList<Product> getProducts(Integer categoryId, Float minPrice, Float maxPrice) throws Exception {
+        ArrayList<Product> products = new ArrayList<Product>();
+        try {
+            Product product = null;
+            conn = Connector.getConnection();
+            String sql = "SELECT * FROM bookshop_product WHERE categoryId = ? AND price BETWEEN ? AND ?";
+            if (categoryId == null) {
+                sql = "SELECT * FROM bookshop_product WHERE price BETWEEN ? AND ? ORDER BY publishedDate DESC";
+                preStm = conn.prepareStatement(sql);
+                preStm.setFloat(1, minPrice);
+                preStm.setFloat(2, maxPrice);
+            } else {
+                preStm = conn.prepareStatement(sql);
+                preStm.setInt(1, categoryId);
+                preStm.setFloat(2, minPrice);
+                preStm.setFloat(3, maxPrice);
+            }
+            rs = preStm.executeQuery();
+            while (rs.next()) {
+                Integer productId = rs.getInt("productId");
+                String name = rs.getString("name");
+                String imageUrl = rs.getString("image");
+                Integer quantity = rs.getInt("quantity");
+                Float price = rs.getFloat("price");
+                String description = rs.getString("description");
+                String publishedDate = rs.getString("publishedDate");
+                String createdDate = rs.getString("createdDate");
+                product = new Product(productId, categoryId, name, imageUrl, quantity, price, description, publishedDate, createdDate);
+                products.add(product);
+            }
+        } finally {
+            this.closeConnection();
+        }
+        return products;
+    }
+
+    public ArrayList<Product> getProductForAdmin(Integer offset, Integer limit) throws Exception {
+        ArrayList<Product> products = new ArrayList<Product>();
+        try {
+            Product product = null;
+            conn = Connector.getConnection();
+            String sql = "SELECT * FROM bookshop_product ORDER BY createdDate DESC OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
+            preStm = conn.prepareStatement(sql);
+            preStm.setInt(1, offset);
+            preStm.setInt(2, limit);
+            rs = preStm.executeQuery();
+            while (rs.next()) {
+                Integer productId = rs.getInt("productId");
+                Integer categoryId = rs.getInt("categoryId");
                 String name = rs.getString("name");
                 String imageUrl = rs.getString("image");
                 Integer quantity = rs.getInt("quantity");

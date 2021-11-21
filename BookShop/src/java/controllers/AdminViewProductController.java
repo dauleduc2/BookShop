@@ -4,20 +4,18 @@ import constant.Router;
 import daos.ProductDAO;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Objects;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import models.Product;
 import models.StatusCode;
 import utils.GetParam;
 import utils.Helper;
 
-@WebServlet(name = "RemoveProductFromCart", urlPatterns = {"/" + Router.REMOVE_PRODUCT_CONTROLLER})
-public class RemoveProductFromCart extends HttpServlet {
+@WebServlet(name = "AdminViewProductController", urlPatterns = {"/" + Router.ADMIN_VIEW_PRODUCT_CONTROLLER})
+public class AdminViewProductController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -26,37 +24,29 @@ public class RemoveProductFromCart extends HttpServlet {
     protected boolean processRequest(HttpServletRequest request, HttpServletResponse response)
             throws Exception {
         response.setContentType("text/html;charset=UTF-8");
-        HttpSession session = request.getSession();
         ProductDAO productDao = new ProductDAO();
 
-        // get productId
-        Integer productId = GetParam.getIntParams(request, "productId", "Product", 1, Integer.MAX_VALUE, 0);
+        // get params
+        Integer offset = GetParam.getIntParams(request, "page", "Page", 0, Integer.MAX_VALUE, null);
+        Integer limit = GetParam.getIntParams(request, "limit", "Limit", 0, Integer.MAX_VALUE, null);
 
-        // find product by given id
-        Product product = productDao.getProductById(productId);
-
-        // get the products from cart
-        ArrayList<Product> products = (ArrayList<Product>) session.getAttribute("products");
-
-        // check existed product
-        if (product == null || products.isEmpty()) {
+        // check params
+        if (offset == null || limit == null) {
             Helper.setAttribute(request, StatusCode.NOT_FOUND.getValue(), "Not found", "The requested URL was not found on this server");
             return false;
         }
-
-        // remove product from cart
-        for (Product pro : products) {
-            if (Objects.equals(pro.getProductId(), productId)) {
-                products.remove(pro);
-                break;
-            }
+        if (offset == 0) {
+            offset = 1;
+        }
+        ArrayList<Product> products = productDao.getProductForAdmin((offset - 1) * 10, limit);
+        if (products.isEmpty()) {
+            offset = 1;
+            products = productDao.getProductForAdmin((offset - 1) * 10, limit);
         }
 
-        // set products to session
-        session.setAttribute("products", products);
+        request.setAttribute("products", products);
+        request.setAttribute("page", offset);
 
-        // send success message
-        request.setAttribute("successMessage", "Remove product successful");
         return true;
     }
 
@@ -73,12 +63,13 @@ public class RemoveProductFromCart extends HttpServlet {
                 return;
             }
             // forward on 200
-            response.sendRedirect(Router.CART_CONTROLLER);
+            request.getRequestDispatcher(Router.ADMIN_VIEW_PRODUCT_PAGE).forward(request, response);
         } catch (Exception e) {
-            System.out.println(e);
             // forward on 500
+            System.out.println(e);
             Helper.setAttribute(request, StatusCode.INTERNAL_SERVER_ERROR.getValue(), "Something failed", "Please try again later");
             request.getRequestDispatcher(Router.ERROR).forward(request, response);
         }
     }
+
 }

@@ -91,9 +91,9 @@ public class PasswordController extends HttpServlet {
             // forward on 200
             this.doGet(request, response);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            System.out.println(e);
             // forward on 500
-            Helper.setAttribute(request, StatusCode.INTERNAL_SERVER_ERROR.ordinal(), "Something failed", "Please try again later");
+            Helper.setAttribute(request, StatusCode.INTERNAL_SERVER_ERROR.getValue(), "Something failed", "Please try again later");
             request.getRequestDispatcher(Router.ERROR).forward(request, response);
         }
     }

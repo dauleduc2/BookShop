@@ -1,23 +1,24 @@
 package controllers;
 
 import constant.Router;
-import daos.ProductDAO;
+import daos.OrderDAO;
+import daos.OrderItemDAO;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Objects;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import models.Product;
+import models.Order;
+import models.OrderItemDto;
 import models.StatusCode;
 import utils.GetParam;
 import utils.Helper;
 
-@WebServlet(name = "RemoveProductFromCart", urlPatterns = {"/" + Router.REMOVE_PRODUCT_CONTROLLER})
-public class RemoveProductFromCart extends HttpServlet {
+@WebServlet(name = "ProductInOrderController", urlPatterns = {"/" + Router.PRODUCT_IN_ORDER_CONTROLLER})
+public class ProductInOrderController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -27,41 +28,46 @@ public class RemoveProductFromCart extends HttpServlet {
             throws Exception {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
-        ProductDAO productDao = new ProductDAO();
+        OrderDAO orderDao = new OrderDAO();
+        OrderItemDAO orderItemDao = new OrderItemDAO();
+        //Get userId
+        String userId = (String) session.getAttribute("userId");
 
-        // get productId
-        Integer productId = GetParam.getIntParams(request, "productId", "Product", 1, Integer.MAX_VALUE, 0);
+        //Get user's order
+        ArrayList<Order> orders = orderDao.getOrdersByUserId(userId);
 
-        // find product by given id
-        Product product = productDao.getProductById(productId);
+        //Get orderId
+        String orderId = GetParam.getStringParam(request, "orderId", "orderId", 0, Integer.MAX_VALUE, null);
 
-        // get the products from cart
-        ArrayList<Product> products = (ArrayList<Product>) session.getAttribute("products");
-
-        // check existed product
-        if (product == null || products.isEmpty()) {
-            Helper.setAttribute(request, StatusCode.NOT_FOUND.getValue(), "Not found", "The requested URL was not found on this server");
+        //Check params
+        if (orderId == null) {
             return false;
         }
 
-        // remove product from cart
-        for (Product pro : products) {
-            if (Objects.equals(pro.getProductId(), productId)) {
-                products.remove(pro);
+        //Check userId and orderId that matched
+        Order currentOrder = null;
+        for (Order order : orders) {
+            if (order.getOrderId().equals(orderId)) {
+                currentOrder = order;
                 break;
             }
         }
 
-        // set products to session
-        session.setAttribute("products", products);
+        if (currentOrder == null) {
+            Helper.setAttribute(request, StatusCode.NOT_FOUND.getValue(), "Not found", "The requested URL was not found on this server");
+            return false;
+        }
 
-        // send success message
-        request.setAttribute("successMessage", "Remove product successful");
+        // Get list of orderItemDtos
+        ArrayList<OrderItemDto> orderItemDtos = orderItemDao.getOrderItemDtoByOrderId(orderId);
+
+        //send request
+        request.setAttribute("orderItems", orderItemDtos);
+        request.setAttribute("order", currentOrder);
         return true;
     }
 
-    /**
-     * Handles the HTTP <code>GET</code> method.
+    /* Handles the HTTP <code>GET</code> method.
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -73,7 +79,7 @@ public class RemoveProductFromCart extends HttpServlet {
                 return;
             }
             // forward on 200
-            response.sendRedirect(Router.CART_CONTROLLER);
+            request.getRequestDispatcher("WEB-INF/view/productInOrder.jsp").forward(request, response);
         } catch (Exception e) {
             System.out.println(e);
             // forward on 500
@@ -81,4 +87,5 @@ public class RemoveProductFromCart extends HttpServlet {
             request.getRequestDispatcher(Router.ERROR).forward(request, response);
         }
     }
+
 }
