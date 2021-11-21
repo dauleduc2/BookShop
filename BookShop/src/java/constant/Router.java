@@ -29,7 +29,7 @@ public class Router {
     public static final String HOME_CONTROLLER = "home";
     public static final String ADD_PRODUCT_CONTROLLER = "addProduct";
     public static final String PRODUCT_DETAIL_CONTROLLER = "product";
-    public static final String UPDATE_PRODUCT_CONTROLLER = "updateproduct";
+    public static final String UPDATE_PRODUCT_CONTROLLER = "updateProduct";
     public static final String ADD_CATEGORY_CONTROLLER = "addCategory";
     public static final String CART_CONTROLLER = "cart";
     public static final String REMOVE_PRODUCT_CONTROLLER = "remove";
