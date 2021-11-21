@@ -10,11 +10,11 @@
         <link rel="stylesheet" href="asset/styles.css" type="text/css" />
     </head>
     <body>
-        <div>
+        <div class="flex">
             <jsp:include page="./commonView/adminSideBar.jsp">
                 <jsp:param name="title" value="Sannin SC |  Add Room" />
             </jsp:include>
-            <div class="flex flex-col flex-1 md:pl-64">
+            <div class="flex flex-col min-h-screen flex-1  bg-gradient-to-b from-gray-50 to-gray-100">
                 <main class="flex-1">
                     <div class="py-6">
                         <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">

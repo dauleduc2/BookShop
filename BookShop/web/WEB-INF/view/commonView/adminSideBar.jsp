@@ -1,6 +1,7 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="constant.Router"%> <%@page contentType="text/html"
+pageEncoding="UTF-8"%>
 
-<div class="hidden md:flex md:w-64 md:flex-col md:fixed md:inset-y-0">
+<div class="hidden md:flex md:w-64 md:flex-col  md:inset-y-0">
   <div class="flex flex-col flex-1 min-h-0 bg-gray-800">
     <div class="flex flex-col flex-1 pt-5 pb-4 overflow-y-auto">
       <div class="flex items-center justify-center flex-shrink-0 w-full px-4">
@@ -12,7 +13,7 @@
       </div>
       <nav class="flex-1 px-2 mt-5 space-y-1">
         <a
-          href="#"
+          href="<%= Router.ADMIN_ORDER_CONTROLLER %>"
           class="
             flex
             items-center
@@ -69,7 +70,7 @@
           View order
         </a>
         <a
-          href="#"
+          href="<%= Router.ADD_CATEGORY_CONTROLLER %>"
           class="
             flex
             items-center
@@ -124,7 +125,7 @@
           Add category
         </a>
         <a
-          href="#"
+          href="<%= Router.ADD_PRODUCT_CONTROLLER %>"
           class="
             flex
             items-center
@@ -254,7 +255,6 @@
               stroke-linejoin="round"
             />
           </svg>
-
           View product
         </a>
       </nav>

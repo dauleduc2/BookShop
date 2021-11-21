@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> <%@page
-    contentType="text/html" pageEncoding="UTF-8"%> <% String avatarUrl = (String) session.getAttribute("avatarUrl");%> <%@page import="constant.Router"%>
+contentType="text/html" pageEncoding="UTF-8"%> <% String avatarUrl = (String) session.getAttribute("avatarUrl");%> <%@page import="constant.Router"%>
     <nav class="bg-gray-800">
         <div class="w-full px-2 mx-auto sm:px-6 lg:px-8">
             <div class="relative flex items-center justify-between h-16">
@@ -201,7 +201,7 @@
                                         >
                                         <img class="object-cover w-8 h-8 rounded-full"
                                              src="<%=avatarUrl == null ? "asset/images/avatar.png"
-                          : avatarUrl%>" alt="" />
+                                                     : avatarUrl%>" alt="" />
                                     </button>
                                 </div>
 
