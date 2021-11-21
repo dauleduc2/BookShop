@@ -228,10 +228,17 @@ public class ProductDAO {
             Product product = null;
             conn = Connector.getConnection();
             String sql = "SELECT * FROM bookshop_product WHERE categoryId = ? AND price BETWEEN ? AND ?";
-            preStm = conn.prepareStatement(sql);
-            preStm.setInt(1, categoryId);
-            preStm.setFloat(2, minPrice);
-            preStm.setFloat(3, maxPrice);
+            if (categoryId == null) {
+                sql = "SELECT * FROM bookshop_product WHERE price BETWEEN ? AND ? ORDER BY publishedDate DESC";
+                preStm = conn.prepareStatement(sql);
+                preStm.setFloat(1, minPrice);
+                preStm.setFloat(2, maxPrice);
+            } else {
+                preStm = conn.prepareStatement(sql);
+                preStm.setInt(1, categoryId);
+                preStm.setFloat(2, minPrice);
+                preStm.setFloat(3, maxPrice);
+            }
             rs = preStm.executeQuery();
             while (rs.next()) {
                 Integer productId = rs.getInt("productId");
