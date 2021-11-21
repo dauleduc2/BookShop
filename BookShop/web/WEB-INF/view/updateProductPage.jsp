@@ -20,11 +20,7 @@
                     = ct.getAllCategory();
 
         %>
-        <form action="<%=Router.UPDATE_PRODUCT_CONTROLLER%>" method="POST" enctype="multipart/form-data" class="max-w-2xl p-2 m-auto my-5 space-y-8 bg-white border-2 border-black divide-y divide-gray-200 rounded-md lg:p-7">
-            <%
-                Product product = (Product) request.getAttribute("product");
-                request.setAttribute("productId", product.getProductId());
-            %>
+        <form action="<%=Router.UPDATE_PRODUCT_CONTROLLER%>?productId=${requestScope.product.getProductId()}" method="POST" enctype="multipart/form-data" class="max-w-2xl p-2 m-auto my-5 space-y-8 bg-white border-2 border-black divide-y divide-gray-200 rounded-md lg:p-7">
             <div class="space-y-8 divide-y divide-gray-200 sm:space-y-5">
                 <div>
                     <div class="mb-3">
@@ -40,7 +36,7 @@
                             Name
                         </label>
                         <div class="mt-1 sm:mt-0 sm:col-span-2">
-                            <input value="${requestScope.product.getName()}" type="text" name="name" id="name" autocomplete="name" class="block w-full max-w-lg border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm" />
+                            <input type="text" name="name" id="name" autocomplete="name" value="${requestScope.product.getName()}" class="block w-full max-w-lg border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm" />
                             <p class="mt-1 text-sm text-red-600" id="email-error">
                                 ${requestScope.nameError}
                             </p>
