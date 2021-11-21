@@ -62,6 +62,7 @@ public class UpdateProductController extends HttpServlet {
         }
         if (imageUrl == null) {
             imageUrl = product.getImageUrl();
+            request.setAttribute("productAvatarError", null);
         }
         if (quantity == null) {
             quantity = product.getQuantity();

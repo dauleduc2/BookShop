@@ -15,7 +15,7 @@ import models.StatusCode;
 import utils.Helper;
 
 @WebFilter(filterName = "AdminFilter", urlPatterns = {"/" + Router.ADD_CATEGORY_CONTROLLER, "/" + Router.ADD_PRODUCT_CONTROLLER,
-    "/" + Router.ADMIN_ORDER_CONTROLLER, "/" + Router.ORDER_STATUS_CONTROLLER, "/" + Router.UPDATE_PRODUCT_CONTROLLER})
+    "/" + Router.ADMIN_ORDER_CONTROLLER, "/" + Router.ORDER_STATUS_CONTROLLER, "/" + Router.UPDATE_PRODUCT_CONTROLLER, "/" + Router.ADMIN_VIEW_PRODUCT_CONTROLLER})
 public class AdminFilter implements Filter {
 
     public void doFilter(ServletRequest request, ServletResponse response,

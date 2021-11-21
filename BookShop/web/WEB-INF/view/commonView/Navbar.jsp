@@ -91,8 +91,8 @@ contentType="text/html" pageEncoding="UTF-8"%> <% String avatarUrl = (String) se
                 <form
                     action="<%=Router.SEARCH_BOOK_CONTROLLER%>"
                     method="POST"
-                    class="flex"
-                    >
+                    class="flex mb-0"
+                    > 
                     <label
                         for="name"
                         class="block pl-4 ml-px text-sm font-medium text-gray-700 sr-only"
