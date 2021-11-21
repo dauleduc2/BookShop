@@ -2,11 +2,38 @@ package utils;
 
 import daos.UserDAO;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 import models.User;
 
 public class Helper {
+
+    /**
+     * Ensure that access only to authorized users
+     */
+    public static boolean protectedRouter(HttpServletRequest request, HttpServletResponse response, int minRole,
+            int maxRole, String page) throws Exception {
+
+        if (!isLogin(request) || !correctRole(request, minRole, maxRole)) {
+            request.setAttribute("errorMessage", "Action is not allow, please login first");
+            request.getRequestDispatcher(page).forward(request, response);
+
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * Check that user's role is valid or invalid
+     */
+    public static boolean correctRole(HttpServletRequest request, int minRole, int maxRole) {
+        HttpSession session = request.getSession(false);
+        Integer roleR = (Integer) session.getAttribute("userRole");
+
+        return roleR != null && roleR >= minRole && roleR <= maxRole;
+    }
 
     /**
      * Check that user is login or not
